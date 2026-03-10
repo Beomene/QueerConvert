@@ -3,65 +3,655 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JPG to PNG Converter</title>
+    <title>Queer Convert · image (JPG to PNG)</title>
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Convert JPG images to PNG format instantly. Drag, drop, and convert with pride!">
+    <meta name="theme-color" content="#121212">
+    
+    <!-- Social meta -->
+    <meta property="og:title" content="Queer Convert - image converter">
+    <meta property="og:description" content="Convert JPG to PNG in your browser. No upload servers, everything stays private!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://trinka.space/queer-convert/pages/image">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6032661605524448"
+            crossorigin="anonymous"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    
+    <!-- Extra styles for image page -->
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        #drop_zone { border: 2px dashed #007bff; padding: 20px; text-align: center; }
-        #preview { margin-top: 20px; }
+        /* Image page specific styling */
+        .image-hero {
+            background: linear-gradient(135deg, 
+                rgba(217, 176, 255, 0.1) 0%, 
+                rgba(217, 176, 255, 0.05) 100%);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(217, 176, 255, 0.2);
+        }
+        
+        .image-hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--rainbow-purple);
+        }
+        
+        .image-hero p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* Upload area */
+        .upload-container {
+            background: var(--bg-secondary);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            border: 2px dashed rgba(217, 176, 255, 0.3);
+            transition: all var(--transition-speed);
+            cursor: none;
+            text-align: center;
+        }
+        
+        .upload-container:hover,
+        .upload-container.drag-over {
+            border-color: var(--rainbow-purple);
+            background: rgba(217, 176, 255, 0.05);
+            transform: scale(1.02);
+        }
+        
+        .upload-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .upload-text {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .upload-hint {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .upload-button {
+            background: var(--rainbow-purple);
+            color: var(--bg-primary);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: none;
+            transition: all var(--transition-speed);
+            display: inline-block;
+        }
+        
+        .upload-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(217, 176, 255, 0.5);
+        }
+        
+        /* Preview area */
+        .preview-container {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .preview-card {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .preview-header h3 {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+        }
+        
+        .preview-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .image-preview {
+            width: 100%;
+            height: 200px;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .image-info {
+            margin-top: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .download-button {
+            background: var(--rainbow-purple);
+            color: var(--bg-primary);
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: none;
+            transition: all var(--transition-speed);
+            width: 100%;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .download-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(217, 176, 255, 0.5);
+        }
+        
+        .download-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .reset-button {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: none;
+            transition: all var(--transition-speed);
+        }
+        
+        .reset-button:hover {
+            border-color: var(--rainbow-purple);
+            color: var(--text-primary);
+        }
+        
+        /* Feature grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Progress bar */
+        .conversion-progress {
+            display: none;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, 
+                var(--rainbow-purple),
+                var(--rainbow-blue));
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        @media (max-width: 600px) {
+            .preview-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .upload-container {
+                padding: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>JPG to PNG Image Converter</h1>
-    <div id="drop_zone">Drag and drop an image here</div>
-    <img id="preview" src="" alt="Preview" style="display:none; max-width: 300px; margin-top: 20px;"/>
-    <a id="download" href="#" style="display:none;">Download Converted Image</a>
+    <!-- Left Ad Column -->
+    <div class="ad-column left">
+        <div class="ad-placeholder" data-ad="left">
+            <!-- AdSense will go here -->
+            <span>🖼️</span>
+        </div>
+    </div>
 
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="site-header">
+            <div class="logo-area">
+                <a href="../index.html" style="text-decoration: none;">
+                    <h1 class="site-title">Queer Convert</h1>
+                </a>
+                <div class="rainbow-bar"></div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="main-nav">
+                <a href="../index.html" class="nav-link">START</a>
+                <a href="distance.html" class="nav-link">DISTANCE</a>
+                <a href="weight.html" class="nav-link">WEIGHT</a>
+                <a href="image.html" class="nav-link active">IMAGE</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <div class="image-hero">
+            <h2>🖼️ JPG to PNG</h2>
+            <p>convert images privately · all in your browser · no upload servers</p>
+        </div>
+
+        <!-- Upload Area -->
+        <div class="upload-container" id="uploadArea">
+            <div class="upload-icon">✨</div>
+            <div class="upload-text">drag & drop your JPG here</div>
+            <div class="upload-hint">or click to browse (max 10MB)</div>
+            <input type="file" id="fileInput" accept=".jpg,.jpeg,.jfif,.pjpeg,.pjp" style="display: none;">
+            <button class="upload-button" id="selectButton">select image</button>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="conversion-progress" id="progressContainer">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div style="color: var(--text-secondary);" id="progressText">converting...</div>
+        </div>
+
+        <!-- Preview Area -->
+        <div class="preview-container" id="previewContainer">
+            <!-- Original Image -->
+            <div class="preview-card">
+                <div class="preview-header">
+                    <h3>original</h3>
+                    <span class="preview-badge" id="originalFormat">JPG</span>
+                </div>
+                <div class="image-preview" id="originalPreview">
+                    <!-- Image will appear here -->
+                </div>
+                <div class="image-info">
+                    <span id="originalName">filename.jpg</span>
+                    <span id="originalSize">0 KB</span>
+                </div>
+                <button class="reset-button" id="resetButton" style="width: 100%;">convert another</button>
+            </div>
+
+            <!-- Converted PNG -->
+            <div class="preview-card">
+                <div class="preview-header">
+                    <h3>converted</h3>
+                    <span class="preview-badge">PNG</span>
+                </div>
+                <div class="image-preview" id="convertedPreview">
+                    <!-- Converted image will appear here -->
+                </div>
+                <div class="image-info">
+                    <span id="convertedName">filename.png</span>
+                    <span id="convertedSize">0 KB</span>
+                </div>
+                <button class="download-button" id="downloadButton" disabled>
+                    <span>💾</span> download PNG
+                </button>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <div class="feature-title">100% private</div>
+                <div class="feature-desc">all conversion happens in your browser · nothing uploaded</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">instant</div>
+                <div class="feature-desc">conversion takes milliseconds · download immediately</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌈</div>
+                <div class="feature-title">lossless</div>
+                <div class="feature-desc">PNG preserves quality · perfect for transparency</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>Made with 🌈 for the community · every conversion = sparkles</p>
+            <p class="footer-small">all rights reversed · support queer joy</p>
+        </footer>
+    </main>
+
+    <!-- Right Ad Column -->
+    <div class="ad-column right">
+        <div class="ad-placeholder" data-ad="right">
+            <!-- AdSense will go here -->
+            <span>🖼️</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script src="../js/confetti.js"></script>
+    
+    <!-- Image Conversion Logic -->
     <script>
-        const dropZone = document.getElementById('drop_zone');
-        const preview = document.getElementById('preview');
-        const download = document.getElementById('download');
+        // DOM Elements
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const selectButton = document.getElementById('selectButton');
+        const previewContainer = document.getElementById('previewContainer');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const originalPreview = document.getElementById('originalPreview');
+        const convertedPreview = document.getElementById('convertedPreview');
+        const originalName = document.getElementById('originalName');
+        const originalSize = document.getElementById('originalSize');
+        const convertedName = document.getElementById('convertedName');
+        const convertedSize = document.getElementById('convertedSize');
+        const downloadButton = document.getElementById('downloadButton');
+        const resetButton = document.getElementById('resetButton');
+        const originalFormat = document.getElementById('originalFormat');
 
-        dropZone.addEventListener('dragover', (event) => {
-            event.preventDefault();
-            dropZone.style.backgroundColor = '#e7f0ff';
+        // Current image data
+        let currentFile = null;
+        let currentImage = null;
+        let convertedBlob = null;
+        let convertedUrl = null;
+
+        // Drag & drop handlers
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('drag-over');
         });
 
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.style.backgroundColor = '#fff';
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('drag-over');
         });
 
-        dropZone.addEventListener('drop', (event) => {
-            event.preventDefault();
-            dropZone.style.backgroundColor = '#fff';
-            const file = event.dataTransfer.files[0];
-            if (file && file.type === 'image/jpeg') {
-                convertImage(file);
-            } else {
-                alert('Please drop a JPG image.');
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
             }
         });
 
-        async function convertImage(file) {
+        // Click handlers
+        selectButton.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        uploadArea.addEventListener('click', (e) => {
+            if (e.target !== selectButton) {
+                fileInput.click();
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        // Reset button
+        resetButton.addEventListener('click', () => {
+            resetConverter();
+        });
+
+        // Handle file selection
+        function handleFile(file) {
+            // Check if it's a JPG
+            if (!file.type.match('image/jpeg')) {
+                alert('Please select a JPG image!');
+                return;
+            }
+
+            // Check size (10MB limit)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('Image too large! Maximum 10MB.');
+                return;
+            }
+
+            currentFile = file;
+            
+            // Show progress
+            uploadArea.style.display = 'none';
+            progressContainer.style.display = 'block';
+            
+            // Simulate progress (since conversion is instant, but we want sparkles!)
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                progressFill.style.width = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    progressText.textContent = 'conversion complete! ✨';
+                    
+                    // Trigger confetti
+                    window.triggerConfetti('fabulous');
+                    
+                    // Show preview
+                    setTimeout(() => {
+                        progressContainer.style.display = 'none';
+                        previewContainer.style.display = 'grid';
+                        displayImages(file);
+                    }, 500);
+                } else {
+                    progressText.textContent = 'converting... ' + progress + '%';
+                }
+            }, 50);
+        }
+
+        // Display original and converted images
+        function displayImages(file) {
             const reader = new FileReader();
-            reader.onload = async (event) => {
+            
+            reader.onload = (e) => {
                 const img = new Image();
-                img.src = event.target.result;
-                img.onload = async () => {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = img.width;
-                    canvas.height = img.height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0);
-                    const pngData = canvas.toDataURL('image/png');
-                    preview.src = pngData;
-                    preview.style.display = 'block';
-                    download.href = pngData;
-                    download.download = 'converted-image.png';
-                    download.style.display = 'inline';
+                img.onload = () => {
+                    currentImage = img;
+                    
+                    // Display original
+                    originalPreview.innerHTML = `<img src="${e.target.result}" alt="original">`;
+                    originalName.textContent = file.name;
+                    originalSize.textContent = formatBytes(file.size);
+                    
+                    // Check if already JPEG
+                    if (file.type === 'image/jpeg' || file.type === 'image/jpg') {
+                        originalFormat.textContent = 'JPG';
+                    } else {
+                        originalFormat.textContent = file.type.split('/')[1].toUpperCase();
+                    }
+                    
+                    // Convert to PNG
+                    convertToPNG(img);
                 };
+                img.src = e.target.result;
             };
+            
             reader.readAsDataURL(file);
         }
+
+        // Convert image to PNG
+        function convertToPNG(img) {
+            // Create canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            
+            // Draw image
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            
+            // Convert to PNG blob
+            canvas.toBlob((blob) => {
+                convertedBlob = blob;
+                convertedUrl = URL.createObjectURL(blob);
+                
+                // Display converted
+                convertedPreview.innerHTML = `<img src="${convertedUrl}" alt="converted PNG">`;
+                convertedName.textContent = file.name.replace(/\.(jpg|jpeg|jfif|pjpeg|pjp)$/i, '.png');
+                convertedSize.textContent = formatBytes(blob.size);
+                
+                // Enable download
+                downloadButton.disabled = false;
+                
+                // Show size comparison
+                const sizeDiff = ((blob.size - currentFile.size) / currentFile.size * 100).toFixed(1);
+                const sizeDiffClass = sizeDiff > 0 ? '⬆️' : '⬇️';
+                convertedSize.textContent += ` (${sizeDiffClass} ${Math.abs(sizeDiff)}%)`;
+                
+            }, 'image/png');
+        }
+
+        // Download PNG
+        downloadButton.addEventListener('click', () => {
+            if (convertedUrl) {
+                const a = document.createElement('a');
+                a.href = convertedUrl;
+                a.download = file.name.replace(/\.(jpg|jpeg|jfif|pjpeg|pjp)$/i, '.png');
+                a.click();
+                
+                // Extra confetti for download!
+                window.triggerConfetti('high');
+            }
+        });
+
+        // Reset converter
+        function resetConverter() {
+            // Clean up
+            if (convertedUrl) {
+                URL.revokeObjectURL(convertedUrl);
+            }
+            
+            // Reset UI
+            currentFile = null;
+            currentImage = null;
+            convertedBlob = null;
+            convertedUrl = null;
+            
+            uploadArea.style.display = 'block';
+            previewContainer.style.display = 'none';
+            progressContainer.style.display = 'none';
+            progressFill.style.width = '0%';
+            downloadButton.disabled = true;
+            
+            // Clear previews
+            originalPreview.innerHTML = '';
+            convertedPreview.innerHTML = '';
+            
+            // Clear file input
+            fileInput.value = '';
+        }
+
+        // Format bytes to human readable
+        function formatBytes(bytes, decimals = 2) {
+            if (bytes === 0) return '0 Bytes';
+            
+            const k = 1024;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        }
+
+        // Clean up on page unload
+        window.addEventListener('beforeunload', () => {
+            if (convertedUrl) {
+                URL.revokeObjectURL(convertedUrl);
+            }
+        });
+
+        // Initial confetti
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => window.triggerConfetti('low'), 500);
+        });
     </script>
 </body>
 </html>
