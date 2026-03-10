@@ -313,6 +313,7 @@
                 <a href="distance.html" class="nav-link">DISTANCE</a>
                 <a href="weight.html" class="nav-link">WEIGHT</a>
                 <a href="image.html" class="nav-link active">IMAGE</a>
+                <a href="calculator.html" class="nav-link">CALC</a>
             </nav>
         </header>
 
@@ -395,12 +396,15 @@
             </div>
         </div>
 
-        <!-- Footer -->
+        <!-- FOOTER - CORRECTLY PLACED here before scripts -->
         <footer class="site-footer">
             <p>Made with 🌈 for the community · every conversion = sparkles</p>
-            <p class="footer-small">all rights reversed · support queer joy</p>
+            <p class="footer-small">
+                <a href="../privacy.html" style="color: var(--rainbow-blue);">privacy</a> · 
+                <a href="../terms.html" style="color: var(--rainbow-blue);">terms</a>
+            </p>
         </footer>
-    </main>
+    </main>  <!-- Close main-content -->
 
     <!-- Right Ad Column -->
     <div class="ad-column right">
@@ -410,7 +414,7 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Scripts - CORRECTLY PLACED after footer, before </body> -->
     <script src="../js/main.js"></script>
     <script src="../js/confetti.js"></script>
     
@@ -593,7 +597,7 @@
             if (convertedUrl) {
                 const a = document.createElement('a');
                 a.href = convertedUrl;
-                a.download = file.name.replace(/\.(jpg|jpeg|jfif|pjpeg|pjp)$/i, '.png');
+                a.download = currentFile.name.replace(/\.(jpg|jpeg|jfif|pjpeg|pjp)$/i, '.png');
                 a.click();
                 
                 // Extra confetti for download!
