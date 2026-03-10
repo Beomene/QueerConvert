@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queer Convert · tools with pride</title>
+    
+    <!-- Meta tags for sharing & AdSense -->
+    <meta name="description" content="Convert files, distances, weights... but never convert yourself. A queer-centered toolbox with sparkles & pride.">
+    <meta name="theme-color" content="#121212">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <!-- Left Ad Column (20vw) -->
+    <div class="ad-column left">
+        <div class="ad-placeholder" data-ad="left">
+            <!-- AdSense will go here -->
+            <span>✨</span>
+        </div>
+    </div>
+
+    <!-- Main Content (60vw) -->
+    <main class="main-content">
+        <!-- Header with rainbow underline -->
+        <header class="site-header">
+            <div class="logo-area">
+                <h1 class="site-title">Queer Convert</h1>
+                <div class="rainbow-bar"></div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link active">START</a>
+                <a href="pages/distance.html" class="nav-link">DISTANCE</a>
+                <a href="pages/weight.html" class="nav-link">WEIGHT</a>
+                <a href="pages/image.html" class="nav-link">IMAGE</a>
+            </nav>
+        </header>
+
+        <!-- Slogan area with subtle rotation effect -->
+        <div class="slogan-container">
+            <p class="slogan">
+                Convert files, distances, weights...
+                <span class="slogan-break">but never convert yourself</span>
+                <span class="slogan-highlight">🏳️‍🌈</span>
+            </p>
+        </div>
+
+        <!-- Tools Grid -->
+        <div class="tools-grid">
+            <!-- JPG to PNG -->
+            <div class="tool-card" data-tool="image">
+                <div class="tool-icon">🖼️</div>
+                <h2 class="tool-title">JPG to PNG</h2>
+                <p class="tool-desc">Convert images with pride</p>
+                <button class="tool-button" onclick="window.location.href='pages/image.html'">
+                    CONVERT
+                </button>
+            </div>
+
+            <!-- Imperial to Metric -->
+            <div class="tool-card" data-tool="distance">
+                <div class="tool-icon">📏</div>
+                <h2 class="tool-title">IMPERIAL to METRIC</h2>
+                <p class="tool-desc">Distance & weight, unified</p>
+                <button class="tool-button" onclick="window.location.href='pages/distance.html'">
+                    CONVERT
+                </button>
+            </div>
+
+            <!-- LBS to KG -->
+            <div class="tool-card" data-tool="weight">
+                <div class="tool-icon">⚖️</div>
+                <h2 class="tool-title">LBS to KG</h2>
+                <p class="tool-desc">Weight, but make it metric</p>
+                <button class="tool-button" onclick="window.location.href='pages/weight.html'">
+                    CONVERT
+                </button>
+            </div>
+
+            <!-- Miles to KM -->
+            <div class="tool-card" data-tool="distance">
+                <div class="tool-icon">🛣️</div>
+                <h2 class="tool-title">MILES to KILOMETER</h2>
+                <p class="tool-desc">Distance, remeasured</p>
+                <button class="tool-button" onclick="window.location.href='pages/distance.html'">
+                    CONVERT
+                </button>
+            </div>
+
+            <!-- Calculator - spans two columns on grid -->
+            <div class="tool-card calculator-card" data-tool="calculator">
+                <div class="tool-icon">🧮</div>
+                <h2 class="tool-title">BASIC CALCULATOR</h2>
+                <p class="tool-desc">Add, subtract, multiply, divide</p>
+                
+                <!-- Simple calculator preview -->
+                <div class="calculator-preview">
+                    <div class="calc-display" id="preview-display">0</div>
+                    <div class="calc-buttons">
+                        <button class="calc-btn" onclick="previewCalc('7')">7</button>
+                        <button class="calc-btn" onclick="previewCalc('8')">8</button>
+                        <button class="calc-btn" onclick="previewCalc('9')">9</button>
+                        <button class="calc-btn calc-operator" onclick="previewCalc('/')">÷</button>
+                        
+                        <button class="calc-btn" onclick="previewCalc('4')">4</button>
+                        <button class="calc-btn" onclick="previewCalc('5')">5</button>
+                        <button class="calc-btn" onclick="previewCalc('6')">6</button>
+                        <button class="calc-btn calc-operator" onclick="previewCalc('*')">×</button>
+                        
+                        <button class="calc-btn" onclick="previewCalc('1')">1</button>
+                        <button class="calc-btn" onclick="previewCalc('2')">2</button>
+                        <button class="calc-btn" onclick="previewCalc('3')">3</button>
+                        <button class="calc-btn calc-operator" onclick="previewCalc('-')">−</button>
+                        
+                        <button class="calc-btn" onclick="previewCalc('0')">0</button>
+                        <button class="calc-btn" onclick="previewCalc('.')">.</button>
+                        <button class="calc-btn calc-equals" onclick="previewCalc('=')">=</button>
+                        <button class="calc-btn calc-operator" onclick="previewCalc('+')">+</button>
+                    </div>
+                </div>
+                
+                <button class="tool-button full-width" onclick="window.location.href='pages/calculator.html'">
+                    OPEN CALCULATOR
+                </button>
+            </div>
+
+            <!-- TRUMP to GLITTER - The fun one -->
+            <div class="tool-card trump-card" data-tool="fun">
+                <div class="tool-icon">🎈</div>
+                <h2 class="tool-title">TRUMP to GLITTER</h2>
+                <p class="tool-desc">The only conversion that matters</p>
+                
+                <div class="balloon-container" id="trumpBalloon">
+                    <div class="balloon">🎈</div>
+                    <p class="balloon-hint">click to pop</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer with quiet pride -->
+        <footer class="site-footer">
+            <p>Made with 🌈 for the community · every conversion = sparkles</p>
+            <p class="footer-small">all rights reversed · support queer joy</p>
+        </footer>
+    </main>
+
+    <!-- Right Ad Column (20vw) -->
+    <div class="ad-column right">
+        <div class="ad-placeholder" data-ad="right">
+            <!-- AdSense will go here -->
+            <span>✨</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/confetti.js"></script>
+    <script>
+        // Simple preview calculator for the homepage
+        function previewCalc(value) {
+            const display = document.getElementById('preview-display');
+            if (value === '=') {
+                try {
+                    // Very simple eval - in real calculator we'll parse properly
+                    display.innerText = eval(display.innerText);
+                    // Trigger confetti!
+                    if (window.triggerConfetti) {
+                        window.triggerConfetti();
+                    }
+                } catch {
+                    display.innerText = '🌈';
+                    setTimeout(() => display.innerText = '0', 1000);
+                }
+            } else {
+                if (display.innerText === '0' || display.innerText === '🌈') {
+                    display.innerText = value;
+                } else {
+                    display.innerText += value;
+                }
+            }
+        }
+
+        // Balloon pop for Trump to Glitter
+        document.addEventListener('DOMContentLoaded', function() {
+            const balloonContainer = document.getElementById('trumpBalloon');
+            if (balloonContainer) {
+                balloonContainer.addEventListener('click', function() {
+                    const balloon = this.querySelector('.balloon');
+                    balloon.style.transform = 'scale(1.5)';
+                    balloon.style.opacity = '0';
+                    
+                    // Trigger confetti!
+                    if (window.triggerConfetti) {
+                        window.triggerConfetti();
+                    }
+                    
+                    // Reset after animation
+                    setTimeout(() => {
+                        balloon.style.transform = 'scale(1)';
+                        balloon.style.opacity = '1';
+                    }, 1000);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
