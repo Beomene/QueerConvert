@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queer Convert · gentle calculator</title>
+    
+    <!-- Meta tags -->
+    <meta name="description" content="A soft, friendly calculator with gentle colors and magical vibes. No pressure, just numbers and sparkles.">
+    <meta name="theme-color" content="#121212">
+    
+    <!-- Social meta -->
+    <meta property="og:title" content="Queer Convert - gentle calculator">
+    <meta property="og:description" content="A calming calculator space with soft pastels, friendly buttons, and magical animations.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://trinka.space/queer-convert/pages/calculator">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6032661605524448"
+            crossorigin="anonymous"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    
+    <!-- Extra styles for gentle calculator -->
+    <style>
+        /* Calculator page specific styling - soft and gentle */
+        .calculator-hero {
+            background: linear-gradient(135deg, 
+                rgba(255, 243, 176, 0.1) 0%, 
+                rgba(217, 176, 255, 0.1) 100%);
+            border-radius: 40px;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 243, 176, 0.2);
+            animation: softGlow 4s infinite alternate;
+        }
+        
+        @keyframes softGlow {
+            0% { box-shadow: 0 0 20px rgba(255, 243, 176, 0.1); }
+            100% { box-shadow: 0 0 40px rgba(217, 176, 255, 0.2); }
+        }
+        
+        .calculator-hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, 
+                var(--rainbow-yellow),
+                var(--rainbow-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .calculator-hero p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Main calculator container - soft and rounded */
+        .calculator-container {
+            background: var(--bg-secondary);
+            border-radius: 40px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .calculator-container:hover {
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+        
+        /* Display area - calm and clear */
+        .calculator-display {
+            background: var(--bg-primary);
+            border-radius: 30px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .calculator-display::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, 
+                rgba(255, 243, 176, 0.1) 0%,
+                transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        #calcDisplay {
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: var(--text-primary);
+            text-align: right;
+            font-family: 'Segoe UI', monospace;
+            position: relative;
+            z-index: 1;
+            word-wrap: break-word;
+            min-height: 5rem;
+            line-height: 1.2;
+            transition: all 0.3s ease;
+        }
+        
+        .calculation-preview {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            text-align: right;
+            margin-top: 0.5rem;
+            font-family: monospace;
+            opacity: 0.7;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Memory indicator */
+        .memory-indicator {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: var(--rainbow-yellow);
+            font-size: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 2;
+        }
+        
+        .memory-indicator.active {
+            opacity: 1;
+        }
+        
+        /* Button grid - soft and friendly */
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        /* Gentle button styling */
+        .calc-btn-gentle {
+            background: var(--bg-primary);
+            border: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-primary);
+            padding: 1.5rem 1rem;
+            border-radius: 25px;
+            font-size: 1.8rem;
+            font-weight: 400;
+            cursor: none;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        /* Button hover effect - gentle glow */
+        .calc-btn-gentle:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Each button gets its own soft color */
+        .calc-btn-gentle[data-type="number"]:hover {
+            background: rgba(176, 212, 255, 0.15);
+            box-shadow: 0 0 20px rgba(176, 212, 255, 0.3);
+        }
+        
+        .calc-btn-gentle[data-type="operator"] {
+            color: var(--rainbow-blue);
+            font-weight: 500;
+        }
+        
+        .calc-btn-gentle[data-type="operator"]:hover {
+            background: rgba(176, 212, 255, 0.2);
+            box-shadow: 0 0 20px rgba(176, 212, 255, 0.4);
+        }
+        
+        .calc-btn-gentle[data-type="function"] {
+            color: var(--rainbow-purple);
+            font-size: 1.5rem;
+        }
+        
+        .calc-btn-gentle[data-type="function"]:hover {
+            background: rgba(217, 176, 255, 0.2);
+            box-shadow: 0 0 20px rgba(217, 176, 255, 0.4);
+        }
+        
+        .calc-btn-gentle[data-type="equals"] {
+            background: linear-gradient(135deg, 
+                rgba(255, 243, 176, 0.2),
+                rgba(217, 176, 255, 0.2));
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 2rem;
+            border: 1px solid rgba(255, 243, 176, 0.3);
+        }
+        
+        .calc-btn-gentle[data-type="equals"]:hover {
+            background: linear-gradient(135deg, 
+                rgba(255, 243, 176, 0.3),
+                rgba(217, 176, 255, 0.3));
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(255, 243, 176, 0.5);
+        }
+        
+        .calc-btn-gentle[data-type="clear"] {
+            color: var(--rainbow-red);
+            font-weight: 500;
+        }
+        
+        .calc-btn-gentle[data-type="clear"]:hover {
+            background: rgba(255, 179, 179, 0.2);
+            box-shadow: 0 0 20px rgba(255, 179, 179, 0.4);
+        }
+        
+        /* Ripple effect for button clicks */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0);
+            animation: ripple-animation 0.6s ease-out;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        /* Calming message area */
+        .calming-message {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        
+        .message-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-style: italic;
+            transition: opacity 0.5s;
+            min-height: 3rem;
+        }
+        
+        .message-sparkle {
+            font-size: 1.5rem;
+            animation: twinkle 2s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* History panel - gentle and optional */
+        .history-panel {
+            background: rgba(255,255,255,0.02);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        
+        .history-title {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .history-item {
+            color: var(--text-secondary);
+            padding: 0.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-family: monospace;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            cursor: none;
+        }
+        
+        .history-item:hover {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-primary);
+            padding-left: 1rem;
+        }
+        
+        .clear-history {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            cursor: none;
+        }
+        
+        .clear-history:hover {
+            border-color: var(--rainbow-red);
+            color: var(--rainbow-red);
+        }
+        
+        /* Quick tips */
+        .tips-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .tip-card {
+            background: rgba(255,255,255,0.02);
+            border-radius: 20px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        
+        .tip-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tip-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .calculator-container {
+                padding: 1.5rem;
+            }
+            
+            #calcDisplay {
+                font-size: 2.5rem;
+            }
+            
+            .calc-btn-gentle {
+                padding: 1.2rem 0.5rem;
+                font-size: 1.5rem;
+            }
+            
+            .calculator-buttons {
+                gap: 0.5rem;
+            }
+            
+            .tips-section {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Anxiety-friendly touches */
+        .breathing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--rainbow-blue);
+            border-radius: 50%;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            opacity: 0.5;
+            animation: breathe 4s infinite;
+        }
+        
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.5); opacity: 0.6; }
+        }
+        
+        /* Soft focus mode */
+        .soft-focus {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at center, 
+                transparent 30%,
+                rgba(0,0,0,0.2) 100%);
+            z-index: 9998;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Soft focus overlay for gentle viewing -->
+    <div class="soft-focus"></div>
+    <div class="breathing-dot"></div>
+
+    <!-- Left Ad Column -->
+    <div class="ad-column left">
+        <div class="ad-placeholder" data-ad="left">
+            <!-- AdSense will go here -->
+            <span>🧮</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="site-header">
+            <div class="logo-area">
+                <a href="../index.html" style="text-decoration: none;">
+                    <h1 class="site-title">Queer Convert</h1>
+                </a>
+                <div class="rainbow-bar"></div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="main-nav">
+                <a href="../index.html" class="nav-link">START</a>
+                <a href="distance.html" class="nav-link">DISTANCE</a>
+                <a href="weight.html" class="nav-link">WEIGHT</a>
+                <a href="image.html" class="nav-link">IMAGE</a>
+                <a href="calculator.html" class="nav-link active">CALC</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <div class="calculator-hero">
+            <h2>🧮 gentle calculator</h2>
+            <p>soft numbers · friendly buttons · magical vibes · no pressure, just sparkles</p>
+        </div>
+
+        <!-- Calculator Container -->
+        <div class="calculator-container">
+            <!-- Memory indicator -->
+            <div class="memory-indicator" id="memoryIndicator">M</div>
+            
+            <!-- Display -->
+            <div class="calculator-display">
+                <div id="calcDisplay">0</div>
+                <div class="calculation-preview" id="calcPreview"></div>
+            </div>
+
+            <!-- History Panel (collapsible) -->
+            <div class="history-panel" id="historyPanel">
+                <div class="history-title">
+                    <span>✨ recent calculations</span>
+                    <button class="clear-history" id="clearHistory">clear</button>
+                </div>
+                <div id="historyList">
+                    <!-- History items appear here -->
+                </div>
+            </div>
+
+            <!-- Button Grid -->
+            <div class="calculator-buttons">
+                <!-- Row 1: Functions -->
+                <button class="calc-btn-gentle" data-type="function" data-value="C">C</button>
+                <button class="calc-btn-gentle" data-type="function" data-value="CE">CE</button>
+                <button class="calc-btn-gentle" data-type="function" data-value="⌫">⌫</button>
+                <button class="calc-btn-gentle" data-type="operator" data-value="/">÷</button>
+                
+                <!-- Row 2: Numbers 7-9 and * -->
+                <button class="calc-btn-gentle" data-type="number" data-value="7">7</button>
+                <button class="calc-btn-gentle" data-type="number" data-value="8">8</button>
+                <button class="calc-btn-gentle" data-type="number" data-value="9">9</button>
+                <button class="calc-btn-gentle" data-type="operator" data-value="*">×</button>
+                
+                <!-- Row 3: Numbers 4-6 and - -->
+                <button class="calc-btn-gentle" data-type="number" data-value="4">4</button>
+                <button class="calc-btn-gentle" data-type="number" data-value="5">5</button>
+                <button class="calc-btn-gentle" data-type="number" data-value="6">6</button>
+                <button class="calc-btn-gentle" data-type="operator" data-value="-">−</button>
+                
+                <!-- Row 4: Numbers 1-3 and + -->
+                <button class="calc-btn-gentle" data-type="number" data-value="1">1</button>
+                <button class="calc-btn-gentle" data-type="number" data-value="2">2</button>
+                <button class="calc-btn-gentle" data-type="number" data-value="3">3</button>
+                <button class="calc-btn-gentle" data-type="operator" data-value="+">+</button>
+                
+                <!-- Row 5: 0, 00, ., = -->
+                <button class="calc-btn-gentle" data-type="number" data-value="0">0</button>
+                <button class="calc-btn-gentle" data-type="number" data-value="00">00</button>
+                <button class="calc-btn-gentle" data-type="number" data-value=".">.</button>
+                <button class="calc-btn-gentle" data-type="equals" data-value="=">=</button>
+            </div>
+
+            <!-- Calming Messages -->
+            <div class="calming-message">
+                <div class="message-sparkle">✨</div>
+                <div class="message-text" id="calmingMessage">you're doing great · take your time</div>
+            </div>
+        </div>
+
+        <!-- Quick Tips -->
+        <div class="tips-section">
+            <div class="tip-card">
+                <div class="tip-icon">🧘</div>
+                <div class="tip-text">breathe · no rush</div>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">✨</div>
+                <div class="tip-text">every answer = sparkles</div>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">💫</div>
+                <div class="tip-text">mistakes? just C</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>Made with 🌈 for the community · gentle math for gentle minds</p>
+            <p class="footer-small">all rights reversed · support queer joy</p>
+        </footer>
+    </main>
+
+    <!-- Right Ad Column -->
+    <div class="ad-column right">
+        <div class="ad-placeholder" data-ad="right">
+            <!-- AdSense will go here -->
+            <span>🧮</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script src="../js/confetti.js"></script>
+    
+    <!-- Gentle Calculator Logic -->
+    <script>
+        // Calculator state
+        let currentInput = '0';
+        let previousInput = '';
+        let operation = null;
+        let resetInput = false;
+        let memory = 0;
+        let history = [];
+        
+        // Calming messages array
+        const calmingMessages = [
+            "you're doing great · take your time",
+            "breathe · numbers are friendly",
+            "every answer brings sparkles ✨",
+            "it's okay to go slow",
+            "you belong here · math and all",
+            "mistakes are just learning",
+            "the = button loves you",
+            "soft numbers for gentle minds",
+            "you've got this · one step at a time",
+            "math is magic · you're magical"
+        ];
+        
+        // Get elements
+        const display = document.getElementById('calcDisplay');
+        const preview = document.getElementById('calcPreview');
+        const memoryIndicator = document.getElementById('memoryIndicator');
+        const historyList = document.getElementById('historyList');
+        const calmingMessage = document.getElementById('calmingMessage');
+        
+        // Rotate calming messages every 10 seconds
+        let messageIndex = 0;
+        setInterval(() => {
+            messageIndex = (messageIndex + 1) % calmingMessages.length;
+            calmingMessage.textContent = calmingMessages[messageIndex];
+            calmingMessage.style.opacity = '0.7';
+        }, 10000);
+        
+        // Update display
+        function updateDisplay() {
+            display.textContent = currentInput;
+            
+            // Show preview if there's an operation
+            if (operation && previousInput) {
+                preview.textContent = `${previousInput} ${getOperatorSymbol(operation)}`;
+            } else {
+                preview.textContent = '';
+            }
+        }
+        
+        // Get operator symbol
+        function getOperatorSymbol(op) {
+            const symbols = {
+                '+': '+',
+                '-': '−',
+                '*': '×',
+                '/': '÷'
+            };
+            return symbols[op] || op;
+        }
+        
+        // Add to history
+        function addToHistory(expression, result) {
+            history.unshift({ expression, result, timestamp: Date.now() });
+            if (history.length > 10) history.pop();
+            updateHistory();
+        }
+        
+        // Update history display
+        function updateHistory() {
+            historyList.innerHTML = history.map(item => `
+                <div class="history-item" onclick="recallCalculation('${item.result}')">
+                    ${item.expression} = ${item.result}
+                </div>
+            `).join('');
+        }
+        
+        // Recall calculation from history
+        window.recallCalculation = function(result) {
+            currentInput = result;
+            resetInput = true;
+            updateDisplay();
+            window.triggerConfetti('low');
+        };
+        
+        // Clear history
+        document.getElementById('clearHistory').addEventListener('click', () => {
+            history = [];
+            updateHistory();
+            window.triggerConfetti('low');
+        });
+        
+        // Handle number input
+        function inputNumber(num) {
+            if (resetInput) {
+                currentInput = num;
+                resetInput = false;
+            } else {
+                if (currentInput === '0' && num !== '.') {
+                    currentInput = num;
+                } else {
+                    // Prevent multiple decimals
+                    if (num === '.' && currentInput.includes('.')) return;
+                    currentInput += num;
+                }
+            }
+            updateDisplay();
+            
+            // Create ripple effect on number press
+            window.triggerConfetti('low');
+        }
+        
+        // Handle operator
+        function setOperation(op) {
+            if (operation && previousInput && !resetInput) {
+                calculate();
+            }
+            
+            previousInput = currentInput;
+            operation = op;
+            resetInput = true;
+            updateDisplay();
+        }
+        
+        // Calculate result
+        function calculate() {
+            if (!operation || !previousInput) return;
+            
+            const prev = parseFloat(previousInput);
+            const current = parseFloat(currentInput);
+            
+            if (isNaN(prev) || isNaN(current)) return;
+            
+            let result;
+            let expression = `${previousInput} ${getOperatorSymbol(operation)} ${currentInput}`;
+            
+            switch (operation) {
+                case '+':
+                    result = prev + current;
+                    break;
+                case '-':
+                    result = prev - current;
+                    break;
+                case '*':
+                    result = prev * current;
+                    break;
+                case '/':
+                    if (current === 0) {
+                        currentInput = '🌼';
+                        operation = null;
+                        previousInput = '';
+                        updateDisplay();
+                        window.triggerConfetti('fabulous');
+                        setTimeout(() => {
+                            currentInput = '0';
+                            updateDisplay();
+                        }, 1500);
+                        return;
+                    }
+                    result = prev / current;
+                    break;
+                default:
+                    return;
+            }
+            
+            // Format result
+            result = parseFloat(result.toFixed(10));
+            currentInput = result.toString();
+            expression += ` = ${currentInput}`;
+            
+            // Add to history
+            addToHistory(expression, currentInput);
+            
+            operation = null;
+            previousInput = '';
+            resetInput = true;
+            
+            updateDisplay();
+            
+            // Fabulous confetti for equals!
+            window.triggerConfetti('fabulous');
+        }
+        
+        // Clear functions
+        function clear() {
+            currentInput = '0';
+            previousInput = '';
+            operation = null;
+            updateDisplay();
+            window.triggerConfetti('low');
+        }
+        
+        function clearEntry() {
+            currentInput = '0';
+            updateDisplay();
+            window.triggerConfetti('low');
+        }
+        
+        function backspace() {
+            if (currentInput.length > 1) {
+                currentInput = currentInput.slice(0, -1);
+            } else {
+                currentInput = '0';
+            }
+            updateDisplay();
+            window.triggerConfetti('low');
+        }
+        
+        // Button click handler
+        function handleButtonClick(value, type) {
+            switch (type) {
+                case 'number':
+                    inputNumber(value);
+                    break;
+                case 'operator':
+                    if (value === 'C') {
+                        clear();
+                    } else if (value === 'CE') {
+                        clearEntry();
+                    } else if (value === '⌫') {
+                        backspace();
+                    } else {
+                        setOperation(value);
+                    }
+                    break;
+                case 'function':
+                    if (value === 'C') clear();
+                    else if (value === 'CE') clearEntry();
+                    else if (value === '⌫') backspace();
+                    break;
+                case 'equals':
+                    calculate();
+                    break;
+            }
+        }
+        
+        // Add click handlers to buttons
+        document.querySelectorAll('.calc-btn-gentle').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const value = button.dataset.value;
+                const type = button.dataset.type;
+                
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                ripple.style.left = e.clientX - button.getBoundingClientRect().left + 'px';
+                ripple.style.top = e.clientY - button.getBoundingClientRect().top + 'px';
+                button.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+                
+                handleButtonClick(value, type);
+            });
+        });
+        
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            const key = e.key;
+            
+            if (key >= '0' && key <= '9') {
+                inputNumber(key);
+            } else if (key === '.') {
+                inputNumber('.');
+            } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+                setOperation(key);
+            } else if (key === 'Enter' || key === '=') {
+                e.preventDefault();
+                calculate();
+            } else if (key === 'Escape') {
+                clear();
+            } else if (key === 'Backspace') {
+                e.preventDefault();
+                backspace();
+            }
+        });
+        
+        // Initial confetti
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => window.triggerConfetti('low'), 500);
+            
+            // Add some example history
+            addToHistory('1 + 1 = 2', '2');
+            addToHistory('10 × 10 = 100', '100');
+        });
+    </script>
+</body>
+</html>
