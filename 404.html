@@ -1,15 +1,44 @@
-<!-- 404.html -->
-<div class="error-container">
-    <h1>404</h1>
-    <div class="rainbow-spiral">🌈</div>
-    <p>This page converted to glitter and floated away</p>
-    <a href="/" class="tool-button">Back to START</a>
-</div>
-
-<footer class="site-footer">
-    <p>Made with 🌈 for the community · every conversion = sparkles</p>
-    <p class="footer-small">
-        <a href="/privacy.html" style="color: var(--rainbow-blue);">privacy</a> · 
-        <a href="/terms.html" style="color: var(--rainbow-blue);">terms</a>
-    </p>
-</footer>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queer Convert · 404</title>
+    <meta name="description" content="This page converted to glitter and floated away">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        .error-container h1 {
+            font-size: 6rem;
+            background: linear-gradient(135deg, 
+                var(--rainbow-red),
+                var(--rainbow-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        .rainbow-spiral {
+            font-size: 5rem;
+            animation: spin 4s infinite linear;
+            margin: 2rem 0;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <main class="main-content" style="width: 100%; margin: 0 auto;">
+        <div class="error-container">
+            <h1>404</h1>
+            <div class="rainbow-spiral">🌈</div>
+            <p style="font-size: 1.5rem; margin-bottom: 2rem;">This page converted to glitter and floated away ✨</p>
+            <a href="index.html" class="tool-button" style="display: inline-block; width: auto; padding: 1rem 3rem;">Back to START</a>
+        </div>
+    </main>
+</body>
+</html>
