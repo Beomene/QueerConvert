@@ -418,7 +418,7 @@
     <script src="../js/main.js"></script>
     <script src="../js/confetti.js"></script>
     
-    <!-- Image Conversion Logic -->
+    <!-- Image Conversion Logic - FIXED VERSION -->
     <script>
         // DOM Elements
         const uploadArea = document.getElementById('uploadArea');
@@ -552,7 +552,7 @@
                     }
                     
                     // Convert to PNG
-                    convertToPNG(img);
+                    convertToPNG(img, file);
                 };
                 img.src = e.target.result;
             };
@@ -560,8 +560,8 @@
             reader.readAsDataURL(file);
         }
 
-        // Convert image to PNG
-        function convertToPNG(img) {
+        // Convert image to PNG - FIXED: pass file as parameter
+        function convertToPNG(img, file) {
             // Create canvas
             const canvas = document.createElement('canvas');
             canvas.width = img.width;
@@ -573,35 +573,63 @@
             
             // Convert to PNG blob
             canvas.toBlob((blob) => {
+                // Make sure blob is valid
+                if (!blob || blob.size === 0) {
+                    console.error('Failed to create PNG blob');
+                    alert('Conversion failed. Please try again.');
+                    return;
+                }
+                
                 convertedBlob = blob;
                 convertedUrl = URL.createObjectURL(blob);
                 
                 // Display converted
                 convertedPreview.innerHTML = `<img src="${convertedUrl}" alt="converted PNG">`;
                 convertedName.textContent = file.name.replace(/\.(jpg|jpeg|jfif|pjpeg|pjp)$/i, '.png');
-                convertedSize.textContent = formatBytes(blob.size);
+                
+                // Make sure we have valid numbers
+                const blobSize = blob.size || 0;
+                const fileSize = currentFile ? currentFile.size : file.size;
+                
+                convertedSize.textContent = formatBytes(blobSize);
                 
                 // Enable download
                 downloadButton.disabled = false;
                 
-                // Show size comparison
-                const sizeDiff = ((blob.size - currentFile.size) / currentFile.size * 100).toFixed(1);
-                const sizeDiffClass = sizeDiff > 0 ? '⬆️' : '⬇️';
-                convertedSize.textContent += ` (${sizeDiffClass} ${Math.abs(sizeDiff)}%)`;
+                // Show size comparison if we have valid sizes
+                if (blobSize > 0 && fileSize > 0) {
+                    const sizeDiff = ((blobSize - fileSize) / fileSize * 100).toFixed(1);
+                    const sizeDiffClass = sizeDiff > 0 ? '⬆️' : '⬇️';
+                    convertedSize.textContent += ` (${sizeDiffClass} ${Math.abs(sizeDiff)}%)`;
+                }
                 
             }, 'image/png');
         }
 
-        // Download PNG
-        downloadButton.addEventListener('click', () => {
-            if (convertedUrl) {
+        // Download PNG - FIXED: better error handling and cross-browser support
+        downloadButton.addEventListener('click', function() {
+            if (!convertedUrl || !currentFile) {
+                alert('No image to download. Please convert an image first.');
+                return;
+            }
+            
+            try {
                 const a = document.createElement('a');
                 a.href = convertedUrl;
                 a.download = currentFile.name.replace(/\.(jpg|jpeg|jfif|pjpeg|pjp)$/i, '.png');
+                
+                // Required for Firefox
+                document.body.appendChild(a);
                 a.click();
+                document.body.removeChild(a);
                 
                 // Extra confetti for download!
                 window.triggerConfetti('high');
+                
+                console.log('Download started:', a.download);
+            } catch (error) {
+                console.error('Download failed:', error);
+                alert('Download failed. Please try again.');
             }
         });
 
@@ -635,6 +663,7 @@
         // Format bytes to human readable
         function formatBytes(bytes, decimals = 2) {
             if (bytes === 0) return '0 Bytes';
+            if (!bytes || isNaN(bytes)) return '0 Bytes';
             
             const k = 1024;
             const dm = decimals < 0 ? 0 : decimals;
