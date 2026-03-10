@@ -353,6 +353,41 @@
             font-size: 0.9rem;
         }
         
+        /* Anxiety-friendly touches */
+        .breathing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--rainbow-blue);
+            border-radius: 50%;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            opacity: 0.5;
+            animation: breathe 4s infinite;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.5); opacity: 0.6; }
+        }
+        
+        /* Soft focus mode */
+        .soft-focus {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at center, 
+                transparent 30%,
+                rgba(0,0,0,0.2) 100%);
+            z-index: 9998;
+            opacity: 0.3;
+        }
+        
         /* Responsive */
         @media (max-width: 600px) {
             .calculator-container {
@@ -375,39 +410,6 @@
             .tips-section {
                 grid-template-columns: 1fr;
             }
-        }
-        
-        /* Anxiety-friendly touches */
-        .breathing-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--rainbow-blue);
-            border-radius: 50%;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            opacity: 0.5;
-            animation: breathe 4s infinite;
-        }
-        
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.5); opacity: 0.6; }
-        }
-        
-        /* Soft focus mode */
-        .soft-focus {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            background: radial-gradient(circle at center, 
-                transparent 30%,
-                rgba(0,0,0,0.2) 100%);
-            z-index: 9998;
-            opacity: 0.3;
         }
     </style>
 </head>
@@ -529,12 +531,15 @@
             </div>
         </div>
 
-        <!-- Footer -->
+        <!-- FOOTER - CORRECTLY PLACED here before scripts -->
         <footer class="site-footer">
-            <p>Made with 🌈 for the community · gentle math for gentle minds</p>
-            <p class="footer-small">all rights reversed · support queer joy</p>
+            <p>Made with 🌈 for the community · every conversion = sparkles</p>
+            <p class="footer-small">
+                <a href="../privacy.html" style="color: var(--rainbow-blue);">privacy</a> · 
+                <a href="../terms.html" style="color: var(--rainbow-blue);">terms</a>
+            </p>
         </footer>
-    </main>
+    </main>  <!-- Close main-content -->
 
     <!-- Right Ad Column -->
     <div class="ad-column right">
@@ -544,7 +549,7 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Scripts - CORRECTLY PLACED after footer, before </body> -->
     <script src="../js/main.js"></script>
     <script src="../js/confetti.js"></script>
     
@@ -733,7 +738,7 @@
         }
         
         // Clear functions
-        function clear() {
+        function clearAll() {
             currentInput = '0';
             previousInput = '';
             operation = null;
@@ -765,7 +770,7 @@
                     break;
                 case 'operator':
                     if (value === 'C') {
-                        clear();
+                        clearAll();
                     } else if (value === 'CE') {
                         clearEntry();
                     } else if (value === '⌫') {
@@ -775,7 +780,7 @@
                     }
                     break;
                 case 'function':
-                    if (value === 'C') clear();
+                    if (value === 'C') clearAll();
                     else if (value === 'CE') clearEntry();
                     else if (value === '⌫') backspace();
                     break;
@@ -794,8 +799,9 @@
                 // Create ripple effect
                 const ripple = document.createElement('span');
                 ripple.classList.add('ripple');
-                ripple.style.left = e.clientX - button.getBoundingClientRect().left + 'px';
-                ripple.style.top = e.clientY - button.getBoundingClientRect().top + 'px';
+                const rect = button.getBoundingClientRect();
+                ripple.style.left = (e.clientX - rect.left) + 'px';
+                ripple.style.top = (e.clientY - rect.top) + 'px';
                 button.appendChild(ripple);
                 
                 setTimeout(() => ripple.remove(), 600);
@@ -818,14 +824,14 @@
                 e.preventDefault();
                 calculate();
             } else if (key === 'Escape') {
-                clear();
+                clearAll();
             } else if (key === 'Backspace') {
                 e.preventDefault();
                 backspace();
             }
         });
         
-        // Initial confetti
+        // Initial confetti and setup
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => window.triggerConfetti('low'), 500);
             
