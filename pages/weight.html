@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queer Convert · weight (lbs to kg)</title>
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Convert pounds to kilograms and back. Fast, accurate, and fabulous weight converter with sparkles!">
+    <meta name="theme-color" content="#121212">
+    
+    <!-- Social meta -->
+    <meta property="og:title" content="Queer Convert - weight converter">
+    <meta property="og:description" content="Convert lbs to kg with pride. Because your weight doesn't define you, but accurate conversions help!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://trinka.space/queer-convert/pages/weight">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6032661605524448"
+            crossorigin="anonymous"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    
+    <!-- Extra styles for weight page -->
+    <style>
+        /* Weight page specific styling */
+        .weight-hero {
+            background: linear-gradient(135deg, 
+                rgba(176, 233, 202, 0.1) 0%, 
+                rgba(176, 233, 202, 0.05) 100%);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(176, 233, 202, 0.2);
+        }
+        
+        .weight-hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--rainbow-green);
+        }
+        
+        .weight-hero p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .converter-card {
+            background: var(--bg-secondary);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .weight-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .weight-unit {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+        
+        .weight-unit .label {
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .weight-unit .value {
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+        
+        .weight-unit input.value {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            text-align: center;
+            font-size: 4rem;
+            width: 100%;
+            color: var(--text-primary);
+            font-weight: 300;
+            padding: 0.5rem;
+        }
+        
+        .weight-unit input.value:focus {
+            outline: none;
+            border-bottom-color: var(--rainbow-green);
+        }
+        
+        .weight-unit .unit-name {
+            color: var(--rainbow-green);
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .swap-icon {
+            font-size: 3rem;
+            color: var(--text-secondary);
+            cursor: none;
+            transition: all 0.5s ease;
+            animation: float 3s infinite;
+        }
+        
+        .swap-icon:hover {
+            color: var(--rainbow-green);
+            transform: rotate(180deg) scale(1.2);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .precision-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: var(--bg-primary);
+            border-radius: 50px;
+        }
+        
+        .precision-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: none;
+            transition: all var(--transition-speed);
+        }
+        
+        .precision-btn:hover {
+            background: var(--rainbow-green);
+            color: var(--bg-primary);
+            border-color: var(--rainbow-green);
+        }
+        
+        .precision-value {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            min-width: 100px;
+            text-align: center;
+        }
+        
+        .common-weights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .weight-preset {
+            background: var(--bg-primary);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: none;
+            transition: all var(--transition-speed);
+        }
+        
+        .weight-preset:hover {
+            transform: translateY(-4px);
+            border-color: var(--rainbow-green);
+            box-shadow: 0 10px 20px rgba(176, 233, 202, 0.2);
+        }
+        
+        .weight-preset .lbs {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .weight-preset .kg {
+            color: var(--rainbow-green);
+            font-size: 1.1rem;
+            margin-top: 0.25rem;
+        }
+        
+        .weight-preset .arrow {
+            color: var(--text-secondary);
+            margin: 0.25rem 0;
+        }
+        
+        .fun-fact {
+            background: rgba(176, 233, 202, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--rainbow-green);
+        }
+        
+        .fun-fact p {
+            color: var(--text-primary);
+            font-style: italic;
+        }
+        
+        .fun-fact .fact-source {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        @media (max-width: 600px) {
+            .weight-display {
+                flex-direction: column;
+            }
+            
+            .swap-icon {
+                transform: rotate(90deg);
+            }
+            
+            .swap-icon:hover {
+                transform: rotate(270deg) scale(1.2);
+            }
+            
+            .weight-unit .value,
+            .weight-unit input.value {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Ad Column -->
+    <div class="ad-column left">
+        <div class="ad-placeholder" data-ad="left">
+            <!-- AdSense will go here -->
+            <span>⚖️</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="site-header">
+            <div class="logo-area">
+                <a href="../index.html" style="text-decoration: none;">
+                    <h1 class="site-title">Queer Convert</h1>
+                </a>
+                <div class="rainbow-bar"></div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="main-nav">
+                <a href="../index.html" class="nav-link">START</a>
+                <a href="distance.html" class="nav-link">DISTANCE</a>
+                <a href="weight.html" class="nav-link active">WEIGHT</a>
+                <a href="image.html" class="nav-link">IMAGE</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <div class="weight-hero">
+            <h2>⚖️ pounds ↔ kilograms</h2>
+            <p>convert with confidence · your body is perfect either way</p>
+        </div>
+
+        <!-- Main Converter Card -->
+        <div class="converter-card">
+            <!-- Weight Display -->
+            <div class="weight-display">
+                <div class="weight-unit">
+                    <div class="label">pounds</div>
+                    <input type="number" id="lbs" class="value" value="150" step="any" placeholder="0">
+                    <div class="unit-name">lb</div>
+                </div>
+                
+                <div class="swap-icon" onclick="swapWeight()" title="swap conversion">↔️</div>
+                
+                <div class="weight-unit">
+                    <div class="label">kilograms</div>
+                    <input type="number" id="kg" class="value" value="68.04" step="any" readonly placeholder="0">
+                    <div class="unit-name">kg</div>
+                </div>
+            </div>
+
+            <!-- Precision Control -->
+            <div class="precision-control">
+                <button class="precision-btn" onclick="adjustPrecision(-1)">−</button>
+                <span class="precision-value" id="precisionDisplay">2 decimals</span>
+                <button class="precision-btn" onclick="adjustPrecision(1)">+</button>
+            </div>
+
+            <!-- Quick Conversions -->
+            <h3 style="color: var(--text-secondary); margin: 2rem 0 1rem; text-align: center;">✨ common weights ✨</h3>
+            
+            <div class="common-weights">
+                <div class="weight-preset" onclick="setWeight(1)">
+                    <div class="lbs">1 lb</div>
+                    <div class="arrow">↓</div>
+                    <div class="kg">0.45 kg</div>
+                </div>
+                <div class="weight-preset" onclick="setWeight(5)">
+                    <div class="lbs">5 lb</div>
+                    <div class="arrow">↓</div>
+                    <div class="kg">2.27 kg</div>
+                </div>
+                <div class="weight-preset" onclick="setWeight(10)">
+                    <div class="lbs">10 lb</div>
+                    <div class="arrow">↓</div>
+                    <div class="kg">4.54 kg</div>
+                </div>
+                <div class="weight-preset" onclick="setWeight(25)">
+                    <div class="lbs">25 lb</div>
+                    <div class="arrow">↓</div>
+                    <div class="kg">11.34 kg</div>
+                </div>
+                <div class="weight-preset" onclick="setWeight(50)">
+                    <div class="lbs">50 lb</div>
+                    <div class="arrow">↓</div>
+                    <div class="kg">22.68 kg</div>
+                </div>
+                <div class="weight-preset" onclick="setWeight(100)">
+                    <div class="lbs">100 lb</div>
+                    <div class="arrow">↓</div>
+                    <div class="kg">45.36 kg</div>
+                </div>
+                <div class="weight-preset" onclick="setWeight(150)">
+                    <div class="lbs">150 lb</div>
+                    <div class="arrow">↓</div>
+                    <div class="kg">68.04 kg</div>
+                </div>
+                <div class="weight-preset" onclick="setWeight(200)">
+                    <div class="lbs">200 lb</div>
+                    <div class="arrow">↓</div>
+                    <div class="kg">90.72 kg</div>
+                </div>
+            </div>
+
+            <!-- Fun Facts (rotating) -->
+            <div class="fun-fact" id="funFact">
+                <p>✨ 1 pound = 16 ounces = 453.6 grams ✨</p>
+                <div class="fact-source">the more you know 🌈</div>
+            </div>
+        </div>
+
+        <!-- Additional Info -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+            <div style="background: var(--bg-secondary); border-radius: 20px; padding: 1.5rem;">
+                <h4 style="color: var(--rainbow-green); margin-bottom: 1rem;">formula</h4>
+                <p style="color: var(--text-secondary); font-family: monospace; font-size: 1.1rem;">
+                    lbs → kg : divide by 2.205<br>
+                    kg → lbs : multiply by 2.205
+                </p>
+            </div>
+            <div style="background: var(--bg-secondary); border-radius: 20px; padding: 1.5rem;">
+                <h4 style="color: var(--rainbow-green); margin-bottom: 1rem;">approx</h4>
+                <p style="color: var(--text-secondary);">
+                    1 kg ≈ 2.2 lb<br>
+                    1 lb ≈ 0.45 kg
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>Made with 🌈 for the community · every conversion = sparkles</p>
+            <p class="footer-small">all rights reversed · support queer joy</p>
+        </footer>
+    </main>
+
+    <!-- Right Ad Column -->
+    <div class="ad-column right">
+        <div class="ad-placeholder" data-ad="right">
+            <!-- AdSense will go here -->
+            <span>⚖️</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script src="../js/confetti.js"></script>
+    
+    <!-- Weight Conversion Logic -->
+    <script>
+        // Current precision (decimal places)
+        let precision = 2;
+        
+        // Get elements
+        const lbsInput = document.getElementById('lbs');
+        const kgInput = document.getElementById('kg');
+        const precisionDisplay = document.getElementById('precisionDisplay');
+        
+        // Conversion factors
+        const LBS_TO_KG = 0.45359237;
+        const KG_TO_LBS = 2.20462262;
+        
+        // Update display based on precision
+        function updatePrecisionDisplay() {
+            precisionDisplay.textContent = precision + ' decimal' + (precision !== 1 ? 's' : '');
+        }
+        
+        // Format number to current precision
+        function formatNumber(num) {
+            return num.toFixed(precision);
+        }
+        
+        // LBS to KG conversion
+        function convertLbsToKg(lbs) {
+            return lbs * LBS_TO_KG;
+        }
+        
+        // KG to LBS conversion
+        function convertKgToLbs(kg) {
+            return kg * KG_TO_LBS;
+        }
+        
+        // Handle LBS input
+        lbsInput.addEventListener('input', function(e) {
+            const lbs = parseFloat(e.target.value) || 0;
+            const kg = convertLbsToKg(lbs);
+            kgInput.value = formatNumber(kg);
+            window.triggerConfetti('low');
+            updateFunFact(lbs);
+        });
+        
+        // Handle KG input (readonly, but keeping for consistency)
+        kgInput.addEventListener('input', function(e) {
+            const kg = parseFloat(e.target.value) || 0;
+            const lbs = convertKgToLbs(kg);
+            lbsInput.value = formatNumber(lbs);
+            window.triggerConfetti('low');
+        });
+        
+        // Swap function
+        function swapWeight() {
+            const currentKg = kgInput.value;
+            kgInput.value = lbsInput.value;
+            lbsInput.value = currentKg;
+            // Trigger the conversion
+            lbsInput.dispatchEvent(new Event('input'));
+        }
+        
+        // Set weight preset
+        function setWeight(lbs) {
+            lbsInput.value = lbs;
+            lbsInput.dispatchEvent(new Event('input'));
+        }
+        
+        // Adjust precision
+        function adjustPrecision(delta) {
+            precision = Math.min(6, Math.max(0, precision + delta));
+            updatePrecisionDisplay();
+            
+            // Re-convert current value with new precision
+            const lbs = parseFloat(lbsInput.value) || 0;
+            kgInput.value = formatNumber(convertLbsToKg(lbs));
+            
+            // Confetti for precision change!
+            window.triggerConfetti('low');
+        }
+        
+        // Fun facts array
+        const funFacts = [
+            { fact: "1 pound = 16 ounces = 453.6 grams", source: "basic conversion" },
+            { fact: "The kilogram is the only SI base unit with a prefix", source: "nerd fact" },
+            { fact: "A pound is officially 'pound-mass' in science", source: "the more you know" },
+            { fact: "1 stone = 14 pounds (if you're feeling British)", source: "🇬🇧" },
+            { fact: "Your weight doesn't define your worth", source: "important reminder" },
+            { fact: "The average human adult weighs 137 lbs (62 kg)", source: "global average" },
+            { fact: "A liter of water weighs exactly 1 kg", source: "handy reference" },
+            { fact: "You are fabulous at any weight", source: "queer convert guarantee" }
+        ];
+        
+        let factIndex = 0;
+        
+        // Update fun fact occasionally
+        function updateFunFact(lbs) {
+            // Every 3 conversions, change the fact
+            if (Math.random() < 0.3) { // 30% chance
+                factIndex = (factIndex + 1) % funFacts.length;
+                const fact = funFacts[factIndex];
+                document.getElementById('funFact').innerHTML = `
+                    <p>✨ ${fact.fact} ✨</p>
+                    <div class="fact-source">${fact.source}</div>
+                `;
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePrecisionDisplay();
+            // Initial confetti because why not
+            setTimeout(() => window.triggerConfetti('low'), 500);
+            
+            // Rotate fun facts every 10 seconds
+            setInterval(() => {
+                factIndex = (factIndex + 1) % funFacts.length;
+                const fact = funFacts[factIndex];
+                document.getElementById('funFact').innerHTML = `
+                    <p>✨ ${fact.fact} ✨</p>
+                    <div class="fact-source">${fact.source}</div>
+                `;
+            }, 10000);
+        });
+    </script>
+</body>
+</html>
