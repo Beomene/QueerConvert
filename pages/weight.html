@@ -275,7 +275,7 @@
             </nav>
         </header>
 
-        <!-- Hero Section - UPDATED MESSAGE -->
+        <!-- Hero Section -->
         <div class="weight-hero">
             <h2>⚖️ pounds ↔ kilograms</h2>
             <p>Weight-o go! You've got this!</p>
@@ -286,18 +286,18 @@
             <!-- Weight Display -->
             <div class="weight-display">
                 <div class="weight-unit">
-                    <div class="label">pounds</div>
-                    <input type="number" id="lbs" class="value" value="100" step="any" placeholder="0">
-                    <div class="unit-name">lb</div>
+                    <div class="label" id="leftLabel">pounds</div>
+                    <input type="number" id="leftValue" class="value" value="100" step="any" placeholder="0">
+                    <div class="unit-name" id="leftUnit">lb</div>
                 </div>
                 
-                <!-- FIXED SWAP BUTTON - now properly switches which unit is input -->
-                <div class="swap-icon" onclick="swapWeight()" title="switch which unit you type into">↔️</div>
+                <!-- SIMPLE SWAP BUTTON - just swaps the labels and recalculates -->
+                <div class="swap-icon" onclick="swapUnits()" title="swap which unit you're converting from">↔️</div>
                 
                 <div class="weight-unit">
-                    <div class="label">kilograms</div>
-                    <input type="number" id="kg" class="value" value="45.36" step="any" placeholder="0">
-                    <div class="unit-name">kg</div>
+                    <div class="label" id="rightLabel">kilograms</div>
+                    <input type="number" id="rightValue" class="value" value="45.36" step="any" placeholder="0" readonly>
+                    <div class="unit-name" id="rightUnit">kg</div>
                 </div>
             </div>
 
@@ -312,49 +312,49 @@
             <h3 style="color: var(--text-secondary); margin: 2rem 0 1rem; text-align: center;">✨ common weights ✨</h3>
             
             <div class="common-weights">
-                <div class="weight-preset" onclick="setWeight(1)">
+                <div class="weight-preset" onclick="setPreset(1)">
                     <div class="lbs">1 lb</div>
                     <div class="arrow">↓</div>
                     <div class="kg">0.45 kg</div>
                 </div>
-                <div class="weight-preset" onclick="setWeight(5)">
+                <div class="weight-preset" onclick="setPreset(5)">
                     <div class="lbs">5 lb</div>
                     <div class="arrow">↓</div>
                     <div class="kg">2.27 kg</div>
                 </div>
-                <div class="weight-preset" onclick="setWeight(10)">
+                <div class="weight-preset" onclick="setPreset(10)">
                     <div class="lbs">10 lb</div>
                     <div class="arrow">↓</div>
                     <div class="kg">4.54 kg</div>
                 </div>
-                <div class="weight-preset" onclick="setWeight(25)">
+                <div class="weight-preset" onclick="setPreset(25)">
                     <div class="lbs">25 lb</div>
                     <div class="arrow">↓</div>
                     <div class="kg">11.34 kg</div>
                 </div>
-                <div class="weight-preset" onclick="setWeight(50)">
+                <div class="weight-preset" onclick="setPreset(50)">
                     <div class="lbs">50 lb</div>
                     <div class="arrow">↓</div>
                     <div class="kg">22.68 kg</div>
                 </div>
-                <div class="weight-preset" onclick="setWeight(100)">
+                <div class="weight-preset" onclick="setPreset(100)">
                     <div class="lbs">100 lb</div>
                     <div class="arrow">↓</div>
                     <div class="kg">45.36 kg</div>
                 </div>
-                <div class="weight-preset" onclick="setWeight(150)">
+                <div class="weight-preset" onclick="setPreset(150)">
                     <div class="lbs">150 lb</div>
                     <div class="arrow">↓</div>
                     <div class="kg">68.04 kg</div>
                 </div>
-                <div class="weight-preset" onclick="setWeight(200)">
+                <div class="weight-preset" onclick="setPreset(200)">
                     <div class="lbs">200 lb</div>
                     <div class="arrow">↓</div>
                     <div class="kg">90.72 kg</div>
                 </div>
             </div>
 
-            <!-- Fun Facts (rotating) - UPDATED to be more general -->
+            <!-- Fun Facts -->
             <div class="fun-fact" id="funFact">
                 <p>✨ 1 pound = 16 ounces = 453.6 grams ✨</p>
                 <div class="fact-source">the more you know 🌈</div>
@@ -387,12 +387,11 @@
                 <a href="../terms.html" style="color: var(--rainbow-blue);">terms</a>
             </p>
         </footer>
-    </main>  <!-- Close main-content -->
+    </main>
 
     <!-- Right Ad Column -->
     <div class="ad-column right">
         <div class="ad-placeholder" data-ad="right">
-            <!-- AdSense will go here -->
             <span>⚖️</span>
         </div>
     </div>
@@ -401,168 +400,126 @@
     <script src="../js/main.js"></script>
     <script src="../js/confetti.js"></script>
     
-    <!-- Weight Conversion Logic - FIXED SWAP FUNCTION -->
+    <!-- SIMPLE WEIGHT CONVERSION LOGIC -->
     <script>
-        // Current precision (decimal places)
+        // Track which unit is on the left
+        let leftIsLbs = true;  // true = left is lbs, false = left is kg
+        
+        // Precision setting
         let precision = 2;
         
-        // Track which field is the input source (true = lbs is input, false = kg is input)
-        let lbsIsInput = true;
-        
         // Get elements
-        const lbsInput = document.getElementById('lbs');
-        const kgInput = document.getElementById('kg');
+        const leftLabel = document.getElementById('leftLabel');
+        const leftUnit = document.getElementById('leftUnit');
+        const leftValue = document.getElementById('leftValue');
+        const rightLabel = document.getElementById('rightLabel');
+        const rightUnit = document.getElementById('rightUnit');
+        const rightValue = document.getElementById('rightValue');
         const precisionDisplay = document.getElementById('precisionDisplay');
         
         // Conversion factors
         const LBS_TO_KG = 0.45359237;
         const KG_TO_LBS = 2.20462262;
         
-        // Update display based on precision
-        function updatePrecisionDisplay() {
-            precisionDisplay.textContent = precision + ' decimal' + (precision !== 1 ? 's' : '');
-        }
-        
         // Format number to current precision
         function formatNumber(num) {
             return num.toFixed(precision);
         }
         
-        // LBS to KG conversion
-        function convertLbsToKg(lbs) {
-            return lbs * LBS_TO_KG;
-        }
-        
-        // KG to LBS conversion
-        function convertKgToLbs(kg) {
-            return kg * KG_TO_LBS;
-        }
-        
-        // Update all values based on which field is active
-        function updateValues() {
-            if (lbsIsInput) {
-                // LBS is the input field, update KG
-                const lbs = parseFloat(lbsInput.value) || 0;
-                kgInput.value = formatNumber(convertLbsToKg(lbs));
+        // Update the conversion based on left value
+        function updateConversion() {
+            const leftNum = parseFloat(leftValue.value) || 0;
+            
+            if (leftIsLbs) {
+                // Left is lbs, convert to kg on right
+                rightValue.value = formatNumber(leftNum * LBS_TO_KG);
             } else {
-                // KG is the input field, update LBS
-                const kg = parseFloat(kgInput.value) || 0;
-                lbsInput.value = formatNumber(convertKgToLbs(kg));
+                // Left is kg, convert to lbs on right
+                rightValue.value = formatNumber(leftNum * KG_TO_LBS);
             }
+            
+            // Trigger confetti
+            window.triggerConfetti('low');
         }
         
-        // Handle LBS input
-        lbsInput.addEventListener('input', function(e) {
-            lbsIsInput = true;  // User is typing in lbs field
-            kgInput.readOnly = true;  // Make kg read-only
-            lbsInput.readOnly = false;  // Make lbs editable
-            updateValues();
-            window.triggerConfetti('low');
-            updateFunFact();
-        });
-        
-        // Handle KG input
-        kgInput.addEventListener('input', function(e) {
-            lbsIsInput = false;  // User is typing in kg field
-            lbsInput.readOnly = true;  // Make lbs read-only
-            kgInput.readOnly = false;  // Make kg editable
-            updateValues();
-            window.triggerConfetti('low');
-            updateFunFact();
-        });
-        
-        // FIXED SWAP FUNCTION - switches which unit is the input
-        function swapWeight() {
-            // Toggle which field is the input source
-            lbsIsInput = !lbsIsInput;
+        // SIMPLE SWAP - just swap the labels and recalculate
+        function swapUnits() {
+            // Swap the flag
+            leftIsLbs = !leftIsLbs;
             
-            // Update read-only states
-            lbsInput.readOnly = !lbsIsInput;
-            kgInput.readOnly = lbsIsInput;
+            // Update labels
+            if (leftIsLbs) {
+                leftLabel.textContent = 'pounds';
+                leftUnit.textContent = 'lb';
+                rightLabel.textContent = 'kilograms';
+                rightUnit.textContent = 'kg';
+            } else {
+                leftLabel.textContent = 'kilograms';
+                leftUnit.textContent = 'kg';
+                rightLabel.textContent = 'pounds';
+                rightUnit.textContent = 'lb';
+            }
             
-            // Trigger an update to recalculate based on the new input source
-            updateValues();
+            // Recalculate based on current left value
+            updateConversion();
             
-            // Add extra sparkles for the swap
+            // Extra sparkles for swap
             window.triggerConfetti('medium');
         }
         
-        // Set weight preset - always sets the input field
-        function setWeight(lbs) {
-            if (lbsIsInput) {
-                // If lbs is input, set lbs value
-                lbsInput.value = lbs;
+        // Set preset value (always sets the left input)
+        function setPreset(lbs) {
+            if (leftIsLbs) {
+                // Left is lbs, just set the value
+                leftValue.value = lbs;
             } else {
-                // If kg is input, convert lbs to kg and set kg value
-                kgInput.value = formatNumber(convertLbsToKg(lbs));
+                // Left is kg, convert lbs to kg
+                leftValue.value = formatNumber(lbs * LBS_TO_KG);
             }
-            updateValues();
+            updateConversion();
         }
         
         // Adjust precision
         function adjustPrecision(delta) {
             precision = Math.min(6, Math.max(0, precision + delta));
-            updatePrecisionDisplay();
+            precisionDisplay.textContent = precision + ' decimal' + (precision !== 1 ? 's' : '');
             
-            // Re-convert with new precision
-            updateValues();
-            
-            // Confetti for precision change!
-            window.triggerConfetti('low');
+            // Reconvert with new precision
+            updateConversion();
         }
         
-        // Fun facts array - UPDATED to be more general
+        // Event listeners
+        leftValue.addEventListener('input', function() {
+            updateConversion();
+        });
+        
+        // Fun facts array
         const funFacts = [
             { fact: "1 pound = 16 ounces = 453.6 grams", source: "basic conversion" },
             { fact: "The kilogram is the only SI base unit with a prefix", source: "nerd fact" },
             { fact: "A pound is officially 'pound-mass' in science", source: "the more you know" },
             { fact: "1 stone = 14 pounds (if you're feeling British)", source: "🇬🇧" },
             { fact: "A liter of water weighs exactly 1 kg", source: "handy reference" },
-            { fact: "A gallon of water weighs about 8.34 lbs", source: "for the scientists" },
-            { fact: "Weight-o go! You've got this!", source: "queer convert" },
-            { fact: "Conversions made fabulous", source: "🌈" }
+            { fact: "Weight-o go! You've got this!", source: "queer convert" }
         ];
         
         let factIndex = 0;
         
-        // Update fun fact occasionally
-        function updateFunFact() {
-            // Every 3 conversions, change the fact
-            if (Math.random() < 0.3) { // 30% chance
-                factIndex = (factIndex + 1) % funFacts.length;
-                const fact = funFacts[factIndex];
-                document.getElementById('funFact').innerHTML = `
-                    <p>✨ ${fact.fact} ✨</p>
-                    <div class="fact-source">${fact.source}</div>
-                `;
-            }
-        }
+        // Rotate fun facts every 10 seconds
+        setInterval(() => {
+            factIndex = (factIndex + 1) % funFacts.length;
+            const fact = funFacts[factIndex];
+            document.getElementById('funFact').innerHTML = `
+                <p>✨ ${fact.fact} ✨</p>
+                <div class="fact-source">${fact.source}</div>
+            `;
+        }, 10000);
         
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            updatePrecisionDisplay();
-            
-            // Set initial state: lbs is input, kg is read-only
-            lbsIsInput = true;
-            lbsInput.readOnly = false;
-            kgInput.readOnly = true;
-            
-            // Set initial values
-            lbsInput.value = 100;
-            updateValues();
-            
-            // Initial confetti
+            precisionDisplay.textContent = precision + ' decimal' + (precision !== 1 ? 's' : '');
+            updateConversion();
             setTimeout(() => window.triggerConfetti('low'), 500);
-            
-            // Rotate fun facts every 10 seconds
-            setInterval(() => {
-                factIndex = (factIndex + 1) % funFacts.length;
-                const fact = funFacts[factIndex];
-                document.getElementById('funFact').innerHTML = `
-                    <p>✨ ${fact.fact} ✨</p>
-                    <div class="fact-source">${fact.source}</div>
-                `;
-            }, 10000);
         });
     </script>
 </body>
