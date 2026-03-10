@@ -160,3 +160,102 @@ document.addEventListener('DOMContentLoaded', () => {
     // Make confetti globally available
     window.triggerConfetti = window.triggerConfetti;
 });
+
+// ===== FABULOUS BUTTON FUNCTIONS =====
+
+// EXTRA SPARKLES FUNCTION
+window.triggerExtraSparkles = function() {
+    // Trigger massive confetti
+    if (window.triggerConfetti) {
+        window.triggerConfetti('fabulous');
+    }
+    
+    // Create floating sparkle emojis
+    for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'extra-sparkle';
+            sparkle.innerHTML = ['✨', '🌟', '💫', '⭐', '🌈'][Math.floor(Math.random() * 5)];
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.top = Math.random() * 100 + 'vh';
+            sparkle.style.color = ['#FFB3B3', '#FFC9A2', '#FFF6B0', '#B0E9CA', '#B0D4FF', '#D9B0FF'][Math.floor(Math.random() * 6)];
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => sparkle.remove(), 2000);
+        }, i * 50);
+    }
+    
+    // Make the button do a little dance (if it exists)
+    const btn = document.getElementById('extraSparklesBtn');
+    if (btn) {
+        btn.style.transform = 'scale(1.2) rotate(5deg)';
+        setTimeout(() => btn.style.transform = 'scale(1.05) rotate(-5deg)', 100);
+        setTimeout(() => btn.style.transform = 'scale(1) rotate(0)', 200);
+    }
+};
+
+// F*** ICE FUNCTION (DISCO MODE)
+let discoInterval;
+let isDiscoMode = false;
+
+window.triggerIceMode = function() {
+    const body = document.body;
+    const iceBtn = document.getElementById('iceButton');
+    
+    if (!isDiscoMode) {
+        // Turn ON disco mode
+        isDiscoMode = true;
+        body.classList.add('disco-mode');
+        
+        if (iceBtn) {
+            iceBtn.innerHTML = '🧊 F*** ICE (ON) 🧊';
+            iceBtn.style.animation = 'pulse-glow-ice 0.2s infinite alternate';
+        }
+        
+        // Continuous confetti in disco mode
+        discoInterval = setInterval(() => {
+            if (window.triggerConfetti) {
+                window.triggerConfetti('low');
+            }
+            
+            // Also create some disco sparkles
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'extra-sparkle';
+                    sparkle.innerHTML = ['✨', '🌟', '💫', '⭐', '🌈', '🕺', '💃'][Math.floor(Math.random() * 7)];
+                    sparkle.style.left = Math.random() * 100 + 'vw';
+                    sparkle.style.top = Math.random() * 100 + 'vh';
+                    sparkle.style.fontSize = '2rem';
+                    sparkle.style.color = ['#FFB3B3', '#FFC9A2', '#FFF6B0', '#B0E9CA', '#B0D4FF', '#D9B0FF'][Math.floor(Math.random() * 6)];
+                    document.body.appendChild(sparkle);
+                    setTimeout(() => sparkle.remove(), 1500);
+                }, i * 100);
+            }
+        }, 500);
+        
+    } else {
+        // Turn OFF disco mode
+        isDiscoMode = false;
+        body.classList.remove('disco-mode');
+        
+        if (iceBtn) {
+            iceBtn.innerHTML = '🧊 F*** ICE 🧊';
+            iceBtn.style.animation = 'pulse-glow-ice 2s infinite alternate';
+        }
+        
+        // Stop continuous confetti
+        if (discoInterval) {
+            clearInterval(discoInterval);
+        }
+        
+        // One last confetti burst for good measure
+        if (window.triggerConfetti) {
+            window.triggerConfetti('fabulous');
+        }
+    }
+};
+
+// Make sure functions are globally available
+window.triggerExtraSparkles = window.triggerExtraSparkles;
+window.triggerIceMode = window.triggerIceMode;
