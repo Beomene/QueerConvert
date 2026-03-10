@@ -11,7 +11,7 @@
     
     <!-- Social meta -->
     <meta property="og:title" content="Queer Convert - weight converter">
-    <meta property="og:description" content="Convert lbs to kg with pride. Because your weight doesn't define you, but accurate conversions help!">
+    <meta property="og:description" content="Convert lbs to kg with pride. Weight conversions for anything and everything!">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://trinka.space/queer-convert/pages/weight">
     
@@ -275,10 +275,10 @@
             </nav>
         </header>
 
-        <!-- Hero Section -->
+        <!-- Hero Section - UPDATED MESSAGE -->
         <div class="weight-hero">
             <h2>⚖️ pounds ↔ kilograms</h2>
-            <p>convert with confidence · your body is perfect either way</p>
+            <p>Weight-o go! You've got this!</p>
         </div>
 
         <!-- Main Converter Card -->
@@ -287,15 +287,16 @@
             <div class="weight-display">
                 <div class="weight-unit">
                     <div class="label">pounds</div>
-                    <input type="number" id="lbs" class="value" value="150" step="any" placeholder="0">
+                    <input type="number" id="lbs" class="value" value="100" step="any" placeholder="0">
                     <div class="unit-name">lb</div>
                 </div>
                 
-                <div class="swap-icon" onclick="swapWeight()" title="swap conversion">↔️</div>
+                <!-- FIXED SWAP BUTTON - now properly switches which unit is input -->
+                <div class="swap-icon" onclick="swapWeight()" title="switch which unit you type into">↔️</div>
                 
                 <div class="weight-unit">
                     <div class="label">kilograms</div>
-                    <input type="number" id="kg" class="value" value="68.04" step="any" readonly placeholder="0">
+                    <input type="number" id="kg" class="value" value="45.36" step="any" placeholder="0">
                     <div class="unit-name">kg</div>
                 </div>
             </div>
@@ -353,7 +354,7 @@
                 </div>
             </div>
 
-            <!-- Fun Facts (rotating) -->
+            <!-- Fun Facts (rotating) - UPDATED to be more general -->
             <div class="fun-fact" id="funFact">
                 <p>✨ 1 pound = 16 ounces = 453.6 grams ✨</p>
                 <div class="fact-source">the more you know 🌈</div>
@@ -378,7 +379,7 @@
             </div>
         </div>
 
-        <!-- FOOTER - CORRECTLY PLACED here before scripts -->
+        <!-- FOOTER -->
         <footer class="site-footer">
             <p>Made with 🌈 for the community · every conversion = sparkles</p>
             <p class="footer-small">
@@ -396,14 +397,17 @@
         </div>
     </div>
 
-    <!-- Scripts - CORRECTLY PLACED after footer, before </body> -->
+    <!-- Scripts -->
     <script src="../js/main.js"></script>
     <script src="../js/confetti.js"></script>
     
-    <!-- Weight Conversion Logic -->
+    <!-- Weight Conversion Logic - FIXED SWAP FUNCTION -->
     <script>
         // Current precision (decimal places)
         let precision = 2;
+        
+        // Track which field is the input source (true = lbs is input, false = kg is input)
+        let lbsIsInput = true;
         
         // Get elements
         const lbsInput = document.getElementById('lbs');
@@ -434,36 +438,65 @@
             return kg * KG_TO_LBS;
         }
         
-        // Handle LBS input
-        lbsInput.addEventListener('input', function(e) {
-            const lbs = parseFloat(e.target.value) || 0;
-            const kg = convertLbsToKg(lbs);
-            kgInput.value = formatNumber(kg);
-            window.triggerConfetti('low');
-            updateFunFact(lbs);
-        });
-        
-        // Handle KG input (readonly, but keeping for consistency)
-        kgInput.addEventListener('input', function(e) {
-            const kg = parseFloat(e.target.value) || 0;
-            const lbs = convertKgToLbs(kg);
-            lbsInput.value = formatNumber(lbs);
-            window.triggerConfetti('low');
-        });
-        
-        // Swap function
-        function swapWeight() {
-            const currentKg = kgInput.value;
-            kgInput.value = lbsInput.value;
-            lbsInput.value = currentKg;
-            // Trigger the conversion
-            lbsInput.dispatchEvent(new Event('input'));
+        // Update all values based on which field is active
+        function updateValues() {
+            if (lbsIsInput) {
+                // LBS is the input field, update KG
+                const lbs = parseFloat(lbsInput.value) || 0;
+                kgInput.value = formatNumber(convertLbsToKg(lbs));
+            } else {
+                // KG is the input field, update LBS
+                const kg = parseFloat(kgInput.value) || 0;
+                lbsInput.value = formatNumber(convertKgToLbs(kg));
+            }
         }
         
-        // Set weight preset
+        // Handle LBS input
+        lbsInput.addEventListener('input', function(e) {
+            lbsIsInput = true;  // User is typing in lbs field
+            kgInput.readOnly = true;  // Make kg read-only
+            lbsInput.readOnly = false;  // Make lbs editable
+            updateValues();
+            window.triggerConfetti('low');
+            updateFunFact();
+        });
+        
+        // Handle KG input
+        kgInput.addEventListener('input', function(e) {
+            lbsIsInput = false;  // User is typing in kg field
+            lbsInput.readOnly = true;  // Make lbs read-only
+            kgInput.readOnly = false;  // Make kg editable
+            updateValues();
+            window.triggerConfetti('low');
+            updateFunFact();
+        });
+        
+        // FIXED SWAP FUNCTION - switches which unit is the input
+        function swapWeight() {
+            // Toggle which field is the input source
+            lbsIsInput = !lbsIsInput;
+            
+            // Update read-only states
+            lbsInput.readOnly = !lbsIsInput;
+            kgInput.readOnly = lbsIsInput;
+            
+            // Trigger an update to recalculate based on the new input source
+            updateValues();
+            
+            // Add extra sparkles for the swap
+            window.triggerConfetti('medium');
+        }
+        
+        // Set weight preset - always sets the input field
         function setWeight(lbs) {
-            lbsInput.value = lbs;
-            lbsInput.dispatchEvent(new Event('input'));
+            if (lbsIsInput) {
+                // If lbs is input, set lbs value
+                lbsInput.value = lbs;
+            } else {
+                // If kg is input, convert lbs to kg and set kg value
+                kgInput.value = formatNumber(convertLbsToKg(lbs));
+            }
+            updateValues();
         }
         
         // Adjust precision
@@ -471,30 +504,29 @@
             precision = Math.min(6, Math.max(0, precision + delta));
             updatePrecisionDisplay();
             
-            // Re-convert current value with new precision
-            const lbs = parseFloat(lbsInput.value) || 0;
-            kgInput.value = formatNumber(convertLbsToKg(lbs));
+            // Re-convert with new precision
+            updateValues();
             
             // Confetti for precision change!
             window.triggerConfetti('low');
         }
         
-        // Fun facts array
+        // Fun facts array - UPDATED to be more general
         const funFacts = [
             { fact: "1 pound = 16 ounces = 453.6 grams", source: "basic conversion" },
             { fact: "The kilogram is the only SI base unit with a prefix", source: "nerd fact" },
             { fact: "A pound is officially 'pound-mass' in science", source: "the more you know" },
             { fact: "1 stone = 14 pounds (if you're feeling British)", source: "🇬🇧" },
-            { fact: "Your weight doesn't define your worth", source: "important reminder" },
-            { fact: "The average human adult weighs 137 lbs (62 kg)", source: "global average" },
             { fact: "A liter of water weighs exactly 1 kg", source: "handy reference" },
-            { fact: "You are fabulous at any weight", source: "queer convert guarantee" }
+            { fact: "A gallon of water weighs about 8.34 lbs", source: "for the scientists" },
+            { fact: "Weight-o go! You've got this!", source: "queer convert" },
+            { fact: "Conversions made fabulous", source: "🌈" }
         ];
         
         let factIndex = 0;
         
         // Update fun fact occasionally
-        function updateFunFact(lbs) {
+        function updateFunFact() {
             // Every 3 conversions, change the fact
             if (Math.random() < 0.3) { // 30% chance
                 factIndex = (factIndex + 1) % funFacts.length;
@@ -509,7 +541,17 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             updatePrecisionDisplay();
-            // Initial confetti because why not
+            
+            // Set initial state: lbs is input, kg is read-only
+            lbsIsInput = true;
+            lbsInput.readOnly = false;
+            kgInput.readOnly = true;
+            
+            // Set initial values
+            lbsInput.value = 100;
+            updateValues();
+            
+            // Initial confetti
             setTimeout(() => window.triggerConfetti('low'), 500);
             
             // Rotate fun facts every 10 seconds
