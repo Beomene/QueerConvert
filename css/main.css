@@ -1,50 +1,542 @@
-:root {
-    --primary-color: #3498db;
-    --secondary-color: #2ecc71;
-    --accent-color: #e74c3c;
-    --background-color: #ecf0f1;
-    --text-color: #2c3e50;
-}
-
-body {
+/* ===== RESET & BASE ===== */
+* {
     margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Glitter Cursor */
+:root {
+    /* Dark theme base */
+    --bg-primary: #121212;
+    --bg-secondary: #1E1E1E;
+    --text-primary: #F0F0F0;
+    --text-secondary: #B0B0B0;
+    
+    /* Pastel rainbow */
+    --rainbow-red: #FFB3B3;
+    --rainbow-orange: #FFC9A2;
+    --rainbow-yellow: #FFF6B0;
+    --rainbow-green: #B0E9CA;
+    --rainbow-blue: #B0D4FF;
+    --rainbow-purple: #D9B0FF;
+    
+    /* Tool-specific accents */
+    --tool-image: var(--rainbow-purple);
+    --tool-distance: var(--rainbow-blue);
+    --tool-weight: var(--rainbow-green);
+    --tool-calculator: var(--rainbow-yellow);
+    --tool-fun: var(--rainbow-orange);
+    
+    /* Effects */
+    --glitter-size: 4px;
+    --transition-speed: 0.3s;
+}
+
 body {
-    cursor: url('path/to/glitter-cursor.png'), auto; /* Placeholder path */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    position: relative;
+    overflow-x: hidden;
+    cursor: none; /* Hide default cursor - we'll make our own! */
 }
 
-/* Parallax Background */
-.parallax {
-    background-image: url('path/to/background-image.jpg');
-    height: 100vh;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+/* ===== CUSTOM GLITTER CURSOR ===== */
+.glitter-cursor {
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: screen;
 }
 
-/* Responsive Design */
-@media only screen and (max-width: 600px) {
-    body {
-        font-size: 14px;
+.glitter-cursor::before,
+.glitter-cursor::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    animation: sparkle 1.5s infinite;
+}
+
+.glitter-cursor::before {
+    background: var(--rainbow-red);
+    box-shadow: 
+        0 0 10px var(--rainbow-red),
+        0 0 20px var(--rainbow-orange);
+    left: -5px;
+    top: -5px;
+    animation-delay: 0s;
+}
+
+.glitter-cursor::after {
+    background: var(--rainbow-blue);
+    box-shadow: 
+        0 0 10px var(--rainbow-blue),
+        0 0 20px var(--rainbow-purple);
+    right: -5px;
+    bottom: -5px;
+    animation-delay: 0.75s;
+}
+
+/* Additional floating sparkles */
+.cursor-sparkle {
+    position: fixed;
+    width: var(--glitter-size);
+    height: var(--glitter-size);
+    background: var(--rainbow-yellow);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    animation: fadeSparkle 1s ease-out forwards;
+    box-shadow: 0 0 10px currentColor;
+}
+
+@keyframes sparkle {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+}
+
+@keyframes fadeSparkle {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+/* ===== PARALLAX BACKGROUND ===== */
+.parallax-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.layer-1 {
+    background: radial-gradient(circle at 20% 50%, rgba(255, 179, 179, 0.03) 0%, transparent 50%);
+    animation: parallax-drift 20s infinite alternate;
+}
+
+.layer-2 {
+    background: radial-gradient(circle at 80% 30%, rgba(176, 212, 255, 0.03) 0%, transparent 50%);
+    animation: parallax-drift 25s infinite alternate-reverse;
+}
+
+.layer-3 {
+    background: radial-gradient(circle at 40% 80%, rgba(217, 176, 255, 0.03) 0%, transparent 50%);
+    animation: parallax-drift 30s infinite alternate;
+}
+
+@keyframes parallax-drift {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-2%, -2%) scale(1.05); }
+}
+
+/* ===== AD COLUMNS ===== */
+.ad-column {
+    width: 20vw;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+}
+
+.ad-placeholder {
+    position: sticky;
+    top: 2rem;
+    margin: 2rem auto;
+    width: 160px;
+    height: 600px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 2rem;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+    width: 60vw;
+    min-height: 100vh;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* ===== HEADER ===== */
+.site-header {
+    margin-bottom: 3rem;
+}
+
+.logo-area {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.site-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, 
+        var(--rainbow-red),
+        var(--rainbow-orange),
+        var(--rainbow-yellow),
+        var(--rainbow-green),
+        var(--rainbow-blue),
+        var(--rainbow-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.25rem;
+}
+
+.rainbow-bar {
+    height: 4px;
+    width: 100%;
+    background: linear-gradient(90deg, 
+        var(--rainbow-red),
+        var(--rainbow-orange),
+        var(--rainbow-yellow),
+        var(--rainbow-green),
+        var(--rainbow-blue),
+        var(--rainbow-purple));
+    border-radius: 2px;
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+/* ===== NAVIGATION ===== */
+.main-nav {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color var(--transition-speed);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        var(--rainbow-red),
+        var(--rainbow-purple));
+    transition: width var(--transition-speed);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text-primary);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* ===== SLOGAN ===== */
+.slogan-container {
+    background: var(--bg-secondary);
+    border-radius: 50px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 3rem;
+    border-left: 4px solid var(--rainbow-purple);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.slogan {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.slogan-break {
+    display: block;
+    font-style: italic;
+    margin-top: 0.25rem;
+}
+
+.slogan-highlight {
+    display: inline-block;
+    margin-left: 0.5rem;
+    animation: wave 2s infinite;
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+}
+
+/* ===== TOOLS GRID ===== */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.tool-card {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Tool-specific gradients */
+.tool-card[data-tool="image"] {
+    border-top: 3px solid var(--tool-image);
+}
+.tool-card[data-tool="distance"] {
+    border-top: 3px solid var(--tool-distance);
+}
+.tool-card[data-tool="weight"] {
+    border-top: 3px solid var(--tool-weight);
+}
+.tool-card[data-tool="calculator"] {
+    border-top: 3px solid var(--tool-calculator);
+}
+.trump-card {
+    border-top: 3px solid var(--tool-fun);
+}
+
+.tool-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.tool-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity var(--transition-speed);
+    pointer-events: none;
+}
+
+.tool-card:hover::before {
+    opacity: 1;
+}
+
+.tool-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.tool-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.tool-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.tool-button {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: none;
+    transition: all var(--transition-speed);
+    width: 100%;
+}
+
+.tool-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--rainbow-purple);
+    transform: scale(1.02);
+}
+
+/* Calculator card spans full width */
+.calculator-card {
+    grid-column: span 2;
+}
+
+.calculator-preview {
+    background: var(--bg-primary);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.calc-display {
+    background: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: right;
+    font-size: 1.5rem;
+    font-family: monospace;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.calc-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+.calc-btn {
+    background: var(--bg-secondary);
+    border: none;
+    color: var(--text-primary);
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: none;
+    transition: all var(--transition-speed);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.calc-btn:hover {
+    background: rgba(255,255,255,0.1);
+    transform: scale(1.05);
+}
+
+.calc-operator {
+    color: var(--rainbow-blue);
+    font-weight: bold;
+}
+
+.calc-equals {
+    background: var(--rainbow-purple);
+    color: var(--bg-primary);
+    font-weight: bold;
+}
+
+/* Trump to Glitter */
+.balloon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    cursor: none;
+    transition: all var(--transition-speed);
+}
+
+.balloon {
+    font-size: 4rem;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    cursor: none;
+}
+
+.balloon:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.balloon-hint {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    opacity: 0.7;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--text-secondary);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 2rem;
+}
+
+.footer-small {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    opacity: 0.7;
+}
+
+.footer-small a {
+    text-decoration: none;
+    transition: opacity var(--transition-speed);
+}
+
+.footer-small a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+    .ad-column {
+        width: 160px;
+    }
+    .main-content {
+        width: calc(100% - 320px);
     }
 }
 
-/* Tool Card Styles */
-.tool-card {
-    background-color: var(--primary-color);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin: 10px;
-    transition: transform 0.2s;
+@media (max-width: 900px) {
+    body {
+        flex-direction: column;
+    }
+    
+    .ad-column {
+        width: 100%;
+        min-height: auto;
+        height: 160px;
+    }
+    
+    .ad-placeholder {
+        position: relative;
+        top: 0;
+        margin: 1rem auto;
+        height: 120px;
+    }
+    
+    .main-content {
+        width: 100%;
+    }
+    
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .calculator-card {
+        grid-column: span 1;
+    }
 }
 
-tool-card:hover {
-    transform: scale(1.05);
+/* ===== UTILITY CLASSES ===== */
+.full-width {
+    width: 100%;
 }
