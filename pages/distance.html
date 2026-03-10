@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queer Convert · distance & weight</title>
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Convert imperial to metric - inches to cm, feet to meters, miles to km, pounds to kg. With sparkles!">
+    <meta name="theme-color" content="#121212">
+    
+    <!-- Social meta -->
+    <meta property="og:title" content="Queer Convert - distance & weight">
+    <meta property="og:description" content="Convert imperial to metric with pride. Inches, feet, miles, pounds → cm, m, km, kg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://trinka.space/queer-convert/pages/distance">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6032661605524448"
+            crossorigin="anonymous"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    
+    <!-- Extra styles for this page -->
+    <style>
+        /* Distance page specific styling */
+        .converter-section {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--rainbow-blue);
+        }
+        
+        .converter-section h2 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .converter-section h2 span {
+            font-size: 2rem;
+        }
+        
+        .converter-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .input-group label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .input-group input,
+        .input-group select {
+            background: var(--bg-primary);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-primary);
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all var(--transition-speed);
+        }
+        
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: var(--rainbow-blue);
+            box-shadow: 0 0 0 3px rgba(176, 212, 255, 0.2);
+        }
+        
+        .input-group input[readonly] {
+            background: rgba(255,255,255,0.05);
+            cursor: default;
+        }
+        
+        .swap-button {
+            background: var(--bg-primary);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: none;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .swap-button:hover {
+            background: var(--rainbow-blue);
+            color: var(--bg-primary);
+            transform: rotate(180deg);
+        }
+        
+        .unit-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--rainbow-blue);
+            margin-left: 0.5rem;
+        }
+        
+        .quick-convert {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .quick-btn {
+            background: var(--bg-primary);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: none;
+            transition: all var(--transition-speed);
+        }
+        
+        .quick-btn:hover {
+            background: var(--rainbow-blue);
+            color: var(--bg-primary);
+            border-color: var(--rainbow-blue);
+        }
+        
+        .weight-section {
+            border-left-color: var(--rainbow-green);
+        }
+        
+        .weight-section h2 span {
+            color: var(--rainbow-green);
+        }
+        
+        @media (max-width: 600px) {
+            .converter-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .swap-button {
+                transform: rotate(90deg);
+                margin: 0 auto;
+            }
+            
+            .swap-button:hover {
+                transform: rotate(270deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Ad Column -->
+    <div class="ad-column left">
+        <div class="ad-placeholder" data-ad="left">
+            <!-- AdSense will go here -->
+            <span>📏</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="site-header">
+            <div class="logo-area">
+                <a href="../index.html" style="text-decoration: none;">
+                    <h1 class="site-title">Queer Convert</h1>
+                </a>
+                <div class="rainbow-bar"></div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="main-nav">
+                <a href="../index.html" class="nav-link">START</a>
+                <a href="distance.html" class="nav-link active">DISTANCE</a>
+                <a href="weight.html" class="nav-link">WEIGHT</a>
+                <a href="image.html" class="nav-link">IMAGE</a>
+            </nav>
+        </header>
+
+        <!-- Page Title -->
+        <div class="slogan-container" style="border-left-color: var(--rainbow-blue);">
+            <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">📏 distance · ⚖️ weight</h1>
+            <p class="slogan">
+                Convert imperial to metric, and never look back
+                <span class="slogan-highlight">🏳️‍🌈</span>
+            </p>
+        </div>
+
+        <!-- DISTANCE CONVERTER SECTION -->
+        <section class="converter-section">
+            <h2>
+                <span>📏</span> 
+                Distance Converter
+                <span class="unit-badge">imperial ↔ metric</span>
+            </h2>
+            
+            <!-- Inches to Centimeters -->
+            <div class="converter-grid" style="margin-bottom: 2rem;">
+                <div class="input-group">
+                    <label>Inches (in)</label>
+                    <input type="number" id="inches" placeholder="0" step="any" value="1">
+                </div>
+                
+                <button class="swap-button" onclick="swapDistance('inches', 'cm')" title="swap">↔</button>
+                
+                <div class="input-group">
+                    <label>Centimeters (cm)</label>
+                    <input type="number" id="cm" placeholder="0" step="any" readonly value="2.54">
+                </div>
+            </div>
+            
+            <!-- Quick inches presets -->
+            <div class="quick-convert">
+                <button class="quick-btn" onclick="setDistance('inches', 1)">1"</button>
+                <button class="quick-btn" onclick="setDistance('inches', 6)">6"</button>
+                <button class="quick-btn" onclick="setDistance('inches', 12)">12" (1ft)</button>
+                <button class="quick-btn" onclick="setDistance('inches', 39.37)">1 meter</button>
+            </div>
+            
+            <!-- Feet to Meters -->
+            <div class="converter-grid" style="margin: 2rem 0;">
+                <div class="input-group">
+                    <label>Feet (ft)</label>
+                    <input type="number" id="feet" placeholder="0" step="any" value="1">
+                </div>
+                
+                <button class="swap-button" onclick="swapDistance('feet', 'meters')" title="swap">↔</button>
+                
+                <div class="input-group">
+                    <label>Meters (m)</label>
+                    <input type="number" id="meters" placeholder="0" step="any" readonly value="0.3048">
+                </div>
+            </div>
+            
+            <!-- Quick feet presets -->
+            <div class="quick-convert">
+                <button class="quick-btn" onclick="setDistance('feet', 1)">1'</button>
+                <button class="quick-btn" onclick="setDistance('feet', 3)">3' (1 yd)</button>
+                <button class="quick-btn" onclick="setDistance('feet', 6)">6'</button>
+                <button class="quick-btn" onclick="setDistance('feet', 10)">10'</button>
+            </div>
+            
+            <!-- Miles to Kilometers -->
+            <div class="converter-grid" style="margin: 2rem 0 0;">
+                <div class="input-group">
+                    <label>Miles (mi)</label>
+                    <input type="number" id="miles" placeholder="0" step="any" value="1">
+                </div>
+                
+                <button class="swap-button" onclick="swapDistance('miles', 'km')" title="swap">↔</button>
+                
+                <div class="input-group">
+                    <label>Kilometers (km)</label>
+                    <input type="number" id="km" placeholder="0" step="any" readonly value="1.60934">
+                </div>
+            </div>
+            
+            <!-- Quick miles presets -->
+            <div class="quick-convert">
+                <button class="quick-btn" onclick="setDistance('miles', 1)">1 mile</button>
+                <button class="quick-btn" onclick="setDistance('miles', 5)">5k</button>
+                <button class="quick-btn" onclick="setDistance('miles', 10)">10k</button>
+                <button class="quick-btn" onclick="setDistance('miles', 26.2)">marathon</button>
+            </div>
+        </section>
+
+        <!-- WEIGHT CONVERTER SECTION -->
+        <section class="converter-section weight-section">
+            <h2>
+                <span>⚖️</span> 
+                Weight Converter
+                <span class="unit-badge">lbs ↔ kg</span>
+            </h2>
+            
+            <!-- Pounds to Kilograms -->
+            <div class="converter-grid">
+                <div class="input-group">
+                    <label>Pounds (lbs)</label>
+                    <input type="number" id="pounds" placeholder="0" step="any" value="1">
+                </div>
+                
+                <button class="swap-button" onclick="swapWeight()" title="swap">↔</button>
+                
+                <div class="input-group">
+                    <label>Kilograms (kg)</label>
+                    <input type="number" id="kg" placeholder="0" step="any" readonly value="0.453592">
+                </div>
+            </div>
+            
+            <!-- Quick weight presets -->
+            <div class="quick-convert">
+                <button class="quick-btn" onclick="setWeight('pounds', 1)">1 lb</button>
+                <button class="quick-btn" onclick="setWeight('pounds', 10)">10 lb</button>
+                <button class="quick-btn" onclick="setWeight('pounds', 100)">100 lb</button>
+                <button class="quick-btn" onclick="setWeight('pounds', 150)">150 lb</button>
+                <button class="quick-btn" onclick="setWeight('pounds', 200)">200 lb</button>
+            </div>
+            
+            <!-- Fun fact -->
+            <p style="margin-top: 2rem; color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                ✨ 1 pound = 16 ounces = 453.6 grams · 1 kilogram = 2.205 pounds ✨
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>Made with 🌈 for the community · every conversion = sparkles</p>
+            <p class="footer-small">all rights reversed · support queer joy</p>
+        </footer>
+    </main>
+
+    <!-- Right Ad Column -->
+    <div class="ad-column right">
+        <div class="ad-placeholder" data-ad="right">
+            <!-- AdSense will go here -->
+            <span>⚖️</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script src="../js/confetti.js"></script>
+    
+    <!-- Distance & Weight Conversion Logic -->
+    <script>
+        // ===== DISTANCE CONVERSIONS =====
+        
+        // Inches to/from CM
+        document.getElementById('inches').addEventListener('input', function(e) {
+            const inches = parseFloat(e.target.value) || 0;
+            document.getElementById('cm').value = (inches * 2.54).toFixed(2);
+            window.triggerConfetti('low');
+        });
+        
+        document.getElementById('cm').addEventListener('input', function(e) {
+            const cm = parseFloat(e.target.value) || 0;
+            document.getElementById('inches').value = (cm / 2.54).toFixed(2);
+            window.triggerConfetti('low');
+        });
+        
+        // Feet to/from Meters
+        document.getElementById('feet').addEventListener('input', function(e) {
+            const feet = parseFloat(e.target.value) || 0;
+            document.getElementById('meters').value = (feet * 0.3048).toFixed(3);
+            window.triggerConfetti('low');
+        });
+        
+        document.getElementById('meters').addEventListener('input', function(e) {
+            const meters = parseFloat(e.target.value) || 0;
+            document.getElementById('feet').value = (meters / 0.3048).toFixed(2);
+            window.triggerConfetti('low');
+        });
+        
+        // Miles to/from KM
+        document.getElementById('miles').addEventListener('input', function(e) {
+            const miles = parseFloat(e.target.value) || 0;
+            document.getElementById('km').value = (miles * 1.60934).toFixed(2);
+            window.triggerConfetti('low');
+        });
+        
+        document.getElementById('km').addEventListener('input', function(e) {
+            const km = parseFloat(e.target.value) || 0;
+            document.getElementById('miles').value = (km / 1.60934).toFixed(2);
+            window.triggerConfetti('low');
+        });
+        
+        // ===== WEIGHT CONVERSIONS =====
+        document.getElementById('pounds').addEventListener('input', function(e) {
+            const pounds = parseFloat(e.target.value) || 0;
+            document.getElementById('kg').value = (pounds * 0.453592).toFixed(2);
+            window.triggerConfetti('low');
+        });
+        
+        document.getElementById('kg').addEventListener('input', function(e) {
+            const kg = parseFloat(e.target.value) || 0;
+            document.getElementById('pounds').value = (kg / 0.453592).toFixed(2);
+            window.triggerConfetti('low');
+        });
+        
+        // ===== HELPER FUNCTIONS =====
+        function setDistance(unit, value) {
+            document.getElementById(unit).value = value;
+            document.getElementById(unit).dispatchEvent(new Event('input'));
+        }
+        
+        function setWeight(unit, value) {
+            document.getElementById(unit).value = value;
+            document.getElementById(unit).dispatchEvent(new Event('input'));
+        }
+        
+        function swapDistance(fromId, toId) {
+            const fromVal = document.getElementById(fromId).value;
+            const toVal = document.getElementById(toId).value;
+            
+            if (fromId === 'inches') {
+                document.getElementById('cm').value = fromVal;
+                document.getElementById('cm').dispatchEvent(new Event('input'));
+            } else if (fromId === 'feet') {
+                document.getElementById('meters').value = fromVal;
+                document.getElementById('meters').dispatchEvent(new Event('input'));
+            } else if (fromId === 'miles') {
+                document.getElementById('km').value = fromVal;
+                document.getElementById('km').dispatchEvent(new Event('input'));
+            }
+        }
+        
+        function swapWeight() {
+            const pounds = document.getElementById('pounds').value;
+            document.getElementById('kg').value = pounds;
+            document.getElementById('kg').dispatchEvent(new Event('input'));
+        }
+        
+        // Trigger initial confetti when page loads (just for fun)
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => window.triggerConfetti('low'), 500);
+        });
+    </script>
+</body>
+</html>
