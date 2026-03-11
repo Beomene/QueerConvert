@@ -467,7 +467,7 @@ window.triggerIceMode = function() {
         body.classList.remove('disco-mode');
         
         if (iceBtn) {
-            iceBtn.innerHTML = '🧊 F*** ICE 🧊';
+            iceBtn.innerHTML = 'F*** ICE';
             iceBtn.style.animation = 'pulse-glow-ice 2s infinite alternate';
         }
         
