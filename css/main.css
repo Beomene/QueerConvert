@@ -722,3 +722,88 @@ body.disco-mode .extra-sparkle {
     font-size: 2rem;
     animation: float-sparkle 1.5s ease-out forwards;
 }
+/* ===== FABULOUS THEMED CURSOR ===== */
+.glitter-cursor {
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: screen;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cursor-center {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: conic-gradient(
+        from 0deg,
+        var(--color-1, #FFB3B3) 0deg 120deg,
+        var(--color-2, #B0D4FF) 120deg 240deg,
+        var(--color-3, #D9B0FF) 240deg 360deg
+    );
+    animation: spin-cursor 3s linear infinite;
+    box-shadow: 0 0 15px var(--color-1, #FFB3B3),
+                0 0 25px var(--color-2, #B0D4FF),
+                0 0 35px var(--color-3, #D9B0FF);
+}
+
+@keyframes spin-cursor {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.glitter-cursor::before,
+.glitter-cursor::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    animation: sparkle 1.5s infinite;
+}
+
+.glitter-cursor::before {
+    background: var(--color-1, #FFB3B3);
+    box-shadow: 0 0 10px var(--color-1, #FFB3B3);
+    left: -5px;
+    top: -5px;
+}
+
+.glitter-cursor::after {
+    background: var(--color-3, #D9B0FF);
+    box-shadow: 0 0 10px var(--color-3, #D9B0FF);
+    right: -5px;
+    bottom: -5px;
+    animation-delay: 0.5s;
+}
+
+/* Sparkle trail */
+.cursor-sparkle {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    animation: fadeSparkle 1s ease-out forwards;
+    box-shadow: 0 0 10px currentColor;
+}
+
+@keyframes sparkle {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+}
+
+@keyframes fadeSparkle {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+@keyframes spin-cursor {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
