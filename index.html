@@ -12,7 +12,7 @@
     <!-- Social meta -->
     <meta property="og:title" content="Queer Convert - tools with pride">
     <meta property="og:description" content="Convert files, distances, weights... but never pray all that precious gay away">
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="website">    
     <meta property="og:url" content="https://trinka.space/queer-convert/">
     
     <!-- Google AdSense -->
@@ -21,6 +21,163 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="css/main.css">
+    
+    <!-- Extra styles for theme buttons -->
+    <style>
+        /* Theme Buttons Section */
+        .theme-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+            margin: 1.5rem 0 2rem;
+        }
+        
+        .theme-btn {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-primary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: none;
+            transition: all 0.2s ease;
+            min-width: 140px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .theme-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--rainbow-purple);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .theme-btn.active {
+            border: 2px solid var(--rainbow-purple);
+            box-shadow: 0 0 15px var(--rainbow-purple);
+        }
+        
+        /* Theme color variables */
+        body.theme-trans {
+            --bg-primary: #5bcffb;  /* light blue */
+            --bg-secondary: #f5a9b8; /* pink */
+            --text-primary: #ffffff;
+            --text-secondary: #ffffff;
+            --rainbow-bar: linear-gradient(90deg, #5bcffb, #f5a9b8, #ffffff, #f5a9b8, #5bcffb);
+        }
+        
+        body.theme-bi {
+            --bg-primary: #d60270; /* magenta/pink */
+            --bg-secondary: #0038a8; /* blue */
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0e0;
+            --rainbow-bar: linear-gradient(90deg, #d60270, #9b4f96, #0038a8);
+        }
+        
+        body.theme-pan {
+            --bg-primary: #ff218c; /* magenta */
+            --bg-secondary: #ffd800; /* yellow */
+            --text-primary: #000000;
+            --text-secondary: #333333;
+            --rainbow-bar: linear-gradient(90deg, #ff218c, #ffd800, #21b1ff);
+        }
+        
+        body.theme-lesbian {
+            --bg-primary: #d52d00; /* dark orange */
+            --bg-secondary: #ff9a56; /* light orange */
+            --text-primary: #ffffff;
+            --text-secondary: #ffffff;
+            --rainbow-bar: linear-gradient(90deg, #d52d00, #ff9a56, #ffffff, #d362a4, #a30262);
+        }
+        
+        body.theme-gay {
+            --bg-primary: #078d70; /* teal */
+            --bg-secondary: #26ceaa; /* mint */
+            --text-primary: #ffffff;
+            --text-secondary: #ffffff;
+            --rainbow-bar: linear-gradient(90deg, #078d70, #26ceaa, #98e8c1, #7bade2, #5049cc);
+        }
+        
+        body.theme-poly {
+            --bg-primary: #151647; /* dark blue */
+            --bg-secondary: #e82820; /* red */
+            --text-primary: #ffffff;
+            --text-secondary: #ffffff;
+            --rainbow-bar: linear-gradient(90deg, #151647, #6784ff, #ffd159, #ff8b71, #e82820);
+        }
+        
+        /* Reset button */
+        .theme-btn.reset {
+            background: transparent;
+            border-color: var(--rainbow-red);
+            color: var(--rainbow-red);
+        }
+        
+        .theme-btn.reset:hover {
+            background: rgba(255, 179, 179, 0.1);
+        }
+        
+        /* Fabulous Buttons Section (existing) */
+        .fabulous-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 2rem 0 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .sparkle-button {
+            background: linear-gradient(135deg, 
+                rgba(255, 243, 176, 0.2),
+                rgba(217, 176, 255, 0.2));
+            border: 2px solid rgba(255, 243, 176, 0.3);
+            color: var(--text-primary);
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 243, 176, 0.3);
+            animation: pulse-glow 2s infinite alternate;
+            min-width: 200px;
+        }
+        
+        .ice-button {
+            background: linear-gradient(135deg, 
+                rgba(176, 212, 255, 0.2),
+                rgba(217, 176, 255, 0.2));
+            border: 2px solid rgba(176, 212, 255, 0.3);
+            color: var(--text-primary);
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(176, 212, 255, 0.3);
+            animation: pulse-glow-ice 2s infinite alternate;
+            min-width: 200px;
+        }
+        
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 20px rgba(255, 243, 176, 0.3); }
+            100% { box-shadow: 0 0 40px rgba(217, 176, 255, 0.6); }
+        }
+        
+        @keyframes pulse-glow-ice {
+            0% { box-shadow: 0 0 20px rgba(176, 212, 255, 0.3); }
+            100% { box-shadow: 0 0 40px rgba(217, 176, 255, 0.6); }
+        }
+        
+        /* Rest of your existing styles... */
+    </style>
 </head>
 <body>
     <!-- Left Ad Column (20vw) -->
@@ -59,6 +216,17 @@
             </p>
         </div>
 
+        <!-- THEME BUTTONS - YOUR FABULOUS NAMES! -->
+        <div class="theme-buttons">
+            <button class="theme-btn" onclick="setTheme('trans')" id="theme-trans">🏳️‍⚧️ represenT</button>
+            <button class="theme-btn" onclick="setTheme('bi')" id="theme-bi">💗💜💙 Omnivore</button>
+            <button class="theme-btn" onclick="setTheme('pan')" id="theme-pan">💖💛💙 I don't discriminate...</button>
+            <button class="theme-btn" onclick="setTheme('lesbian')" id="theme-lesbian">🧡🤍💖 MatheSapphic</button>
+            <button class="theme-btn" onclick="setTheme('gay')" id="theme-gay">💚🤍💜 HOMO sapiens, hunny</button>
+            <button class="theme-btn" onclick="setTheme('poly')" id="theme-poly">💙💛🧡❤️ The merrier...</button>
+            <button class="theme-btn reset" onclick="resetTheme()">✨ RESET</button>
+        </div>
+
         <!-- FABULOUS BUTTONS SECTION -->
         <div class="fabulous-buttons">
             <button class="sparkle-button" id="extraSparklesBtn" onclick="triggerExtraSparkles()">
@@ -74,7 +242,7 @@
             <!-- JPG to PNG -->
             <div class="tool-card" data-tool="image">
                 <h2 class="tool-title">JPG to PNG</h2>
-                <p class="tool-desc">You resist fascism and turn heads, we help you change a silly little image format</p>
+                <p class="tool-desc">Convert images with pride</p>
                 <button class="tool-button" onclick="window.location.href='pages/image.html'">
                     CONVERT
                 </button>
@@ -83,7 +251,7 @@
             <!-- Imperial to Metric -->
             <div class="tool-card" data-tool="distance">
                 <h2 class="tool-title">IMPERIAL to METRIC</h2>
-                <p class="tool-desc">Tired of flacid footsies and incipid inches when you can have crisp, clear centimeters?</p>
+                <p class="tool-desc">Distance & weight, unified</p>
                 <button class="tool-button" onclick="window.location.href='pages/distance.html'">
                     CONVERT
                 </button>
@@ -100,7 +268,7 @@
 
             <!-- Miles to KM -->
             <div class="tool-card" data-tool="distance">
-                <h2 class="tool-title">MILES to KILOMETERS</h2>
+                <h2 class="tool-title">MILES to KILOMETER</h2>
                 <p class="tool-desc">Distance, remeasured</p>
                 <button class="tool-button" onclick="window.location.href='pages/distance.html'">
                     CONVERT
@@ -109,7 +277,7 @@
 
             <!-- Calculator - spans two columns on grid -->
             <div class="tool-card calculator-card" data-tool="calculator">
-                <h2 class="tool-title">BASIC AND KIND CALCULATOR</h2>
+                <h2 class="tool-title">BASIC CALCULATOR</h2>
                 <p class="tool-desc">Add, subtract, multiply, divide</p>
                 
                 <!-- Simple calculator preview -->
@@ -178,14 +346,75 @@
     <script src="js/confetti.js"></script>
     
     <script>
-        // Simple preview calculator for the homepage
+        // Theme switching function
+        function setTheme(theme) {
+            // Remove any existing theme class
+            document.body.className = document.body.className.replace(/theme-\w+/g, '').trim();
+            
+            // Add new theme class
+            document.body.classList.add('theme-' + theme);
+            
+            // Save to localStorage
+            localStorage.setItem('queerConvertTheme', theme);
+            
+            // Update active button states
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById('theme-' + theme).classList.add('active');
+            
+            // Trigger confetti for fun!
+            window.triggerConfetti('low');
+        }
+        
+        // Reset theme to default
+        function resetTheme() {
+            document.body.className = document.body.className.replace(/theme-\w+/g, '').trim();
+            localStorage.removeItem('queerConvertTheme');
+            
+            // Remove active states
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            window.triggerConfetti('low');
+        }
+        
+        // Load saved theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('queerConvertTheme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            }
+            
+            // Your existing code...
+            const balloonContainer = document.getElementById('trumpBalloon');
+            if (balloonContainer) {
+                balloonContainer.addEventListener('click', function() {
+                    const balloon = this.querySelector('.balloon');
+                    balloon.style.transform = 'scale(1.5)';
+                    balloon.style.opacity = '0';
+                    
+                    if (window.triggerConfetti) {
+                        window.triggerConfetti('fabulous');
+                    }
+                    
+                    setTimeout(() => {
+                        balloon.style.transform = 'scale(1)';
+                        balloon.style.opacity = '1';
+                    }, 1000);
+                });
+            }
+            
+            setTimeout(() => window.triggerConfetti('low'), 500);
+        });
+
+        // Preview calculator function
         function previewCalc(value) {
             const display = document.getElementById('preview-display');
             if (value === '=') {
                 try {
-                    // Very simple eval - in real calculator we'll parse properly
                     display.innerText = eval(display.innerText);
-                    // Trigger confetti!
                     if (window.triggerConfetti) {
                         window.triggerConfetti();
                     }
@@ -202,34 +431,10 @@
             }
         }
 
-        // Balloon pop for Trump to Glitter
-        document.addEventListener('DOMContentLoaded', function() {
-            const balloonContainer = document.getElementById('trumpBalloon');
-            if (balloonContainer) {
-                balloonContainer.addEventListener('click', function() {
-                    const balloon = this.querySelector('.balloon');
-                    balloon.style.transform = 'scale(1.5)';
-                    balloon.style.opacity = '0';
-                    
-                    // Trigger confetti!
-                    if (window.triggerConfetti) {
-                        window.triggerConfetti('fabulous');
-                    }
-                    
-                    // Reset after animation
-                    setTimeout(() => {
-                        balloon.style.transform = 'scale(1)';
-                        balloon.style.opacity = '1';
-                    }, 1000);
-                });
-            }
-            
-            // Initial confetti
-            setTimeout(() => window.triggerConfetti('low'), 500);
-        });
-
-        // Make sure functions are available
+        // Make functions globally available
         window.previewCalc = previewCalc;
+        window.setTheme = setTheme;
+        window.resetTheme = resetTheme;
     </script>
 </body>
 </html>
