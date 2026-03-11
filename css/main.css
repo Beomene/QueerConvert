@@ -44,15 +44,63 @@ body {
     cursor: none; /* Hide default cursor - we'll make our own! */
 }
 
-/* ===== CUSTOM GLITTER CURSOR ===== */
+/* ===== THEME RIBBONS ===== */
+.theme-ribbon {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        var(--color-1, var(--rainbow-red)),
+        var(--color-2, var(--rainbow-blue)),
+        var(--color-3, var(--rainbow-purple)));
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0.7;
+    animation: ribbon-wave 3s infinite ease-in-out;
+}
+
+.ribbon-top {
+    top: 0;
+}
+
+.ribbon-bottom {
+    bottom: 0;
+}
+
+@keyframes ribbon-wave {
+    0%, 100% { opacity: 0.5; transform: scaleY(1); }
+    50% { opacity: 0.8; transform: scaleY(1.2); }
+}
+
+/* ===== FABULOUS THEMED CURSOR ===== */
+/* (Detta ersätter båda tidigare cursor-sektionerna) */
 .glitter-cursor {
-    width: 25px;
-    height: 25px;
-    background: transparent;
+    width: 30px;
+    height: 30px;
     position: fixed;
     pointer-events: none;
     z-index: 9999;
     mix-blend-mode: screen;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cursor-center {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: conic-gradient(
+        from 0deg,
+        var(--color-1, var(--rainbow-red)) 0deg 120deg,
+        var(--color-2, var(--rainbow-blue)) 120deg 240deg,
+        var(--color-3, var(--rainbow-purple)) 240deg 360deg
+    );
+    animation: spin-cursor 3s linear infinite;
+    box-shadow: 0 0 15px var(--color-1, var(--rainbow-red)),
+                0 0 25px var(--color-2, var(--rainbow-blue)),
+                0 0 35px var(--color-3, var(--rainbow-purple));
 }
 
 .glitter-cursor::before,
@@ -62,35 +110,29 @@ body {
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    animation: sparkle 1.4s infinite;
+    animation: sparkle 1.5s infinite;
 }
 
 .glitter-cursor::before {
-    background: var(--rainbow-red);
-    box-shadow: 
-        0 0 10px var(--rainbow-red),
-        0 0 20px var(--rainbow-orange);
+    background: var(--color-1, var(--rainbow-red));
+    box-shadow: 0 0 10px var(--color-1, var(--rainbow-red));
     left: -5px;
     top: -5px;
-    animation-delay: 0s;
 }
 
 .glitter-cursor::after {
-    background: var(--rainbow-blue);
-    box-shadow: 
-        0 0 10px var(--rainbow-blue),
-        0 0 20px var(--rainbow-purple);
+    background: var(--color-3, var(--rainbow-purple));
+    box-shadow: 0 0 10px var(--color-3, var(--rainbow-purple));
     right: -5px;
     bottom: -5px;
-    animation-delay: 0.75s;
+    animation-delay: 0.5s;
 }
 
-/* Additional floating sparkles */
+/* Sparkle trail */
 .cursor-sparkle {
     position: fixed;
     width: var(--glitter-size);
     height: var(--glitter-size);
-    background: var(--rainbow-yellow);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
@@ -106,6 +148,11 @@ body {
 @keyframes fadeSparkle {
     0% { transform: scale(1); opacity: 1; }
     100% { transform: scale(0); opacity: 0; }
+}
+
+@keyframes spin-cursor {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 /* ===== PARALLAX BACKGROUND ===== */
@@ -156,7 +203,6 @@ body {
     background: var(--bg-secondary);
     border-radius: 12px;
     border: 1px dashed rgba(255, 255, 255, 0.1);
-    /* No emoji, just empty space for ads */
 }
 
 /* ===== MAIN CONTENT ===== */
@@ -308,7 +354,6 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Tool-specific gradients */
 .tool-card[data-tool="image"] {
     border-top: 3px solid var(--tool-image);
 }
@@ -382,7 +427,6 @@ body {
     transform: scale(1.02);
 }
 
-/* Calculator card spans full width */
 .calculator-card {
     grid-column: span 2;
 }
@@ -439,7 +483,6 @@ body {
     font-weight: bold;
 }
 
-/* Trump to Glitter */
 .balloon-container {
     display: flex;
     flex-direction: column;
@@ -716,93 +759,7 @@ body.disco-mode .nav-link {
     }
 }
 
-/* Disco sparkles are bigger and faster */
 body.disco-mode .extra-sparkle {
     font-size: 2rem;
     animation: float-sparkle 1.5s ease-out forwards;
-}
-/* ===== FABULOUS THEMED CURSOR ===== */
-.glitter-cursor {
-    width: 30px;
-    height: 30px;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: screen;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.cursor-center {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: conic-gradient(
-        from 0deg,
-        var(--color-1, #FFB3B3) 0deg 120deg,
-        var(--color-2, #B0D4FF) 120deg 240deg,
-        var(--color-3, #D9B0FF) 240deg 360deg
-    );
-    animation: spin-cursor 3s linear infinite;
-    box-shadow: 0 0 15px var(--color-1, #FFB3B3),
-                0 0 25px var(--color-2, #B0D4FF),
-                0 0 35px var(--color-3, #D9B0FF);
-}
-
-@keyframes spin-cursor {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.glitter-cursor::before,
-.glitter-cursor::after {
-    content: '';
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    animation: sparkle 1.5s infinite;
-}
-
-.glitter-cursor::before {
-    background: var(--color-1, #FFB3B3);
-    box-shadow: 0 0 10px var(--color-1, #FFB3B3);
-    left: -5px;
-    top: -5px;
-}
-
-.glitter-cursor::after {
-    background: var(--color-3, #D9B0FF);
-    box-shadow: 0 0 10px var(--color-3, #D9B0FF);
-    right: -5px;
-    bottom: -5px;
-    animation-delay: 0.5s;
-}
-
-/* Sparkle trail */
-.cursor-sparkle {
-    position: fixed;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    animation: fadeSparkle 1s ease-out forwards;
-    box-shadow: 0 0 10px currentColor;
-}
-
-@keyframes sparkle {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.5); opacity: 0.5; }
-}
-
-@keyframes fadeSparkle {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(0); opacity: 0; }
-}
-
-@keyframes spin-cursor {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
 }
