@@ -138,11 +138,9 @@ body {
     100% { transform: translate(-2%, -2%) scale(1.05); }
 }
 
-/* Update this section in main.css around line 100 */
-
 /* ===== AD COLUMNS ===== */
 .ad-column {
-    width: 20vw;
+    width: 25vw;
     min-height: 100vh;
     position: relative;
     z-index: 1;
@@ -162,7 +160,7 @@ body {
 
 /* ===== MAIN CONTENT ===== */
 .main-content {
-    width: 60vw;
+    width: 50vw;
     min-height: 100vh;
     padding: 2rem;
     position: relative;
@@ -181,7 +179,7 @@ body {
 }
 
 .site-title {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     font-weight: 700;
     background: linear-gradient(135deg, 
         var(--rainbow-red),
