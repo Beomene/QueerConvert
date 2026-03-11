@@ -763,3 +763,59 @@ body.disco-mode .extra-sparkle {
     font-size: 2rem;
     animation: float-sparkle 1.5s ease-out forwards;
 }
+
+/* ===== MOBIL-OPTIMERING ===== */
+@media (max-width: 600px) {
+    /* Göm tomma sektioner på mobil */
+    .ad-placeholder {
+        display: none;  /* Ta bort tomma ad-rutor på mobil */
+    }
+    
+    /* Gör verktygskorten mer kompakta */
+    .tool-card {
+        padding: 1rem;
+    }
+    
+    /* Minska storlek på swap-knappar */
+    .swap-icon {
+        font-size: 1.5rem;  /* Mindre på mobil */
+    }
+    
+    /* Ta bort onödiga mellanrum */
+    .quick-convert {
+        gap: 0.25rem;
+    }
+    
+    .quick-btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+    }
+}
+updateThemeColors() {
+    const bodyClass = document.body.className;
+    let colors = ['#FFB3B3', '#B0D4FF', '#D9B0FF']; // default rainbow
+    
+    if (bodyClass.includes('theme-trans')) {
+        colors = ['#5bcffb', '#f5a9b8', '#ffffff'];
+    } else if (bodyClass.includes('theme-bi')) {
+        colors = ['#d60270', '#9b4f96', '#0038a8'];
+    } else if (bodyClass.includes('theme-pan')) {
+        colors = ['#ff218c', '#ffd800', '#21b1ff'];
+    } else if (bodyClass.includes('theme-lesbian')) {
+        colors = ['#d52d00', '#ff9a56', '#a30262'];
+    } else if (bodyClass.includes('theme-gay')) {
+        colors = ['#078d70', '#26ceaa', '#5049cc'];
+    } else if (bodyClass.includes('theme-poly')) {
+        colors = ['#151647', '#ffd159', '#e82820'];
+    }
+    
+    // Uppdatera cursorn
+    this.center.style.setProperty('--color-1', colors[0]);
+    this.center.style.setProperty('--color-2', colors[1] || colors[0]);
+    this.center.style.setProperty('--color-3', colors[2] || colors[0]);
+    
+    // Uppdatera ribbons (lägg till detta!)
+    document.documentElement.style.setProperty('--color-1', colors[0]);
+    document.documentElement.style.setProperty('--color-2', colors[1] || colors[0]);
+    document.documentElement.style.setProperty('--color-3', colors[2] || colors[0]);
+}
