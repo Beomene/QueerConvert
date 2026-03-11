@@ -1,4 +1,46 @@
-# robots.txt
+# robots.txt for Queer Convert
+# https://trinka.space/queer-convert/
+
+# Allow all friendly bots to crawl
 User-agent: *
 Allow: /
+
+# Give Googlebot specific instructions
+User-agent: Googlebot
+Allow: /
+Allow: /*.css$
+Allow: /*.js$
+Disallow: /private/
+Disallow: /temp/
+
+# Give Bingbot similar access
+User-agent: Bingbot
+Allow: /
+Allow: /*.css$
+Allow: /*.js$
+
+# Respect crawler delays
+Crawl-delay: 2
+
+# Specify sitemap location
 Sitemap: https://trinka.space/queer-convert/sitemap.xml
+
+# Prevent indexing of temporary or private files
+User-agent: *
+Disallow: /temp/
+Disallow: /private/
+Disallow: /backup/
+Disallow: /old/
+
+# Block AI training bots (if desired)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
