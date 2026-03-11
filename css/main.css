@@ -806,3 +806,47 @@ body.disco-mode .extra-sparkle {
     font-size: 2rem;
     animation: float-sparkle 1.5s ease-out forwards;
 }
+/* ===== ICE BUTTON COUNTER ===== */
+.ice-button-container {
+    position: relative;
+    display: inline-block;
+}
+
+.ice-counter {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    min-width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+    box-shadow: 0 0 15px rgba(255, 75, 43, 0.5);
+    animation: counter-pulse 2s infinite;
+    border: 1px solid rgba(255,255,255,0.3);
+    z-index: 10;
+}
+
+@keyframes counter-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* När man tryckt många gånger */
+.ice-counter[data-hot="5"] { background: linear-gradient(135deg, #ff8c00, #ff0080); }
+.ice-counter[data-hot="10"] { background: linear-gradient(135deg, #ff00aa, #aa00ff); }
+.ice-counter[data-hot="20"] { 
+    background: linear-gradient(135deg, #ff0000, #ff8800, #ffff00);
+    animation: counter-hot 0.5s infinite;
+}
+
+@keyframes counter-hot {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 20px #ff0000; }
+    50% { transform: scale(1.2); box-shadow: 0 0 40px #ffaa00; }
+}
