@@ -49,6 +49,33 @@ class GlitterCursor {
             colors = ['#078d70', '#26ceaa', '#5049cc'];
         } else if (bodyClass.includes('theme-poly')) {
             colors = ['#151647', '#ffd159', '#e82820'];
+        } else if (bodyClass.includes('theme-agender')) {
+            colors = ['#000000', '#cccccc', '#ffffff'];
+        } else if (bodyClass.includes('theme-asexual')) {
+            colors = ['#000000', '#a3a3a3', '#ffffff', '#800080'];
+        } else if (bodyClass.includes('theme-aromantic')) {
+            colors = ['#3da542', '#a7d379', '#ffffff', '#a9a9a9', '#000000'];
+        } else if (bodyClass.includes('theme-nonbinary')) {
+            colors = ['#fff430', '#ffffff', '#9c59d1', '#2d2d2d'];
+        } else if (bodyClass.includes('theme-genderfluid')) {
+            colors = ['#ff76a4', '#ffffff', '#bf11d7', '#000000', '#303cbe'];
+        } else if (bodyClass.includes('theme-genderqueer')) {
+            colors = ['#b57edc', '#ffffff', '#4a8123'];
+        } else if (bodyClass.includes('theme-intersex')) {
+            colors = ['#ffd800', '#800080'];
+        } else if (bodyClass.includes('theme-demigirl')) {
+            colors = ['#7f7f7f', '#ffc0cb', '#ffffff', '#ffc0cb', '#7f7f7f'];
+        } else if (bodyClass.includes('theme-demiboy')) {
+            colors = ['#7f7f7f', '#a4d3ff', '#ffffff', '#a4d3ff', '#7f7f7f'];
+        } else if (bodyClass.includes('theme-queer')) {
+            colors = ['#e0147c', '#ffffff', '#3fa63f'];
+        }
+    
+    // Uppdatera cursorn med färgerna
+    this.center.style.setProperty('--color-1', colors[0]);
+    this.center.style.setProperty('--color-2', colors[1] || colors[0]);
+    this.center.style.setProperty('--color-3', colors[2] || colors[0]);
+}
         }
         
         this.center.style.setProperty('--color-1', colors[0]);
