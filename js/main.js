@@ -135,13 +135,11 @@ class ParallaxBackground {
 
 // ===== CONFETTI TRIGGER =====
 window.triggerConfetti = function(intensity = 'medium') {
-    // Create confetti explosion with pastel colors
     const colors = [
         '#FFB3B3', '#FFC9A2', '#FFF6B0', 
         '#B0E9CA', '#B0D4FF', '#D9B0FF'
     ];
     
-    // Set count based on intensity
     let count = 50;
     if (intensity === 'low') count = 25;
     if (intensity === 'medium') count = 50;
@@ -165,7 +163,6 @@ window.triggerConfetti = function(intensity = 'medium') {
             confetti.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
             
             document.body.appendChild(confetti);
-            
             setTimeout(() => confetti.remove(), 5000);
         }, i * 20);
     }
@@ -187,25 +184,14 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// ===== INITIALIZE =====
-document.addEventListener('DOMContentLoaded', () => {
-    new GlitterCursor();
-    new ParallaxBackground();
-    
-    // Make confetti globally available
-    window.triggerConfetti = window.triggerConfetti;
-});
-
 // ===== FABULOUS BUTTON FUNCTIONS =====
 
 // EXTRA SPARKLES FUNCTION
 window.triggerExtraSparkles = function() {
-    // Trigger massive confetti
     if (window.triggerConfetti) {
         window.triggerConfetti('fabulous');
     }
     
-    // Create floating sparkle emojis
     for (let i = 0; i < 20; i++) {
         setTimeout(() => {
             const sparkle = document.createElement('div');
@@ -215,12 +201,10 @@ window.triggerExtraSparkles = function() {
             sparkle.style.top = Math.random() * 100 + 'vh';
             sparkle.style.color = ['#FFB3B3', '#FFC9A2', '#FFF6B0', '#B0E9CA', '#B0D4FF', '#D9B0FF'][Math.floor(Math.random() * 6)];
             document.body.appendChild(sparkle);
-            
             setTimeout(() => sparkle.remove(), 2000);
         }, i * 50);
     }
     
-    // Make the button do a little dance (if it exists)
     const btn = document.getElementById('extraSparklesBtn');
     if (btn) {
         btn.style.transform = 'scale(1.2) rotate(5deg)';
@@ -238,7 +222,6 @@ window.triggerIceMode = function() {
     const iceBtn = document.getElementById('iceButton');
     
     if (!isDiscoMode) {
-        // Turn ON disco mode
         isDiscoMode = true;
         body.classList.add('disco-mode');
         
@@ -247,13 +230,11 @@ window.triggerIceMode = function() {
             iceBtn.style.animation = 'pulse-glow-ice 0.2s infinite alternate';
         }
         
-        // Continuous confetti in disco mode
         discoInterval = setInterval(() => {
             if (window.triggerConfetti) {
                 window.triggerConfetti('low');
             }
             
-            // Also create some disco sparkles
             for (let i = 0; i < 5; i++) {
                 setTimeout(() => {
                     const sparkle = document.createElement('div');
@@ -270,7 +251,6 @@ window.triggerIceMode = function() {
         }, 500);
         
     } else {
-        // Turn OFF disco mode
         isDiscoMode = false;
         body.classList.remove('disco-mode');
         
@@ -279,18 +259,22 @@ window.triggerIceMode = function() {
             iceBtn.style.animation = 'pulse-glow-ice 2s infinite alternate';
         }
         
-        // Stop continuous confetti
         if (discoInterval) {
             clearInterval(discoInterval);
         }
         
-        // One last confetti burst for good measure
         if (window.triggerConfetti) {
             window.triggerConfetti('fabulous');
         }
     }
 };
 
-// Make sure functions are globally available
-window.triggerExtraSparkles = window.triggerExtraSparkles;
-window.triggerIceMode = window.triggerIceMode;
+// ===== INITIALIZE =====
+document.addEventListener('DOMContentLoaded', () => {
+    new GlitterCursor();
+    new ParallaxBackground();
+    
+    window.triggerConfetti = window.triggerConfetti;
+    window.triggerExtraSparkles = window.triggerExtraSparkles;
+    window.triggerIceMode = window.triggerIceMode;
+});
