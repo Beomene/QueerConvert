@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Queer Convert · distance & weight</title>
+    <title>Queer Convert · distance</title>
     
     <!-- Meta tags -->
-    <meta name="description" content="Convert imperial to metric - inches to cm, feet to meters, miles to km, pounds to kg. With sparkles!">
+    <meta name="description" content="Convert imperial to metric distance - inches to cm, feet to meters, miles to km. With sparkles!">
     <meta name="theme-color" content="#121212">
     
     <!-- Social meta -->
-    <meta property="og:title" content="Queer Convert - distance & weight">
-    <meta property="og:description" content="Convert imperial to metric with pride. Inches, feet, miles, pounds → cm, m, km, kg">
+    <meta property="og:title" content="Queer Convert - distance converter">
+    <meta property="og:description" content="Convert imperial to metric distance with pride. Inches, feet, miles → cm, m, km">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://trinka.space/queer-convert/pages/distance">
     
@@ -144,14 +144,6 @@
             border-color: var(--rainbow-blue);
         }
         
-        .weight-section {
-            border-left-color: var(--rainbow-green);
-        }
-        
-        .weight-section h2 span {
-            color: var(--rainbow-green);
-        }
-        
         @media (max-width: 600px) {
             .converter-grid {
                 grid-template-columns: 1fr;
@@ -200,14 +192,14 @@
 
         <!-- Page Title -->
         <div class="slogan-container" style="border-left-color: var(--rainbow-blue);">
-            <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">📏 distance · ⚖️ weight</h1>
+            <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">📏 distance converter</h1>
             <p class="slogan">
                 Convert imperial to metric, and never look back
                 <span class="slogan-highlight">🏳️‍🌈</span>
             </p>
         </div>
 
-        <!-- DISTANCE CONVERTER SECTION -->
+        <!-- DISTANCE CONVERTER SECTION - NO WEIGHT -->
         <section class="converter-section">
             <h2>
                 <span>📏</span> 
@@ -285,45 +277,12 @@
             </div>
         </section>
 
-        <!-- WEIGHT CONVERTER SECTION -->
-        <section class="converter-section weight-section">
-            <h2>
-                <span>⚖️</span> 
-                Weight Converter
-                <span class="unit-badge">lbs ↔ kg</span>
-            </h2>
-            
-            <!-- Pounds to Kilograms -->
-            <div class="converter-grid">
-                <div class="input-group">
-                    <label>Pounds (lbs)</label>
-                    <input type="number" id="pounds" placeholder="0" step="any" value="1">
-                </div>
-                
-                <button class="swap-button" onclick="swapWeight()" title="swap">↔</button>
-                
-                <div class="input-group">
-                    <label>Kilograms (kg)</label>
-                    <input type="number" id="kg" placeholder="0" step="any" readonly value="0.453592">
-                </div>
-            </div>
-            
-            <!-- Quick weight presets -->
-            <div class="quick-convert">
-                <button class="quick-btn" onclick="setWeight('pounds', 1)">1 lb</button>
-                <button class="quick-btn" onclick="setWeight('pounds', 10)">10 lb</button>
-                <button class="quick-btn" onclick="setWeight('pounds', 100)">100 lb</button>
-                <button class="quick-btn" onclick="setWeight('pounds', 150)">150 lb</button>
-                <button class="quick-btn" onclick="setWeight('pounds', 200)">200 lb</button>
-            </div>
-            
-            <!-- Fun fact -->
-            <p style="margin-top: 2rem; color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
-                ✨ 1 pound = 16 ounces = 453.6 grams · 1 kilogram = 2.205 pounds ✨
-            </p>
-        </section>
+        <!-- Fun fact about distance -->
+        <p style="margin: 1rem 0 2rem; color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+            ✨ 1 inch = 2.54 cm · 1 foot = 0.3048 m · 1 mile = 1.60934 km · 1 kilometer = 0.621371 miles ✨
+        </p>
 
-        <!-- FOOTER - CORRECTLY PLACED HERE before scripts -->
+        <!-- FOOTER -->
         <footer class="site-footer">
             <p>Made with 🌈 for the community · every conversion = sparkles</p>
             <p class="footer-small">
@@ -337,17 +296,17 @@
     <div class="ad-column right">
         <div class="ad-placeholder" data-ad="right">
             <!-- AdSense will go here -->
-            <span>⚖️</span>
+            <span>📏</span>
         </div>
     </div>
 
-    <!-- Scripts - CORRECTLY PLACED after footer, before </body> -->
+    <!-- Scripts -->
     <script src="../js/main.js"></script>
     <script src="../js/confetti.js"></script>
     
-    <!-- Distance & Weight Conversion Logic -->
+    <!-- Distance Conversion Logic - NO WEIGHT -->
     <script>
-        // ===== DISTANCE CONVERSIONS =====
+        // ===== DISTANCE CONVERSIONS ONLY =====
         
         // Inches to/from CM
         document.getElementById('inches').addEventListener('input', function(e) {
@@ -388,33 +347,14 @@
             window.triggerConfetti('low');
         });
         
-        // ===== WEIGHT CONVERSIONS =====
-        document.getElementById('pounds').addEventListener('input', function(e) {
-            const pounds = parseFloat(e.target.value) || 0;
-            document.getElementById('kg').value = (pounds * 0.453592).toFixed(2);
-            window.triggerConfetti('low');
-        });
-        
-        document.getElementById('kg').addEventListener('input', function(e) {
-            const kg = parseFloat(e.target.value) || 0;
-            document.getElementById('pounds').value = (kg / 0.453592).toFixed(2);
-            window.triggerConfetti('low');
-        });
-        
         // ===== HELPER FUNCTIONS =====
         function setDistance(unit, value) {
             document.getElementById(unit).value = value;
             document.getElementById(unit).dispatchEvent(new Event('input'));
         }
         
-        function setWeight(unit, value) {
-            document.getElementById(unit).value = value;
-            document.getElementById(unit).dispatchEvent(new Event('input'));
-        }
-        
         function swapDistance(fromId, toId) {
             const fromVal = document.getElementById(fromId).value;
-            const toVal = document.getElementById(toId).value;
             
             if (fromId === 'inches') {
                 document.getElementById('cm').value = fromVal;
@@ -428,13 +368,7 @@
             }
         }
         
-        function swapWeight() {
-            const pounds = document.getElementById('pounds').value;
-            document.getElementById('kg').value = pounds;
-            document.getElementById('kg').dispatchEvent(new Event('input'));
-        }
-        
-        // Trigger initial confetti when page loads (just for fun)
+        // Trigger initial confetti when page loads
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => window.triggerConfetti('low'), 500);
         });
