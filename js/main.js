@@ -277,7 +277,7 @@ window.triggerLaserRainbow = function() {
                     width: 0;
                     height: 0;
                     opacity: 0;
-                    box-shadow: 0 0 10px ${color};
+                    box-shadow: 0 0 70px ${color};
                 }
             `;
             
