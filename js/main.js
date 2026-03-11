@@ -567,7 +567,7 @@ window.triggerIceMode = function() {
     createIceEffects(15);
     createShockwave();
     
-    if (iceClickCount >= 999) {
+    if (iceClickCount >= 99) {
         iceClickCount = 0;
         iceCounter.textContent = iceClickCount;
         localStorage.setItem('iceClickCount', iceClickCount);
