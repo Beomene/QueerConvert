@@ -1,20 +1,59 @@
-// ===== GLITTER CURSOR =====
+// ===== FABULOUS THEMED CURSOR =====
 class GlitterCursor {
     constructor() {
         this.cursor = document.createElement('div');
         this.cursor.className = 'glitter-cursor';
         document.body.appendChild(this.cursor);
         
+        // Create the inner swirling center
+        this.center = document.createElement('div');
+        this.center.className = 'cursor-center';
+        this.cursor.appendChild(this.center);
+        
         this.sparkles = [];
         this.lastX = 0;
         this.lastY = 0;
         
         this.bindEvents();
+        this.updateThemeColors();
     }
     
     bindEvents() {
         document.addEventListener('mousemove', (e) => this.onMouseMove(e));
         document.addEventListener('click', (e) => this.onClick(e));
+        
+        // Watch for theme changes
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'class') {
+                    this.updateThemeColors();
+                }
+            });
+        });
+        observer.observe(document.body, { attributes: true });
+    }
+    
+    updateThemeColors() {
+        const bodyClass = document.body.className;
+        let colors = ['#FFB3B3', '#B0D4FF', '#D9B0FF']; // default rainbow
+        
+        if (bodyClass.includes('theme-trans')) {
+            colors = ['#5bcffb', '#f5a9b8', '#ffffff'];
+        } else if (bodyClass.includes('theme-bi')) {
+            colors = ['#d60270', '#9b4f96', '#0038a8'];
+        } else if (bodyClass.includes('theme-pan')) {
+            colors = ['#ff218c', '#ffd800', '#21b1ff'];
+        } else if (bodyClass.includes('theme-lesbian')) {
+            colors = ['#d52d00', '#ff9a56', '#a30262'];
+        } else if (bodyClass.includes('theme-gay')) {
+            colors = ['#078d70', '#26ceaa', '#5049cc'];
+        } else if (bodyClass.includes('theme-poly')) {
+            colors = ['#151647', '#ffd159', '#e82820'];
+        }
+        
+        this.center.style.setProperty('--color-1', colors[0]);
+        this.center.style.setProperty('--color-2', colors[1]);
+        this.center.style.setProperty('--color-3', colors[2]);
     }
     
     onMouseMove(e) {
@@ -22,9 +61,9 @@ class GlitterCursor {
         const y = e.clientY;
         
         // Move main cursor
-        this.cursor.style.transform = `translate(${x - 10}px, ${y - 10}px)`;
+        this.cursor.style.transform = `translate(${x - 15}px, ${y - 15}px)`;
         
-        // Leave sparkle trail (throttled for performance)
+        // Leave sparkle trail (throttled)
         if (Math.hypot(x - this.lastX, y - this.lastY) > 15) {
             this.createSparkle(x, y);
             this.lastX = x;
@@ -49,22 +88,18 @@ class GlitterCursor {
         const sparkle = document.createElement('div');
         sparkle.className = 'cursor-sparkle';
         
-        // Random pastel color
+        // Use theme colors for sparkles
         const colors = [
-            'var(--rainbow-red)',
-            'var(--rainbow-orange)',
-            'var(--rainbow-yellow)',
-            'var(--rainbow-green)',
-            'var(--rainbow-blue)',
-            'var(--rainbow-purple)'
+            getComputedStyle(this.center).getPropertyValue('--color-1').trim() || '#FFB3B3',
+            getComputedStyle(this.center).getPropertyValue('--color-2').trim() || '#B0D4FF',
+            getComputedStyle(this.center).getPropertyValue('--color-3').trim() || '#D9B0FF'
         ];
+        
         sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
         sparkle.style.left = x + 'px';
         sparkle.style.top = y + 'px';
         
         document.body.appendChild(sparkle);
-        
-        // Remove after animation
         setTimeout(() => sparkle.remove(), 1000);
     }
 }
