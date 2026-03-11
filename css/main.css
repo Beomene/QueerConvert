@@ -182,7 +182,7 @@ body {
     font-size: 3.5rem;
     font-weight: 700;
     background: linear-gradient(135deg, 
-        var(--rainbow-red),
+        var(--rainbow-white),
         var(--rainbow-orange),
         var(--rainbow-yellow),
         var(--rainbow-green),
@@ -195,17 +195,17 @@ body {
 }
 
 .rainbow-bar {
-    height: 44px;
+    height: 4px;
     width: 100%;
     background: linear-gradient(90deg, 
-        var(--rainbow-red),
+        var(--rainbow-white),
         var(--rainbow-orange),
         var(--rainbow-yellow),
         var(--rainbow-green),
         var(--rainbow-blue),
         var(--rainbow-purple));
     border-radius: 20px;
-    animation: shimmer 44s infinite;
+    animation: shimmer 4s infinite;
 }
 
 @keyframes shimmer {
@@ -258,11 +258,11 @@ body {
 /* ===== SLOGAN ===== */
 .slogan-container {
     background: var(--bg-secondary);
-    border-radius: 50px;
+    border-radius: 10px;
     padding: 1.5rem 2rem;
     margin-bottom: 3rem;
     border-left: 4px solid var(--rainbow-purple);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 3, 0, 0.3);
 }
 
 .slogan {
