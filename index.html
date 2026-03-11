@@ -21,273 +21,9 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="css/main.css">
-    
-    <!-- Extra styles for theme buttons -->
-    <style>
-        /* Theme Buttons Section */
-        .theme-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            justify-content: center;
-            margin: 1.5rem 0 2rem;
-        }
-        
-        .theme-btn {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.15);
-            color: var(--text-secondary);
-            padding: 0.5rem 1rem;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 400;
-            cursor: none;
-            transition: all 0.2s ease;
-        }
-        
-        .theme-btn:hover {
-            color: var(--text-primary);
-            border-color: rgba(255,255,255,0.3);
-        }
-        
-        .theme-btn.active {
-            border-width: 2px;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-        
-        /* Theme-specific header colors */
-        body.theme-trans .site-header {
-            background: linear-gradient(135deg, #5bcffb22, #f5a9b822);
-            border-bottom: 2px solid #5bcffb;
-        }
-        
-        body.theme-bi .site-header {
-            background: linear-gradient(135deg, #d6027022, #0038a822);
-            border-bottom: 2px solid #d60270;
-        }
-        
-        body.theme-pan .site-header {
-            background: linear-gradient(135deg, #ff218c22, #21b1ff22);
-            border-bottom: 2px solid #ff218c;
-        }
-        
-        body.theme-lesbian .site-header {
-            background: linear-gradient(135deg, #d52d0022, #a3026222);
-            border-bottom: 2px solid #d52d00;
-        }
-        
-        body.theme-gay .site-header {
-            background: linear-gradient(135deg, #078d7022, #5049cc22);
-            border-bottom: 2px solid #078d70;
-        }
-        
-        body.theme-poly .site-header {
-            background: linear-gradient(135deg, #15164722, #e8282022);
-            border-bottom: 2px solid #151647;
-        }
-        
-        body.theme-agender .site-header {
-            background: linear-gradient(135deg, #00000022, #cccccc22);
-            border-bottom: 2px solid #000000;
-        }
-        
-        body.theme-asexual .site-header {
-            background: linear-gradient(135deg, #00000022, #80008022);
-            border-bottom: 2px solid #800080;
-        }
-        
-        body.theme-aromantic .site-header {
-            background: linear-gradient(135deg, #3da54222, #00000022);
-            border-bottom: 2px solid #3da542;
-        }
-        
-        body.theme-nonbinary .site-header {
-            background: linear-gradient(135deg, #fff43022, #2d2d2d22);
-            border-bottom: 2px solid #9c59d1;
-        }
-        
-        body.theme-genderfluid .site-header {
-            background: linear-gradient(135deg, #ff76a422, #303cbe22);
-            border-bottom: 2px solid #bf11d7;
-        }
-        
-        body.theme-genderqueer .site-header {
-            background: linear-gradient(135deg, #b57edc22, #4a812322);
-            border-bottom: 2px solid #b57edc;
-        }
-        
-        body.theme-intersex .site-header {
-            background: linear-gradient(135deg, #ffd80022, #80008022);
-            border-bottom: 2px solid #ffd800;
-        }
-        
-        body.theme-demigirl .site-header {
-            background: linear-gradient(135deg, #7f7f7f22, #ffc0cb22);
-            border-bottom: 2px solid #ffc0cb;
-        }
-        
-        body.theme-demiboy .site-header {
-            background: linear-gradient(135deg, #7f7f7f22, #a4d3ff22);
-            border-bottom: 2px solid #a4d3ff;
-        }
-        
-        body.theme-queer .site-header {
-            background: linear-gradient(135deg, #e0147c22, #3fa63f22);
-            border-bottom: 2px solid #e0147c;
-        }
-        
-        /* Active theme button gets matching color */
-        body.theme-trans .theme-btn[data-theme="trans"].active {
-            border-color: #5bcffb;
-        }
-        body.theme-bi .theme-btn[data-theme="bi"].active {
-            border-color: #d60270;
-        }
-        body.theme-pan .theme-btn[data-theme="pan"].active {
-            border-color: #ff218c;
-        }
-        body.theme-lesbian .theme-btn[data-theme="lesbian"].active {
-            border-color: #d52d00;
-        }
-        body.theme-gay .theme-btn[data-theme="gay"].active {
-            border-color: #078d70;
-        }
-        body.theme-poly .theme-btn[data-theme="poly"].active {
-            border-color: #151647;
-        }
-        body.theme-agender .theme-btn[data-theme="agender"].active {
-            border-color: #cccccc;
-        }
-        body.theme-asexual .theme-btn[data-theme="asexual"].active {
-            border-color: #800080;
-        }
-        body.theme-aromantic .theme-btn[data-theme="aromantic"].active {
-            border-color: #3da542;
-        }
-        body.theme-nonbinary .theme-btn[data-theme="nonbinary"].active {
-            border-color: #9c59d1;
-        }
-        body.theme-genderfluid .theme-btn[data-theme="genderfluid"].active {
-            border-color: #bf11d7;
-        }
-        body.theme-genderqueer .theme-btn[data-theme="genderqueer"].active {
-            border-color: #b57edc;
-        }
-        body.theme-intersex .theme-btn[data-theme="intersex"].active {
-            border-color: #ffd800;
-        }
-        body.theme-demigirl .theme-btn[data-theme="demigirl"].active {
-            border-color: #ffc0cb;
-        }
-        body.theme-demiboy .theme-btn[data-theme="demiboy"].active {
-            border-color: #a4d3ff;
-        }
-        body.theme-queer .theme-btn[data-theme="queer"].active {
-            border-color: #e0147c;
-        }
-        
-        /* Reset button */
-        .theme-btn.reset.active {
-            border-color: var(--text-secondary);
-        }
-        
-        /* Fabulous Buttons Section - RENARE, INGA EXTRA EMOJIS */
-        .fabulous-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin: 2rem 0 3rem;
-            flex-wrap: wrap;
-        }
-        
-        .laser-button {
-            background: linear-gradient(135deg, 
-                rgba(255, 243, 176, 0.2),
-                rgba(217, 176, 255, 0.2));
-            border: 2px solid rgba(255, 243, 176, 0.3);
-            color: var(--text-primary);
-            padding: 1.2rem 2.5rem;
-            border-radius: 50px;
-            font-size: 1.3rem;
-            font-weight: 600;
-            cursor: none;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(255, 243, 176, 0.3);
-            animation: pulse-glow 2s infinite alternate;
-            min-width: 200px;
-        }
-        
-        .ice-button {
-            background: linear-gradient(135deg, 
-                rgba(176, 212, 255, 0.2),
-                rgba(217, 176, 255, 0.2));
-            border: 2px solid rgba(176, 212, 255, 0.3);
-            color: var(--text-primary);
-            padding: 1.2rem 2.5rem;
-            border-radius: 50px;
-            font-size: 1.3rem;
-            font-weight: 600;
-            cursor: none;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(176, 212, 255, 0.3);
-            animation: pulse-glow-ice 2s infinite alternate;
-            min-width: 200px;
-        }
-        
-        .laser-button:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 0 40px rgba(255, 243, 176, 0.6);
-        }
-        
-        .ice-button:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 0 40px rgba(176, 212, 255, 0.6);
-        }
-        
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 20px rgba(255, 243, 176, 0.3); }
-            100% { box-shadow: 0 0 40px rgba(217, 176, 255, 0.6); }
-        }
-        
-        @keyframes pulse-glow-ice {
-            0% { box-shadow: 0 0 20px rgba(176, 212, 255, 0.3); }
-            100% { box-shadow: 0 0 40px rgba(217, 176, 255, 0.6); }
-        }
-        
-        /* Ice button container för counter */
-        .ice-button-container {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .ice-counter {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: linear-gradient(135deg, #ff416c, #ff4b2b);
-            color: white;
-            font-weight: bold;
-            font-size: 0.9rem;
-            min-width: 24px;
-            height: 24px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 6px;
-            box-shadow: 0 0 15px rgba(255, 75, 43, 0.5);
-            border: 1px solid rgba(255,255,255,0.3);
-            z-index: 10;
-        }
-    </style>
 </head>
 <body>
-    <!-- Left Ad Column - HELT REN, INGA EMOJIS -->
+    <!-- Left Ad Column - REN, INGA EMOJIS -->
     <div class="ad-column left">
         <div class="ad-placeholder" data-ad="left">
             <!-- AdSense will go here -->
@@ -317,7 +53,7 @@
         <div class="slogan-container">
             <p class="slogan">
                 Convert files, distances, weights...
-                <span class="slogan-break">but never pray all that precious anti-fascist away</span>
+                <span class="slogan-break">but never pray all the precious anti-fascist away</span>
                 <span class="slogan-highlight">🏳️‍🌈</span>
             </p>
         </div>
@@ -343,14 +79,14 @@
             <button class="theme-btn reset" onclick="resetTheme()" data-theme="reset">reset</button>
         </div>
 
-        <!-- FABULOUS BUTTONS - RENA, INGA EXTRA EMOJIS -->
+        <!-- FABULOUS BUTTONS - HELT UTAN EMOJIS -->
         <div class="fabulous-buttons">
             <button class="laser-button" id="laserRainbowBtn" onclick="triggerLaserRainbow()">
                 LASER RAINBOW
             </button>
             <div class="ice-button-container">
                 <button class="ice-button" id="iceButton" onclick="triggerIceMode()">
-                    F*** ICE
+                    F-ICE
                 </button>
                 <span class="ice-counter" id="iceCounter">0</span>
             </div>
@@ -394,7 +130,7 @@
                 </button>
             </div>
 
-            <!-- Image Converter (duplicate? kept for consistency) -->
+            <!-- Image Converter -->
             <div class="tool-card" data-tool="image">
                 <h2 class="tool-title">IMAGE</h2>
                 <p class="tool-desc">JPG → PNG</p>
@@ -432,7 +168,7 @@
         </div>
     </div>
 
-    <!-- Theme ribbons -->
+    <!-- Theme ribbons (skapas av JS, men vi har dem här också för säkerhet) -->
     <div class="theme-ribbon ribbon-top"></div>
     <div class="theme-ribbon ribbon-bottom"></div>
 
@@ -441,9 +177,11 @@
     <script src="js/confetti.js"></script>
     
     <script>
-        // Preview calculator function
+        // Preview calculator function (för index-sidan)
         function previewCalc(value) {
             const display = document.getElementById('preview-display');
+            if (!display) return; // Om vi inte är på index med calculator-preview
+            
             if (value === '=') {
                 try {
                     display.innerText = eval(display.innerText);
@@ -487,11 +225,18 @@
             const savedTheme = localStorage.getItem('queerConvertTheme');
             if (savedTheme) {
                 setTheme(savedTheme);
-            } else {
-                // Initialize ice counter
-                const iceCounter = document.getElementById('iceCounter');
-                if (iceCounter) {
-                    iceCounter.textContent = '0';
+            }
+            
+            // Sätt ice counter om den finns
+            const iceCounter = document.getElementById('iceCounter');
+            if (iceCounter) {
+                const savedCount = localStorage.getItem('iceClickCount');
+                if (savedCount) {
+                    iceCounter.textContent = savedCount;
+                    // Uppdatera global variabel om den finns
+                    if (window.iceClickCount !== undefined) {
+                        window.iceClickCount = parseInt(savedCount);
+                    }
                 }
             }
             
@@ -507,7 +252,10 @@
             document.querySelectorAll('.theme-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            document.querySelector(`.theme-btn[data-theme="${theme}"]`).classList.add('active');
+            const activeBtn = document.querySelector(`.theme-btn[data-theme="${theme}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
             
             window.triggerConfetti('low');
         }
@@ -523,10 +271,20 @@
             window.triggerConfetti('low');
         }
 
+        // Spara ice counter när den ändras
+        function updateIceCounter(value) {
+            const counter = document.getElementById('iceCounter');
+            if (counter) {
+                counter.textContent = value;
+                localStorage.setItem('iceClickCount', value);
+            }
+        }
+
         // Make functions globally available
         window.previewCalc = previewCalc;
         window.setTheme = setTheme;
         window.resetTheme = resetTheme;
+        window.updateIceCounter = updateIceCounter;
     </script>
 </body>
 </html>
