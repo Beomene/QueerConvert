@@ -845,6 +845,51 @@ body.disco-mode .extra-sparkle {
     background: linear-gradient(135deg, #ff0000, #ff8800, #ffff00);
     animation: counter-hot 0.5s infinite;
 }
+/* ===== ICE EFFECTS ===== */
+.ice-effect {
+    pointer-events: none;
+    position: fixed;
+    z-index: 9998;
+}
+
+@keyframes ice-float {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(0.5);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.9;
+        transform: translate(10px, -20px) rotate(45deg) scale(1);
+    }
+    40% {
+        transform: translate(-15px, -40px) rotate(90deg) scale(0.8);
+    }
+    60% {
+        transform: translate(20px, -60px) rotate(135deg) scale(1.2);
+    }
+    80% {
+        transform: translate(-10px, -80px) rotate(180deg) scale(0.9);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(0, -100px) rotate(225deg) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Olika animationer för olika isformer */
+.ice-effect:nth-child(3n) {
+    animation: ice-spin 2s ease-out forwards;
+}
+
+@keyframes ice-spin {
+    0% { transform: translate(0, 0) rotate(0deg) scale(0.3); opacity: 0; }
+    20% { transform: translate(-20px, -30px) rotate(180deg) scale(1); opacity: 1; }
+    40% { transform: translate(20px, -60px) rotate(360deg) scale(0.8); }
+    60% { transform: translate(-30px, -90px) rotate(540deg) scale(1.1); }
+    80% { transform: translate(15px, -120px) rotate(720deg) scale(0.7); opacity: 0.5; }
+    100% { transform: translate(0, -150px) rotate(900deg) scale(0); opacity: 0; }
+}
 
 @keyframes counter-hot {
     0%, 100% { transform: scale(1); box-shadow: 0 0 20px #ff0000; }
