@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Queer Convert · tools with pride</title>
     
-    <!-- Meta tags -->
+    <!-- Meta tags for sharing & AdSense -->
     <meta name="description" content="Convert files, distances, weights... but never convert yourself. A queer-centered toolbox with sparkles & pride.">
     <meta name="theme-color" content="#121212">
     
     <!-- Social meta -->
     <meta property="og:title" content="Queer Convert - tools with pride">
-    <meta property="og:description" content="Convert files, distances, weights... but never convert yourself. A queer-centered toolbox.">
+    <meta property="og:description" content="Convert files, distances, weights... but never convert yourself. A queer-centered toolbox with sparkles & pride.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://trinka.space/queer-convert/">
     
@@ -22,7 +22,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/main.css">
     
-    <!-- Extra styles for refined theme buttons -->
+    <!-- Extra styles for theme buttons -->
     <style>
         /* Theme Buttons Section */
         .theme-buttons {
@@ -38,7 +38,7 @@
             border: 1px solid rgba(255,255,255,0.15);
             color: var(--text-secondary);
             padding: 0.5rem 1rem;
-            border-radius: 20px;
+            border-radius: 30px;
             font-size: 0.85rem;
             font-weight: 400;
             cursor: none;
@@ -56,7 +56,7 @@
             color: var(--text-primary);
         }
         
-        /* Theme-specific header colors - ONLY the header band changes */
+        /* Theme-specific header colors */
         body.theme-trans .site-header {
             background: linear-gradient(135deg, #5bcffb22, #f5a9b822);
             border-bottom: 2px solid #5bcffb;
@@ -87,6 +87,56 @@
             border-bottom: 2px solid #151647;
         }
         
+        body.theme-agender .site-header {
+            background: linear-gradient(135deg, #00000022, #cccccc22);
+            border-bottom: 2px solid #000000;
+        }
+        
+        body.theme-asexual .site-header {
+            background: linear-gradient(135deg, #00000022, #80008022);
+            border-bottom: 2px solid #800080;
+        }
+        
+        body.theme-aromantic .site-header {
+            background: linear-gradient(135deg, #3da54222, #00000022);
+            border-bottom: 2px solid #3da542;
+        }
+        
+        body.theme-nonbinary .site-header {
+            background: linear-gradient(135deg, #fff43022, #2d2d2d22);
+            border-bottom: 2px solid #9c59d1;
+        }
+        
+        body.theme-genderfluid .site-header {
+            background: linear-gradient(135deg, #ff76a422, #303cbe22);
+            border-bottom: 2px solid #bf11d7;
+        }
+        
+        body.theme-genderqueer .site-header {
+            background: linear-gradient(135deg, #b57edc22, #4a812322);
+            border-bottom: 2px solid #b57edc;
+        }
+        
+        body.theme-intersex .site-header {
+            background: linear-gradient(135deg, #ffd80022, #80008022);
+            border-bottom: 2px solid #ffd800;
+        }
+        
+        body.theme-demigirl .site-header {
+            background: linear-gradient(135deg, #7f7f7f22, #ffc0cb22);
+            border-bottom: 2px solid #ffc0cb;
+        }
+        
+        body.theme-demiboy .site-header {
+            background: linear-gradient(135deg, #7f7f7f22, #a4d3ff22);
+            border-bottom: 2px solid #a4d3ff;
+        }
+        
+        body.theme-queer .site-header {
+            background: linear-gradient(135deg, #e0147c22, #3fa63f22);
+            border-bottom: 2px solid #e0147c;
+        }
+        
         /* Active theme button gets matching color */
         body.theme-trans .theme-btn[data-theme="trans"].active {
             border-color: #5bcffb;
@@ -106,13 +156,43 @@
         body.theme-poly .theme-btn[data-theme="poly"].active {
             border-color: #151647;
         }
+        body.theme-agender .theme-btn[data-theme="agender"].active {
+            border-color: #cccccc;
+        }
+        body.theme-asexual .theme-btn[data-theme="asexual"].active {
+            border-color: #800080;
+        }
+        body.theme-aromantic .theme-btn[data-theme="aromantic"].active {
+            border-color: #3da542;
+        }
+        body.theme-nonbinary .theme-btn[data-theme="nonbinary"].active {
+            border-color: #9c59d1;
+        }
+        body.theme-genderfluid .theme-btn[data-theme="genderfluid"].active {
+            border-color: #bf11d7;
+        }
+        body.theme-genderqueer .theme-btn[data-theme="genderqueer"].active {
+            border-color: #b57edc;
+        }
+        body.theme-intersex .theme-btn[data-theme="intersex"].active {
+            border-color: #ffd800;
+        }
+        body.theme-demigirl .theme-btn[data-theme="demigirl"].active {
+            border-color: #ffc0cb;
+        }
+        body.theme-demiboy .theme-btn[data-theme="demiboy"].active {
+            border-color: #a4d3ff;
+        }
+        body.theme-queer .theme-btn[data-theme="queer"].active {
+            border-color: #e0147c;
+        }
         
         /* Reset button */
         .theme-btn.reset.active {
             border-color: var(--text-secondary);
         }
         
-        /* Fabulous Buttons Section */
+        /* Fabulous Buttons Section - RENARE, INGA EXTRA EMOJIS */
         .fabulous-buttons {
             display: flex;
             gap: 1.5rem;
@@ -121,7 +201,7 @@
             flex-wrap: wrap;
         }
         
-        .sparkle-button {
+        .laser-button {
             background: linear-gradient(135deg, 
                 rgba(255, 243, 176, 0.2),
                 rgba(217, 176, 255, 0.2));
@@ -133,6 +213,8 @@
             font-weight: 600;
             cursor: none;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
             box-shadow: 0 0 20px rgba(255, 243, 176, 0.3);
             animation: pulse-glow 2s infinite alternate;
             min-width: 200px;
@@ -150,9 +232,21 @@
             font-weight: 600;
             cursor: none;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
             box-shadow: 0 0 20px rgba(176, 212, 255, 0.3);
             animation: pulse-glow-ice 2s infinite alternate;
             min-width: 200px;
+        }
+        
+        .laser-button:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 0 40px rgba(255, 243, 176, 0.6);
+        }
+        
+        .ice-button:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 0 40px rgba(176, 212, 255, 0.6);
         }
         
         @keyframes pulse-glow {
@@ -164,13 +258,36 @@
             0% { box-shadow: 0 0 20px rgba(176, 212, 255, 0.3); }
             100% { box-shadow: 0 0 40px rgba(217, 176, 255, 0.6); }
         }
+        
+        /* Ice button container för counter */
+        .ice-button-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .ice-counter {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            min-width: 24px;
+            height: 24px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 6px;
+            box-shadow: 0 0 15px rgba(255, 75, 43, 0.5);
+            border: 1px solid rgba(255,255,255,0.3);
+            z-index: 10;
+        }
     </style>
 </head>
-    <!-- Theme ribbons -->
-<div class="theme-ribbon ribbon-top"></div>
-<div class="theme-ribbon ribbon-bottom"></div>
 <body>
-    <!-- Left Ad Column - CLEAN, NO EMOJI -->
+    <!-- Left Ad Column - HELT REN, INGA EMOJIS -->
     <div class="ad-column left">
         <div class="ad-placeholder" data-ad="left">
             <!-- AdSense will go here -->
@@ -179,7 +296,7 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Header band - this changes color with themes -->
+        <!-- Header band -->
         <header class="site-header">
             <div class="logo-area">
                 <h1 class="site-title">Queer Convert</h1>
@@ -196,54 +313,55 @@
             </nav>
         </header>
 
-        <!-- Slogan -->
+        <!-- Slogan - EN EMOTE KVARSTÅR (den är viktig!) -->
         <div class="slogan-container">
             <p class="slogan">
                 Convert files, distances, weights...
-                <span class="slogan-break">but never pray the anti-fascist away</span>
-                <span class="slogan-highlight"></span>
+                <span class="slogan-break">but never pray all that precious anti-fascist away</span>
+                <span class="slogan-highlight">🏳️‍🌈</span>
             </p>
         </div>
 
-        <!-- THEME BUTTONS - your fabulous names -->
-        <!-- THEME BUTTONS - alla identiteter! -->
+        <!-- THEME BUTTONS - alla identiteter, inga emojis på knapparna -->
         <div class="theme-buttons">
             <button class="theme-btn" onclick="setTheme('trans')" data-theme="trans">represenT</button>
             <button class="theme-btn" onclick="setTheme('bi')" data-theme="bi">Omnivore</button>
             <button class="theme-btn" onclick="setTheme('pan')" data-theme="pan">I don't discriminate...</button>
             <button class="theme-btn" onclick="setTheme('lesbian')" data-theme="lesbian">MatheSapphic</button>
             <button class="theme-btn" onclick="setTheme('gay')" data-theme="gay">HOMO sapiens, hunny</button>
-            <button class="theme-btn" onclick="setTheme('poly')" data-theme="poly">The Merrier...</button>
+            <button class="theme-btn" onclick="setTheme('poly')" data-theme="poly">The merrier...</button>
+            <button class="theme-btn" onclick="setTheme('agender')" data-theme="agender">Gender? nah</button>
+            <button class="theme-btn" onclick="setTheme('asexual')" data-theme="asexual">Ace</button>
+            <button class="theme-btn" onclick="setTheme('aromantic')" data-theme="aromantic">Aro</button>
+            <button class="theme-btn" onclick="setTheme('nonbinary')" data-theme="nonbinary">NB</button>
+            <button class="theme-btn" onclick="setTheme('genderfluid')" data-theme="genderfluid">fluid</button>
+            <button class="theme-btn" onclick="setTheme('genderqueer')" data-theme="genderqueer">queer</button>
+            <button class="theme-btn" onclick="setTheme('intersex')" data-theme="intersex">intersex</button>
+            <button class="theme-btn" onclick="setTheme('demigirl')" data-theme="demigirl">demi-girl</button>
+            <button class="theme-btn" onclick="setTheme('demiboy')" data-theme="demiboy">demi-boy</button>
+            <button class="theme-btn" onclick="setTheme('queer')" data-theme="queer">Queer (obviously)</button>
             <button class="theme-btn reset" onclick="resetTheme()" data-theme="reset">reset</button>
-            <button class="theme-btn" onclick="setTheme('agender')" data-theme="agender">Gender-nah</button>
-            <button class="theme-btn" onclick="setTheme('asexual')" data-theme="asexual">My spAce</button>
-            <button class="theme-btn" onclick="setTheme('aromantic')" data-theme="aromantic">Aro but has a heart</button>
-            <button class="theme-btn" onclick="setTheme('nonbinary')" data-theme="nonbinary">Not Gonna Binary</button>
-            <button class="theme-btn" onclick="setTheme('genderfluid')" data-theme="genderfluid">drip drip</button>
-            <button class="theme-btn" onclick="setTheme('genderqueer')" data-theme="genderqueer">the Q in the G</button>
-            <button class="theme-btn" onclick="setTheme('intersex')" data-theme="intersex">inter-esting</button>
-            <button class="theme-btn" onclick="setTheme('demigirl')" data-theme="demigirl">grrrl</button>
-            <button class="theme-btn" onclick="setTheme('demiboy')" data-theme="demiboy">boi</button>
-            <button class="theme-btn" onclick="setTheme('queer')" data-theme="queer">All of us</button>
-            <button class="theme-btn reset" onclick="resetTheme()" data-theme="reset">✨ reset ✨</button>
         </div>
 
-        <!-- FABULOUS BUTTONS SECTION -->
+        <!-- FABULOUS BUTTONS - RENA, INGA EXTRA EMOJIS -->
         <div class="fabulous-buttons">
-            <button class="sparkle-button" id="extraSparklesBtn" onclick="triggerLaserRainbow()">
-                EXTRA EXTRA LASER SPARKLES
+            <button class="laser-button" id="laserRainbowBtn" onclick="triggerLaserRainbow()">
+                LASER RAINBOW
             </button>
-            <button class="ice-button" id="iceButton" onclick="triggerIceMode()">
-                F-ICE
-            </button>
+            <div class="ice-button-container">
+                <button class="ice-button" id="iceButton" onclick="triggerIceMode()">
+                    F*** ICE
+                </button>
+                <span class="ice-counter" id="iceCounter">0</span>
+            </div>
         </div>
 
-        <!-- Tools Grid -->
+        <!-- Tools Grid - REN, INGA EMOJIS PÅ KORTEN -->
         <div class="tools-grid">
             <!-- JPG to PNG -->
             <div class="tool-card" data-tool="image">
                 <h2 class="tool-title">JPG to PNG</h2>
-                <p class="tool-desc">Convert images, fight patriarchy</p>
+                <p class="tool-desc">Convert images with pride</p>
                 <button class="tool-button" onclick="window.location.href='pages/image.html'">
                     CONVERT
                 </button>
@@ -252,7 +370,7 @@
             <!-- Distance -->
             <div class="tool-card" data-tool="distance">
                 <h2 class="tool-title">DISTANCE</h2>
-                <p class="tool-desc">Why flacid footsies and incipid inches when you can have crisp mm clarity?</p>
+                <p class="tool-desc">imperial ↔ metric</p>
                 <button class="tool-button" onclick="window.location.href='pages/distance.html'">
                     CONVERT
                 </button>
@@ -261,7 +379,7 @@
             <!-- Weight -->
             <div class="tool-card" data-tool="weight">
                 <h2 class="tool-title">WEIGHT</h2>
-                <p class="tool-desc">In for a penny, in for a kilo</p>
+                <p class="tool-desc">lbs ↔ kg</p>
                 <button class="tool-button" onclick="window.location.href='pages/weight.html'">
                     CONVERT
                 </button>
@@ -270,25 +388,25 @@
             <!-- Calculator -->
             <div class="tool-card" data-tool="calculator">
                 <h2 class="tool-title">CALCULATOR</h2>
-                <p class="tool-desc">Math can be scary but this calc is kind! 831!</p>
+                <p class="tool-desc">add, subtract, multiply, divide</p>
                 <button class="tool-button" onclick="window.location.href='pages/calculator.html'">
                     OPEN
                 </button>
             </div>
 
-            <!-- Image Converter (duplicate? Let's keep one) -->
+            <!-- Image Converter (duplicate? kept for consistency) -->
             <div class="tool-card" data-tool="image">
                 <h2 class="tool-title">IMAGE</h2>
-                <p class="tool-desc">JPG → PNG (YOU JUST WANNA FIND THIS. HERE IT IS) </p>
+                <p class="tool-desc">JPG → PNG</p>
                 <button class="tool-button" onclick="window.location.href='pages/image.html'">
                     CONVERT
                 </button>
             </div>
 
-            <!-- TRUMP to GLITTER -->
+            <!-- TRUMP to GLITTER - Ballongen får vara kvar, den är viktig! -->
             <div class="tool-card trump-card" data-tool="fun">
                 <h2 class="tool-title">TRUMP → GLITTER</h2>
-                <p class="tool-desc">stay hopeful for a better world</p>
+                <p class="tool-desc">the only conversion that matters</p>
                 
                 <div class="balloon-container" id="trumpBalloon">
                     <div class="balloon">🎈</div>
@@ -297,9 +415,9 @@
             </div>
         </div>
 
-        <!-- FOOTER -->
+        <!-- FOOTER - REN, INGA EXTRA EMOJIS -->
         <footer class="site-footer">
-            <p>Made with love for humanity and community · sparkles for everyone</p>
+            <p>Made with 🌈 for the community · every conversion = sparkles</p>
             <p class="footer-small">
                 <a href="privacy.html">privacy</a> · 
                 <a href="terms.html">terms</a>
@@ -307,12 +425,16 @@
         </footer>
     </main>
 
-    <!-- Right Ad Column - CLEAN, NO EMOJI -->
+    <!-- Right Ad Column - REN, INGA EMOJIS -->
     <div class="ad-column right">
         <div class="ad-placeholder" data-ad="right">
             <!-- AdSense will go here -->
         </div>
     </div>
+
+    <!-- Theme ribbons -->
+    <div class="theme-ribbon ribbon-top"></div>
+    <div class="theme-ribbon ribbon-bottom"></div>
 
     <!-- Scripts -->
     <script src="js/main.js"></script>
@@ -347,7 +469,7 @@
             if (balloonContainer) {
                 balloonContainer.addEventListener('click', function() {
                     const balloon = this.querySelector('.balloon');
-                    balloon.style.transform = 'scale(1.6)';
+                    balloon.style.transform = 'scale(1.5)';
                     balloon.style.opacity = '0';
                     
                     if (window.triggerConfetti) {
@@ -365,23 +487,23 @@
             const savedTheme = localStorage.getItem('queerConvertTheme');
             if (savedTheme) {
                 setTheme(savedTheme);
+            } else {
+                // Initialize ice counter
+                const iceCounter = document.getElementById('iceCounter');
+                if (iceCounter) {
+                    iceCounter.textContent = '0';
+                }
             }
             
             setTimeout(() => window.triggerConfetti('low'), 500);
         });
 
-        // Theme switching - header only
+        // Theme switching
         function setTheme(theme) {
-            // Remove any existing theme class
             document.body.className = document.body.className.replace(/theme-\w+/g, '').trim();
-            
-            // Add new theme class
             document.body.classList.add('theme-' + theme);
-            
-            // Save to localStorage
             localStorage.setItem('queerConvertTheme', theme);
             
-            // Update active button states
             document.querySelectorAll('.theme-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
@@ -390,7 +512,6 @@
             window.triggerConfetti('low');
         }
         
-        // Reset theme
         function resetTheme() {
             document.body.className = document.body.className.replace(/theme-\w+/g, '').trim();
             localStorage.removeItem('queerConvertTheme');
