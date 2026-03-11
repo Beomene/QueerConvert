@@ -11,7 +11,7 @@
     
     <!-- Social meta -->
     <meta property="og:title" content="Queer Convert - tools with pride">
-    <meta property="og:description" content="Convert files, distances, weights... but never convert yourself. A queer-centered toolbox with sparkles & pride.">
+    <meta property="og:description" content="Convert files, distances, weights... but never convert yourself. A queer-centered toolbox.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://trinka.space/queer-convert/">
     
@@ -22,9 +22,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/main.css">
     
-    <!-- Extra styles for subtle theme buttons -->
+    <!-- Extra styles for refined theme buttons -->
     <style>
-        /* Theme Buttons Section - subtle and elegant */
+        /* Theme Buttons Section */
         .theme-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -34,8 +34,8 @@
         }
         
         .theme-btn {
-            background: var(--bg-secondary);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
             color: var(--text-secondary);
             padding: 0.5rem 1rem;
             border-radius: 30px;
@@ -43,14 +43,11 @@
             font-weight: 400;
             cursor: none;
             transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
-            letter-spacing: 0.3px;
         }
         
         .theme-btn:hover {
-            transform: translateY(-1px);
             color: var(--text-primary);
+            border-color: rgba(255,255,255,0.3);
         }
         
         .theme-btn.active {
@@ -59,109 +56,63 @@
             color: var(--text-primary);
         }
         
-        /* Theme-specific subtle accents - only borders and glows */
-        .theme-btn[data-theme="trans"].active {
+        /* Theme-specific header colors - ONLY the header band changes */
+        body.theme-trans .site-header {
+            background: linear-gradient(135deg, #5bcffb22, #f5a9b822);
+            border-bottom: 2px solid #5bcffb;
+        }
+        
+        body.theme-bi .site-header {
+            background: linear-gradient(135deg, #d6027022, #0038a822);
+            border-bottom: 2px solid #d60270;
+        }
+        
+        body.theme-pan .site-header {
+            background: linear-gradient(135deg, #ff218c22, #21b1ff22);
+            border-bottom: 2px solid #ff218c;
+        }
+        
+        body.theme-lesbian .site-header {
+            background: linear-gradient(135deg, #d52d0022, #a3026222);
+            border-bottom: 2px solid #d52d00;
+        }
+        
+        body.theme-gay .site-header {
+            background: linear-gradient(135deg, #078d7022, #5049cc22);
+            border-bottom: 2px solid #078d70;
+        }
+        
+        body.theme-poly .site-header {
+            background: linear-gradient(135deg, #15164722, #e8282022);
+            border-bottom: 2px solid #151647;
+        }
+        
+        /* Active theme button gets matching color */
+        body.theme-trans .theme-btn[data-theme="trans"].active {
             border-color: #5bcffb;
-            box-shadow: 0 0 12px #5bcffb66;
         }
-        .theme-btn[data-theme="bi"].active {
+        body.theme-bi .theme-btn[data-theme="bi"].active {
             border-color: #d60270;
-            box-shadow: 0 0 12px #d6027066;
         }
-        .theme-btn[data-theme="pan"].active {
+        body.theme-pan .theme-btn[data-theme="pan"].active {
             border-color: #ff218c;
-            box-shadow: 0 0 12px #ff218c66;
         }
-        .theme-btn[data-theme="lesbian"].active {
+        body.theme-lesbian .theme-btn[data-theme="lesbian"].active {
             border-color: #d52d00;
-            box-shadow: 0 0 12px #d52d0066;
         }
-        .theme-btn[data-theme="gay"].active {
+        body.theme-gay .theme-btn[data-theme="gay"].active {
             border-color: #078d70;
-            box-shadow: 0 0 12px #078d7066;
         }
-        .theme-btn[data-theme="poly"].active {
+        body.theme-poly .theme-btn[data-theme="poly"].active {
             border-color: #151647;
-            box-shadow: 0 0 12px #15164766;
         }
         
-        /* Theme color variables - subtle accents only */
-        body.theme-trans {
-            --rainbow-bar: linear-gradient(90deg, #5bcffb, #f5a9b8, #ffffff, #f5a9b8, #5bcffb);
-            --accent-primary: #5bcffb;
-            --accent-secondary: #f5a9b8;
-        }
-        
-        body.theme-bi {
-            --rainbow-bar: linear-gradient(90deg, #d60270, #9b4f96, #0038a8);
-            --accent-primary: #d60270;
-            --accent-secondary: #0038a8;
-        }
-        
-        body.theme-pan {
-            --rainbow-bar: linear-gradient(90deg, #ff218c, #ffd800, #21b1ff);
-            --accent-primary: #ff218c;
-            --accent-secondary: #21b1ff;
-        }
-        
-        body.theme-lesbian {
-            --rainbow-bar: linear-gradient(90deg, #d52d00, #ff9a56, #ffffff, #d362a4, #a30262);
-            --accent-primary: #d52d00;
-            --accent-secondary: #a30262;
-        }
-        
-        body.theme-gay {
-            --rainbow-bar: linear-gradient(90deg, #078d70, #26ceaa, #98e8c1, #7bade2, #5049cc);
-            --accent-primary: #078d70;
-            --accent-secondary: #5049cc;
-        }
-        
-        body.theme-poly {
-            --rainbow-bar: linear-gradient(90deg, #151647, #6784ff, #ffd159, #ff8b71, #e82820);
-            --accent-primary: #151647;
-            --accent-secondary: #e82820;
-        }
-        
-        /* Subtle theme applications */
-        body.theme-trans .tool-card,
-        body.theme-bi .tool-card,
-        body.theme-pan .tool-card,
-        body.theme-lesbian .tool-card,
-        body.theme-gay .tool-card,
-        body.theme-poly .tool-card {
-            border-top: 3px solid var(--accent-primary);
-        }
-        
-        body.theme-trans .tool-button:hover,
-        body.theme-bi .tool-button:hover,
-        body.theme-pan .tool-button:hover,
-        body.theme-lesbian .tool-button:hover,
-        body.theme-gay .tool-button:hover,
-        body.theme-poly .tool-button:hover {
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 15px var(--accent-primary);
-        }
-        
-        body.theme-trans .active,
-        body.theme-bi .active,
-        body.theme-pan .active,
-        body.theme-lesbian .active,
-        body.theme-gay .active,
-        body.theme-poly .active {
-            color: var(--accent-primary);
-        }
-        
-        /* Reset button stays subtle */
-        .theme-btn.reset {
-            border-color: rgba(255,255,255,0.1);
-        }
-        
+        /* Reset button */
         .theme-btn.reset.active {
             border-color: var(--text-secondary);
-            box-shadow: 0 0 12px rgba(255,255,255,0.3);
         }
         
-        /* Fabulous Buttons Section (existing) */
+        /* Fabulous Buttons Section */
         .fabulous-buttons {
             display: flex;
             gap: 1.5rem;
@@ -182,8 +133,6 @@
             font-weight: 600;
             cursor: none;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
             box-shadow: 0 0 20px rgba(255, 243, 176, 0.3);
             animation: pulse-glow 2s infinite alternate;
             min-width: 200px;
@@ -201,8 +150,6 @@
             font-weight: 600;
             cursor: none;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
             box-shadow: 0 0 20px rgba(176, 212, 255, 0.3);
             animation: pulse-glow-ice 2s infinite alternate;
             min-width: 200px;
@@ -220,16 +167,16 @@
     </style>
 </head>
 <body>
-    <!-- Left Ad Column -->
+    <!-- Left Ad Column - CLEAN, NO EMOJI -->
     <div class="ad-column left">
         <div class="ad-placeholder" data-ad="left">
-            <span>✨</span>
+            <!-- AdSense will go here -->
         </div>
     </div>
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Header -->
+        <!-- Header band - this changes color with themes -->
         <header class="site-header">
             <div class="logo-area">
                 <h1 class="site-title">Queer Convert</h1>
@@ -255,7 +202,7 @@
             </p>
         </div>
 
-        <!-- SUBTLE THEME BUTTONS - no emojis, just color names -->
+        <!-- THEME BUTTONS - your fabulous names -->
         <div class="theme-buttons">
             <button class="theme-btn" onclick="setTheme('trans')" data-theme="trans">represenT</button>
             <button class="theme-btn" onclick="setTheme('bi')" data-theme="bi">Omnivore</button>
@@ -269,10 +216,10 @@
         <!-- FABULOUS BUTTONS SECTION -->
         <div class="fabulous-buttons">
             <button class="sparkle-button" id="extraSparklesBtn" onclick="triggerExtraSparkles()">
-                ✨ EXTRA SPARKLES ✨
+                EXTRA SPARKLES
             </button>
             <button class="ice-button" id="iceButton" onclick="triggerIceMode()">
-                🧊 F*** ICE 🧊
+                F*** ICE
             </button>
         </div>
 
@@ -287,72 +234,46 @@
                 </button>
             </div>
 
-            <!-- Imperial to Metric -->
+            <!-- Distance -->
             <div class="tool-card" data-tool="distance">
-                <h2 class="tool-title">IMPERIAL to METRIC</h2>
-                <p class="tool-desc">Distance & weight, unified</p>
+                <h2 class="tool-title">DISTANCE</h2>
+                <p class="tool-desc">imperial ↔ metric</p>
                 <button class="tool-button" onclick="window.location.href='pages/distance.html'">
                     CONVERT
                 </button>
             </div>
 
-            <!-- LBS to KG -->
+            <!-- Weight -->
             <div class="tool-card" data-tool="weight">
-                <h2 class="tool-title">LBS to KG</h2>
-                <p class="tool-desc">Weight, but make it metric</p>
+                <h2 class="tool-title">WEIGHT</h2>
+                <p class="tool-desc">lbs ↔ kg</p>
                 <button class="tool-button" onclick="window.location.href='pages/weight.html'">
                     CONVERT
                 </button>
             </div>
 
-            <!-- Miles to KM -->
-            <div class="tool-card" data-tool="distance">
-                <h2 class="tool-title">MILES to KILOMETER</h2>
-                <p class="tool-desc">Distance, remeasured</p>
-                <button class="tool-button" onclick="window.location.href='pages/distance.html'">
-                    CONVERT
+            <!-- Calculator -->
+            <div class="tool-card" data-tool="calculator">
+                <h2 class="tool-title">CALCULATOR</h2>
+                <p class="tool-desc">add, subtract, multiply, divide</p>
+                <button class="tool-button" onclick="window.location.href='pages/calculator.html'">
+                    OPEN
                 </button>
             </div>
 
-            <!-- Calculator -->
-            <div class="tool-card calculator-card" data-tool="calculator">
-                <h2 class="tool-title">BASIC CALCULATOR</h2>
-                <p class="tool-desc">Add, subtract, multiply, divide</p>
-                
-                <div class="calculator-preview">
-                    <div class="calc-display" id="preview-display">0</div>
-                    <div class="calc-buttons">
-                        <button class="calc-btn" onclick="previewCalc('7')">7</button>
-                        <button class="calc-btn" onclick="previewCalc('8')">8</button>
-                        <button class="calc-btn" onclick="previewCalc('9')">9</button>
-                        <button class="calc-btn calc-operator" onclick="previewCalc('/')">÷</button>
-                        
-                        <button class="calc-btn" onclick="previewCalc('4')">4</button>
-                        <button class="calc-btn" onclick="previewCalc('5')">5</button>
-                        <button class="calc-btn" onclick="previewCalc('6')">6</button>
-                        <button class="calc-btn calc-operator" onclick="previewCalc('*')">×</button>
-                        
-                        <button class="calc-btn" onclick="previewCalc('1')">1</button>
-                        <button class="calc-btn" onclick="previewCalc('2')">2</button>
-                        <button class="calc-btn" onclick="previewCalc('3')">3</button>
-                        <button class="calc-btn calc-operator" onclick="previewCalc('-')">−</button>
-                        
-                        <button class="calc-btn" onclick="previewCalc('0')">0</button>
-                        <button class="calc-btn" onclick="previewCalc('.')">.</button>
-                        <button class="calc-btn calc-equals" onclick="previewCalc('=')">=</button>
-                        <button class="calc-btn calc-operator" onclick="previewCalc('+')">+</button>
-                    </div>
-                </div>
-                
-                <button class="tool-button full-width" onclick="window.location.href='pages/calculator.html'">
-                    OPEN CALCULATOR
+            <!-- Image Converter (duplicate? Let's keep one) -->
+            <div class="tool-card" data-tool="image">
+                <h2 class="tool-title">IMAGE</h2>
+                <p class="tool-desc">JPG → PNG</p>
+                <button class="tool-button" onclick="window.location.href='pages/image.html'">
+                    CONVERT
                 </button>
             </div>
 
             <!-- TRUMP to GLITTER -->
             <div class="tool-card trump-card" data-tool="fun">
-                <h2 class="tool-title">TRUMP to GLITTER</h2>
-                <p class="tool-desc">The only conversion that matters</p>
+                <h2 class="tool-title">TRUMP → GLITTER</h2>
+                <p class="tool-desc">the only conversion that matters</p>
                 
                 <div class="balloon-container" id="trumpBalloon">
                     <div class="balloon">🎈</div>
@@ -365,16 +286,16 @@
         <footer class="site-footer">
             <p>Made with 🌈 for the community · every conversion = sparkles</p>
             <p class="footer-small">
-                <a href="privacy.html" style="color: var(--rainbow-blue);">privacy</a> · 
-                <a href="terms.html" style="color: var(--rainbow-blue);">terms</a>
+                <a href="privacy.html">privacy</a> · 
+                <a href="terms.html">terms</a>
             </p>
         </footer>
     </main>
 
-    <!-- Right Ad Column -->
+    <!-- Right Ad Column - CLEAN, NO EMOJI -->
     <div class="ad-column right">
         <div class="ad-placeholder" data-ad="right">
-            <span>✨</span>
+            <!-- AdSense will go here -->
         </div>
     </div>
 
@@ -434,7 +355,7 @@
             setTimeout(() => window.triggerConfetti('low'), 500);
         });
 
-        // Theme switching - subtle version
+        // Theme switching - header only
         function setTheme(theme) {
             // Remove any existing theme class
             document.body.className = document.body.className.replace(/theme-\w+/g, '').trim();
@@ -451,7 +372,6 @@
             });
             document.querySelector(`.theme-btn[data-theme="${theme}"]`).classList.add('active');
             
-            // Subtle confetti
             window.triggerConfetti('low');
         }
         
