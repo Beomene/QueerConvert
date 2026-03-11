@@ -311,7 +311,7 @@ body.ultra-disco .tool-card {
 
 /* ===== AD COLUMNS ===== */
 .ad-column {
-    width: 25vw;
+    width: 30vw;
     min-height: 100vh;
     position: relative;
     z-index: 1;
@@ -323,7 +323,7 @@ body.ultra-disco .tool-card {
 
 /* ===== MAIN CONTENT ===== */
 .main-content {
-    width: 50vw;
+    width: 40vw;
     min-height: 100vh;
     padding: 2rem;
     position: relative;
