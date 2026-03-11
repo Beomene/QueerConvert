@@ -895,3 +895,14 @@ body.disco-mode .extra-sparkle {
     0%, 100% { transform: scale(1); box-shadow: 0 0 20px #ff0000; }
     50% { transform: scale(1.2); box-shadow: 0 0 40px #ffaa00; }
 }
+/* ===== LASER RAINBOW ANIMATIONS ===== */
+@keyframes fadeOut {
+    0% { opacity: 0.8; }
+    100% { opacity: 0; }
+}
+
+/* För extra starka lasrar - lägg till detta i slutet av din CSS */
+.laser-beam {
+    filter: brightness(2) saturate(3);
+    mix-blend-mode: screen;
+}
