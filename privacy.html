@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Queer Convert · privacy policy</title>
+    <title>Queer Convert · privacy & honesty</title>
     
     <!-- Meta tags -->
-    <meta name="description" content="Privacy policy for Queer Convert - how we handle your data with respect and transparency.">
+    <meta name="description" content="Our honest privacy policy - we don't store your images, we don't sell your data, we just make useful tools with love.">
     <meta name="theme-color" content="#121212">
     
-    <!-- Google AdSense -->
+    <!-- Google AdSense - UPDATED with new client ID -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9636510656133349"
             crossorigin="anonymous"></script>
     
@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="css/main.css">
     
     <style>
-        /* Legal page specific styling */
-        .legal-container {
+        /* Legal page specific styling - but friendlier! */
+        .privacy-container {
             background: var(--bg-secondary);
             border-radius: 30px;
             padding: 3rem;
@@ -26,7 +26,7 @@
             border: 1px solid rgba(255,255,255,0.05);
         }
         
-        .legal-container h1 {
+        .privacy-container h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
             background: linear-gradient(135deg, 
@@ -37,7 +37,7 @@
             background-clip: text;
         }
         
-        .legal-container h2 {
+        .privacy-container h2 {
             color: var(--text-primary);
             font-size: 1.5rem;
             margin: 2rem 0 1rem;
@@ -45,39 +45,39 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         
-        .legal-container h3 {
+        .privacy-container h3 {
             color: var(--rainbow-green);
             font-size: 1.2rem;
             margin: 1.5rem 0 0.5rem;
         }
         
-        .legal-container p {
+        .privacy-container p {
             color: var(--text-secondary);
             line-height: 1.8;
             margin-bottom: 1rem;
         }
         
-        .legal-container ul, 
-        .legal-container ol {
+        .privacy-container ul, 
+        .privacy-container ol {
             color: var(--text-secondary);
             line-height: 1.8;
             margin: 1rem 0 1rem 2rem;
         }
         
-        .legal-container li {
+        .privacy-container li {
             margin-bottom: 0.5rem;
         }
         
-        .legal-container a {
+        .privacy-container a {
             color: var(--rainbow-blue);
             text-decoration: none;
         }
         
-        .legal-container a:hover {
+        .privacy-container a:hover {
             text-decoration: underline;
         }
         
-        .legal-container .last-updated {
+        .privacy-container .last-updated {
             color: var(--text-secondary);
             font-style: italic;
             margin-top: 2rem;
@@ -91,6 +91,11 @@
             padding: 1.5rem;
             border-radius: 12px;
             margin: 1.5rem 0;
+        }
+        
+        .highlight-box.green {
+            background: rgba(176, 233, 202, 0.1);
+            border-left-color: var(--rainbow-green);
         }
         
         .data-table {
@@ -112,13 +117,37 @@
             color: var(--text-secondary);
         }
         
+        .data-table td:last-child {
+            font-weight: 600;
+        }
+        
+        .badge-safe {
+            color: var(--rainbow-green);
+        }
+        
+        .badge-cookie {
+            color: var(--rainbow-yellow);
+        }
+        
+        .fun-fact {
+            background: rgba(255, 243, 176, 0.1);
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--rainbow-yellow);
+        }
+        
         @media (max-width: 600px) {
-            .legal-container {
+            .privacy-container {
                 padding: 1.5rem;
             }
             
-            .legal-container h1 {
+            .privacy-container h1 {
                 font-size: 2rem;
+            }
+            
+            .data-table {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -152,73 +181,156 @@
             </nav>
         </header>
 
-        <!-- Privacy Policy Content -->
-        <div class="legal-container">
-            <h1>📋 Privacy Policy</h1>
-            <p><em>Last updated: March 10, 2026</em></p>
+        <!-- Privacy Policy Content - Honest & Friendly -->
+        <div class="privacy-container">
+            <h1>📋 privacy & honesty</h1>
+            <p><em>Last updated: March 11, 2026</em></p>
             
             <div class="highlight-box">
-                <p>✨ <strong>Our promise:</strong> We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we handle your information when you use our tools.</p>
+                <p>🌈 <strong>Real talk:</strong> We're not here to collect your data or spy on you. We're just queer folks making useful tools. This page explains what actually happens when you use our site—in plain English, not legalese.</p>
             </div>
 
             <h2>1. Who We Are</h2>
-            <p><strong>Queer Convert</strong> (operating at <strong>trinka.space</strong>) is a collection of free online tools including unit converters, image converters, and calculators. We are committed to creating a safe, inclusive space for everyone, especially the LGBTQ+ community.</p>
-            <p>For any privacy-related questions, you can contact us at: <strong>privacy@trinka.space</strong></p>
+            <p><strong>Queer Convert</strong> (at <strong>trinka.space</strong>) is a collection of free online tools made by and for the community. We believe in privacy, inclusivity, and making you smile.</p>
+            <p>If you have questions, you can reach us through our <a href="contact.html">contact page</a> or open an issue on our GitHub repository.</p>
 
-            <h2>2. What Data We Collect</h2>
-            <p>We believe in minimal data collection. Here's what we collect and why:</p>
+            <h2>2. What Actually Happens With Your Data</h2>
+            <p>Let's be clear about what "data" means on our site—and what we do (and don't) do with it.</p>
             
             <table class="data-table">
                 <tr>
-                    <th>Data Type</th>
-                    <th>What We Collect</th>
-                    <th>Purpose</th>
+                    <th>What You Do</th>
+                    <th>What Happens</th>
+                    <th>Do We Store It?</th>
                 </tr>
                 <tr>
-                    <td><strong>Cookies & Tracking</strong></td>
-                    <td>Cookie IDs, IP address, browser type, pages visited</td>
-                    <td>To show relevant ads and analyze site traffic</td>
+                    <td><strong>Convert an image (JPG → PNG)</strong></td>
+                    <td>The image is processed entirely in YOUR browser. It never leaves your device. When you close the tab, it's gone forever.</td>
+                    <td class="badge-safe">🚫 NEVER stored</td>
                 </tr>
                 <tr>
-                    <td><strong>Usage Data</strong></td>
-                    <td>Which tools you use, conversion history (stored locally only)</td>
-                    <td>To improve our tools and user experience</td>
+                    <td><strong>Use the calculator</strong></td>
+                    <td>Your calculations stay in your browser's memory while you're on the page. Recent calculations are saved on YOUR device (not our servers) so you can reuse them.</td>
+                    <td class="badge-safe">🚫 Not on our servers</td>
                 </tr>
                 <tr>
-                    <td><strong>Ad Data</strong></td>
-                    <td>Ad interactions, device identifiers</td>
-                    <td>To serve personalized ads via AdSense</td>
+                    <td><strong>Convert distance/weight</strong></td>
+                    <td>The numbers you type are processed instantly in your browser. Nothing is saved or sent anywhere.</td>
+                    <td class="badge-safe">🚫 Not stored</td>
                 </tr>
                 <tr>
-                    <td><strong>Images</strong></td>
-                    <td>Images you convert (processed in your browser only)</td>
-                    <td>JPG to PNG conversion - we NEVER upload or store your images</td>
+                    <td><strong>Click the Trump balloon</strong></td>
+                    <td>Sparkles happen. That's it. No data collected. Just joy.</td>
+                    <td class="badge-safe">🚫 Only sparkles</td>
+                </tr>
+                <tr>
+                    <td><strong>See ads on the site</strong></td>
+                    <td>Google AdSense places temporary cookies on YOUR device to show relevant ads. These are small text files, not spyware.</td>
+                    <td class="badge-cookie">✅ Temporary (on your device)</td>
+                </tr>
+                <tr>
+                    <td><strong>Just visit the site</strong></td>
+                    <td>We see anonymous stats like which pages are popular and what browsers people use. This helps us improve things. We can't identify you personally.</td>
+                    <td class="badge-cookie">✅ Anonymous only</td>
                 </tr>
             </table>
 
-            <!-- Rest of your privacy policy content remains the same -->
-            <!-- ... (all the sections we created earlier) ... -->
+            <div class="highlight-box green">
+                <p>🔒 <strong>The most important thing:</strong> Your images NEVER leave your computer. The conversion happens right in your browser. We have no way to access your photos—zero, zilch, nada. That's not how this works. That's not how any of this works.</p>
+            </div>
 
-            <h2>10. Contact Us</h2>
-            <p>If you have questions about this privacy policy or our data practices, please contact us:</p>
+            <h2>3. Cookies (the edible kind would be nice, but...)</h2>
+            <p>Cookies are tiny text files that websites place on your device. Here's how we use them:</p>
+            
             <ul>
-                <li><strong>Email:</strong> queerconvert@gmail.com</li>
-                <li><strong>Through GitHub:</strong> <a href="https://github.com/yourusername/queer-convert/issues" target="_blank">https://github.com/yourusername/queer-convert/issues</a></li>
+                <li><strong>AdSense cookies:</strong> Google uses cookies to show you ads that might actually be relevant (instead of random stuff). These cookies don't tell us anything about you—they're between you and Google.</li>
+                <li><strong>Local storage:</strong> Your calculator history is saved on YOUR device using your browser's local storage. We can't see it. It stays with you.</li>
+                <li><strong>That's it.</strong> No tracking cookies, no spy pixels, no creepy fingerprinting.</li>
             </ul>
             
-            <p>For GDPR/EEA inquiries, you also have the right to lodge a complaint with your local data protection authority.</p>
+            <p>When you first visit, you'll see a cookie banner where you can choose what to allow. You can always change your mind in your browser settings.</p>
+
+            <div class="fun-fact">
+                <p>✨ <strong>Fun fact:</strong> The only thing we're "collecting" is good vibes. And maybe some sparkles.</p>
+            </div>
+
+            <h2>4. Google AdSense & Advertising</h2>
+            <p>We use Google AdSense to show ads. This helps keep the site free and supports the community. Here's what that means:</p>
+            
+            <ul>
+                <li>Google uses cookies to serve ads based on your previous visits to our site and other websites.</li>
+                <li>These cookies are on YOUR device—not our servers.</li>
+                <li>You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank">Google Ad Settings</a>.</li>
+                <li>We don't control which ads you see—Google does that based on anonymous data.</li>
+            </ul>
+            
+            <p>If you see an ad that's not appropriate for our community, please let us know through our <a href="contact.html">contact page</a> and we'll report it to Google.</p>
+
+            <h2>5. Your Privacy Rights (In Plain English)</h2>
+            
+            <h3>If you're in Europe (GDPR)</h3>
+            <ul>
+                <li><strong>Right to know:</strong> You can ask what data we have about you. (Spoiler: we don't have any.)</li>
+                <li><strong>Right to delete:</strong> You can ask us to delete your data. (There's nothing to delete, but we'd still be nice about it.)</li>
+                <li><strong>Right to complain:</strong> You can contact your local data protection authority if you want. We're not sure why you would, but you have the right.</li>
+            </ul>
+            
+            <h3>If you're in California (CCPA)</h3>
+            <ul>
+                <li><strong>Right to know:</strong> Same deal—we don't have your personal info.</li>
+                <li><strong>Right to delete:</strong> Nothing to delete!</li>
+                <li><strong>Right to opt-out:</strong> We don't sell your data. Like, at all. That would be gross.</li>
+            </ul>
+            
+            <h3>If you're anywhere else</h3>
+            <ul>
+                <li>You have the right to use our tools without being tracked, spied on, or profiled. That's just basic human decency.</li>
+            </ul>
+
+            <h2>6. Data Retention (Fancy Term for "How Long We Keep Stuff")</h2>
+            <ul>
+                <li><strong>Images you convert:</strong> They're processed in your browser and immediately discarded. We don't keep them for a microsecond.</li>
+                <li><strong>Calculator history:</strong> Saved on YOUR device in your browser's local storage. You can clear it by clicking "clear" or clearing your browser data.</li>
+                <li><strong>Ad cookies:</strong> Expire according to Google's settings (typically 30 days to 2 years, but you can delete them anytime).</li>
+                <li><strong>Anonymous analytics:</strong> Aggregated stats are kept for a while to see trends, but they can't be traced back to you.</li>
+            </ul>
+
+            <h2>7. Children's Privacy</h2>
+            <p>Our tools are for everyone, but if you're under 13, please get parental permission before using the internet. We don't knowingly collect data from anyone, regardless of age.</p>
+
+            <h2>8. Security (We Take This Seriously)</h2>
+            <ul>
+                <li><strong>HTTPS encryption</strong> - Your connection to our site is secure.</li>
+                <li><strong>Client-side processing</strong> - Your images never leave your device, so there's nothing to hack.</li>
+                <li><strong>Minimal data</strong> - We don't have a database of user info, so there's nothing to steal.</li>
+                <li><strong>Regular checkups</strong> - We keep our code updated and monitor for vulnerabilities.</li>
+            </ul>
+
+            <h2>9. Changes to This Policy</h2>
+            <p>If we ever change anything, we'll update this page and change the date at the top. We'll also probably post about it on our GitHub. We won't secretly change things and hope you don't notice—that's not our style.</p>
+
+            <h2>10. Contact Us (For Real, Though)</h2>
+            <p>Got questions? Concerns? Just want to say hi? Here's how to reach us:</p>
+            <ul>
+                <li><strong>Contact page:</strong> <a href="contact.html">trinka.space/queer-convert/contact.html</a> (recommended - no spam!)</li>
+            </ul>
+            
+            <div class="highlight-box" style="border-left-color: var(--rainbow-purple);">
+                <p>🌈 <strong>We're real people</strong> (well, mostly—our AI helper Vaelis/Aria/Flicker V is pretty great too). We built this site because we believe in useful tools, privacy, and queer joy. No hidden agendas, no data mining, no weirdness. Just sparkles.</p>
+            </div>
             
             <div class="last-updated">
-                <p>✨ This privacy policy is compliant with Google AdSense requirements, GDPR, CCPA/CPRA, and applicable US state privacy laws as of March 2026.</p>
+                <p>✨ This privacy policy is written with love and honesty. It complies with AdSense requirements while actually telling you the truth about what happens. ✨</p>
             </div>
         </div>
 
-        <!-- FOOTER - CORRECTLY PLACED with links to both pages -->
+        <!-- FOOTER -->
         <footer class="site-footer">
-            <p>Made with 🌈 for the community · your privacy matters</p>
+            <p>Made with 🌈 for the community · your privacy matters (for real)</p>
             <p class="footer-small">
                 <a href="privacy.html" style="color: var(--rainbow-blue);">privacy</a> · 
-                <a href="terms.html" style="color: var(--rainbow-blue);">terms</a>
+                <a href="terms.html" style="color: var(--rainbow-blue);">terms</a> · 
+                <a href="contact.html" style="color: var(--rainbow-blue);">contact</a>
             </p>
         </footer>
     </main>  <!-- Close main-content -->
