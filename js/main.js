@@ -70,17 +70,16 @@ class GlitterCursor {
         } else if (bodyClass.includes('theme-queer')) {
             colors = ['#e0147c', '#ffffff', '#3fa63f'];
         }
-    
-    // Uppdatera cursorn med färgerna
-    this.center.style.setProperty('--color-1', colors[0]);
-    this.center.style.setProperty('--color-2', colors[1] || colors[0]);
-    this.center.style.setProperty('--color-3', colors[2] || colors[0]);
-}
-        }
         
+        // Uppdatera cursorn med färgerna
         this.center.style.setProperty('--color-1', colors[0]);
-        this.center.style.setProperty('--color-2', colors[1]);
-        this.center.style.setProperty('--color-3', colors[2]);
+        this.center.style.setProperty('--color-2', colors[1] || colors[0]);
+        this.center.style.setProperty('--color-3', colors[2] || colors[0]);
+        
+        // Uppdatera ribbons om de finns
+        document.documentElement.style.setProperty('--color-1', colors[0]);
+        document.documentElement.style.setProperty('--color-2', colors[1] || colors[0]);
+        document.documentElement.style.setProperty('--color-3', colors[2] || colors[0]);
     }
     
     onMouseMove(e) {
@@ -295,6 +294,7 @@ window.triggerIceMode = function() {
         }
     }
 };
+
 // ===== INITIALIZE =====
 document.addEventListener('DOMContentLoaded', () => {
     new GlitterCursor();
