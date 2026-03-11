@@ -65,8 +65,8 @@ class ConfettiManager {
             confetti.style.position = 'fixed';
             confetti.style.left = x + 'px';
             confetti.style.top = y + 'px';
-            confetti.style.width = '8px';
-            confetti.style.height = '8px';
+            confetti.style.width = '6px';
+            confetti.style.height = '6px';
             confetti.style.background = this.colors[Math.floor(Math.random() * this.colors.length)];
             confetti.style.borderRadius = '50%';
             confetti.style.pointerEvents = 'none';
