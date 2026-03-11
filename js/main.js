@@ -237,11 +237,11 @@ window.triggerLaserRainbow = function() {
             band.className = 'rainbow-band';
             
             // Slumpmässig startposition (kan börja utanför skärmen)
-            const startX = -20 + Math.random() * 140;
-            const startY = -20 + Math.random() * 140;
+            const startX = -20 + Math.random() * 100;
+            const startY = -20 + Math.random() * 100;
             
             // Slumpmässig längd (10-50% av skärmen)
-            const length = 10 + Math.random() * 40;
+            const length = 10 + Math.random() * 20;
             
             // Slumpmässig rotation (0-360 grader)
             const rotation = Math.random() * 360;
@@ -266,19 +266,19 @@ window.triggerLaserRainbow = function() {
             band.style.left = startX + '%';
             band.style.top = startY + '%';
             band.style.width = length + 'vw';
-            band.style.height = '6px'; // Tjocklek
+            band.style.height = '4px'; // Tjocklek
             band.style.background = `linear-gradient(${gradientDirection}, ${gradientStops.join(', ')})`;
             band.style.transform = `rotate(${rotation}deg)`;
             band.style.transformOrigin = 'center center';
-            band.style.boxShadow = `0 0 40px ${bandColors[0]}, 0 0 80px ${bandColors[bandColors.length-1]}`;
+            band.style.boxShadow = `0 0 40px ${bandColors[0]}, 0 0 90px ${bandColors[bandColors.length-1]}`;
             band.style.pointerEvents = 'none';
             band.style.zIndex = '9999';
-            band.style.opacity = '0.9';
-            band.style.filter = 'blur(2px)';
+            band.style.opacity = '0.99';
+            band.style.filter = 'blur(3px)';
             band.style.mixBlendMode = 'screen';
             
             // Animera bandet - studsande rörelse!
-            const duration = 4; // 4 sekunder
+            const duration = 2; // 2 sekunder
             
             // Skapa en kaotisk bana med 3-5 punkter
             const points = [];
@@ -289,7 +289,7 @@ window.triggerLaserRainbow = function() {
             
             for (let j = 0; j < pointCount; j++) {
                 // Studsa i olika riktningar
-                currentX += (Math.random() - 0.5) * 80;
+                currentX += (Math.random() - 0.5) * 40;
                 currentY += (Math.random() - 0.5) * 80;
                 
                 // Håll inom rimliga gränser (kan gå utanför, det är coolt)
@@ -297,7 +297,7 @@ window.triggerLaserRainbow = function() {
                     x: currentX,
                     y: currentY,
                     rotate: rotation + (Math.random() - 0.5) * 180,
-                    scale: 0.8 + Math.random() * 0.7
+                    scale: 0.5 + Math.random() * 0.5
                 });
             }
             
@@ -314,7 +314,7 @@ window.triggerLaserRainbow = function() {
                     top: ${startY}%;
                     transform: rotate(${rotation}deg) scale(1);
                     opacity: 0;
-                    box-shadow: 0 0 20px ${bandColors[0]};
+                    box-shadow: 0 0 30px ${bandColors[0]};
                 }
             `;
             
