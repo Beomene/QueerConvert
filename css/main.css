@@ -138,6 +138,8 @@ body {
     100% { transform: translate(-2%, -2%) scale(1.05); }
 }
 
+/* Update this section in main.css around line 100 */
+
 /* ===== AD COLUMNS ===== */
 .ad-column {
     width: 20vw;
@@ -154,12 +156,8 @@ body {
     height: 600px;
     background: var(--bg-secondary);
     border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-secondary);
-    font-size: 2rem;
     border: 1px dashed rgba(255, 255, 255, 0.1);
+    /* No emoji, just empty space for ads */
 }
 
 /* ===== MAIN CONTENT ===== */
