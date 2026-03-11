@@ -159,179 +159,259 @@ class ParallaxBackground {
     }
 }
 
-// ===== LASER RAINBOW =====
+// ===== UPPDATERAD CONFETTI - SNABBARE FALL! =====
+window.triggerConfetti = function(intensity = 'medium') {
+    const colors = [
+        '#FFB3B3', '#FFC9A2', '#FFF6B0', 
+        '#B0E9CA', '#B0D4FF', '#D9B0FF'
+    ];
+    
+    let count = 50;
+    if (intensity === 'low') count = 25;
+    if (intensity === 'medium') count = 50;
+    if (intensity === 'high') count = 100;
+    if (intensity === 'fabulous') count = 150;
+    
+    for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.style.position = 'fixed';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = -20 + 'px';
+            confetti.style.width = Math.random() * 15 + 5 + 'px';
+            confetti.style.height = Math.random() * 15 + 5 + 'px';
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+            confetti.style.pointerEvents = 'none';
+            confetti.style.zIndex = '9999';
+            confetti.style.boxShadow = '0 0 10px currentColor';
+            confetti.style.animation = `fall ${1 + Math.random() * 1.5}s linear forwards`; // SNABBARE!
+            
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 3000);
+        }, i * 15); // Tätare intervall
+    }
+};
+
+// Add keyframe animation for confetti
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fall {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(100vh) rotate(720deg);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+// ===== LASER RAINBOW - STUDsANDE, LYSANDE BAND =====
 window.triggerLaserRainbow = function() {
     if (window.triggerConfetti) {
         window.triggerConfetti('fabulous');
     }
     
+    // Färgpalett - pastell, starka, och svart/vit/grå
     const colors = [
-        '#FF3366', '#FF9933', '#FFCC33', 
-        '#33FF66', '#33FFCC', '#3366FF',
-        '#9933FF', '#FF33CC', '#FF6633'
+        // Pasteller (mjuka, ljusa)
+        '#FFB3B3', '#FFC9A2', '#FFF6B0', '#B0E9CA', '#B0D4FF', '#D9B0FF',
+        // Vita och ljusa
+        '#FFFFFF', '#FFF0F0', '#FFF9E6', '#F0FFF0', '#F0F0FF',
+        // Starka neon (enstaka)
+        '#FF3366', '#FF9933', '#33FF66', '#3366FF', '#9933FF',
+        // Svarta, gråa, vita (monokroma band)
+        '#FFFFFF', '#E0E0E0', '#C0C0C0', '#A0A0A0', '#808080', '#606060', '#404040', '#202020', '#000000'
     ];
     
-    const laserCount = 25;
+    const bandCount = 20; // 20 studsande band
     
-    for (let i = 0; i < laserCount; i++) {
+    for (let i = 0; i < bandCount; i++) {
         setTimeout(() => {
-            const startX = Math.random() * 120 - 10;
-            const startY = Math.random() * 120 - 10;
+            // Skapa ett långt band
+            const band = document.createElement('div');
+            band.className = 'rainbow-band';
             
-            const controlPoints = [];
+            // Slumpmässig startposition (kan börja utanför skärmen)
+            const startX = -20 + Math.random() * 140;
+            const startY = -20 + Math.random() * 140;
+            
+            // Slumpmässig längd (10-50% av skärmen)
+            const length = 10 + Math.random() * 40;
+            
+            // Slumpmässig rotation (0-360 grader)
+            const rotation = Math.random() * 360;
+            
+            // Välj 2-6 färger för detta band
+            const bandColors = [];
+            const colorCount = 2 + Math.floor(Math.random() * 5);
+            for (let j = 0; j < colorCount; j++) {
+                bandColors.push(colors[Math.floor(Math.random() * colors.length)]);
+            }
+            
+            // Skapa gradient - olika riktningar för variation
+            const gradientDirection = Math.random() > 0.5 ? '90deg' : '45deg';
+            const gradientStops = [];
+            for (let j = 0; j < bandColors.length; j++) {
+                const pos = (j / (bandColors.length - 1)) * 100;
+                gradientStops.push(`${bandColors[j]} ${pos}%`);
+            }
+            
+            // Bandet är en lång rektangel
+            band.style.position = 'fixed';
+            band.style.left = startX + '%';
+            band.style.top = startY + '%';
+            band.style.width = length + 'vw';
+            band.style.height = '6px'; // Tjocklek
+            band.style.background = `linear-gradient(${gradientDirection}, ${gradientStops.join(', ')})`;
+            band.style.transform = `rotate(${rotation}deg)`;
+            band.style.transformOrigin = 'center center';
+            band.style.boxShadow = `0 0 40px ${bandColors[0]}, 0 0 80px ${bandColors[bandColors.length-1]}`;
+            band.style.pointerEvents = 'none';
+            band.style.zIndex = '9999';
+            band.style.opacity = '0.9';
+            band.style.filter = 'blur(2px)';
+            band.style.mixBlendMode = 'screen';
+            
+            // Animera bandet - studsande rörelse!
+            const duration = 4; // 4 sekunder
+            
+            // Skapa en kaotisk bana med 3-5 punkter
+            const points = [];
             const pointCount = 3 + Math.floor(Math.random() * 3);
             
+            let currentX = startX;
+            let currentY = startY;
+            
             for (let j = 0; j < pointCount; j++) {
-                controlPoints.push({
-                    x: Math.random() * 120 - 10,
-                    y: Math.random() * 120 - 10
+                // Studsa i olika riktningar
+                currentX += (Math.random() - 0.5) * 80;
+                currentY += (Math.random() - 0.5) * 80;
+                
+                // Håll inom rimliga gränser (kan gå utanför, det är coolt)
+                points.push({
+                    x: currentX,
+                    y: currentY,
+                    rotate: rotation + (Math.random() - 0.5) * 180,
+                    scale: 0.8 + Math.random() * 0.7
                 });
             }
             
-            const endX = Math.random() * 120 - 10;
-            const endY = Math.random() * 120 - 10;
+            const bandId = 'band-' + Date.now() + '-' + i;
+            band.setAttribute('data-band', bandId);
             
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            const thickness = 2 + Math.random() * 5;
-            const duration = 4;
+            // Bygg keyframes med alla punkter
+            let keyframeText = '';
             
-            const laser = document.createElement('div');
-            laser.className = 'laser-beam';
-            laser.style.position = 'fixed';
-            laser.style.left = startX + '%';
-            laser.style.top = startY + '%';
-            laser.style.width = '5';
-            laser.style.height = '3';
-            laser.style.background = 'transparent';
-            llaser.style.boxShadow = `0 0 10px ${color}, 0 0 80px ${color}, 0 0 120px ${color}`;
-            laser.style.pointerEvents = 'none';
-            laser.style.zIndex = '9999';
-            laser.style.opacity = '0.9';
+            // Start (0%)
+            keyframeText += `
+                0% {
+                    left: ${startX}%;
+                    top: ${startY}%;
+                    transform: rotate(${rotation}deg) scale(1);
+                    opacity: 0;
+                    box-shadow: 0 0 20px ${bandColors[0]};
+                }
+            `;
             
-            const trail = document.createElement('div');
-            trail.className = 'laser-trail';
-            trail.style.position = 'fixed';
-            trail.style.left = startX + '%';
-            trail.style.top = startY + '%';
-            trail.style.width = '3';
-            trail.style.height = '10';
-            trail.style.background = 'transparent';
-            trail.style.boxShadow = `0 0 40px ${color}, 0 0 80px ${color}, 0 0 180px ${color}`;
-            trail.style.pointerEvents = 'none';
-            trail.style.zIndex = '9998';
-            trail.style.opacity = '0.9';
-            trail.style.filter = 'blur(4px)';
-            
-            const style = document.createElement('style');
-            const laserId = 'laser-' + Date.now() + '-' + i;
-            const trailId = 'trail-' + Date.now() + '-' + i;
-            
-            laser.setAttribute('data-laser', laserId);
-            trail.setAttribute('data-trail', trailId);
-            
-            let keyframePoints = '';
-            let trailKeyframePoints = '';
-            
-            keyframePoints += `0% { left: ${startX}%; top: ${startY}%; width: 0; height: 0; opacity: 0; }`;
-            trailKeyframePoints += `0% { left: ${startX}%; top: ${startY}%; width: 0; height: 0; opacity: 0; }`;
-            
-            const totalSteps = pointCount + 2;
-            for (let step = 1; step <= pointCount; step++) {
-                const point = controlPoints[step - 1];
-                const percent = (step / totalSteps) * 100;
-                keyframePoints += `
-                    ${percent}% {
-                        left: ${point.x}%;
-                        top: ${point.y}%;
-                        width: ${thickness}px;
-                        height: ${thickness}px;
+            // Första punkten (20%)
+            if (points.length > 0) {
+                keyframeText += `
+                    20% {
+                        left: ${points[0].x}%;
+                        top: ${points[0].y}%;
+                        transform: rotate(${points[0].rotate}deg) scale(${points[0].scale});
                         opacity: 1;
-                        box-shadow: 0 0 40px ${color}, 0 0 80px ${color};
-                    }
-                `;
-                trailKeyframePoints += `
-                    ${percent}% {
-                        left: ${point.x}%;
-                        top: ${point.y}%;
-                        width: ${thickness * 3}px;
-                        height: ${thickness * 3}px;
-                        opacity: 0.6;
-                        box-shadow: 0 0 60px ${color}, 0 0 120px ${color};
+                        box-shadow: 0 0 60px ${bandColors[0]}, 0 0 120px ${bandColors[bandColors.length-1]};
                     }
                 `;
             }
             
-            const finalPercent = 95;
-            keyframePoints += `
-                ${finalPercent}% {
-                    left: ${endX}%;
-                    top: ${endY}%;
-                    width: ${thickness}px;
-                    height: ${thickness}px;
-                    opacity: 1;
-                    box-shadow: 0 0 40px ${color}, 0 0 80px ${color};
-                }
-                100% {
-                    left: ${endX}%;
-                    top: ${endY}%;
-                    width: 0;
-                    height: 0;
-                    opacity: 0;
-                    box-shadow: 0 0 70px ${color};
-                }
-            `;
+            // Andra punkten (40%)
+            if (points.length > 1) {
+                keyframeText += `
+                    40% {
+                        left: ${points[1].x}%;
+                        top: ${points[1].y}%;
+                        transform: rotate(${points[1].rotate}deg) scale(${points[1].scale});
+                        opacity: 1;
+                        box-shadow: 0 0 80px ${bandColors[0]}, 0 0 160px ${bandColors[bandColors.length-1]};
+                    }
+                `;
+            }
             
-            trailKeyframePoints += `
-                ${finalPercent}% {
-                    left: ${endX}%;
-                    top: ${endY}%;
-                    width: ${thickness * 4}px;
-                    height: ${thickness * 4}px;
-                    opacity: 0.3;
-                    box-shadow: 0 0 80px ${color}, 0 0 160px ${color};
-                }
+            // Tredje punkten (60%)
+            if (points.length > 2) {
+                keyframeText += `
+                    60% {
+                        left: ${points[2].x}%;
+                        top: ${points[2].y}%;
+                        transform: rotate(${points[2].rotate}deg) scale(${points[2].scale});
+                        opacity: 1;
+                        box-shadow: 0 0 100px ${bandColors[0]}, 0 0 200px ${bandColors[bandColors.length-1]};
+                    }
+                `;
+            }
+            
+            // Fjärde punkten (80%)
+            if (points.length > 3) {
+                keyframeText += `
+                    80% {
+                        left: ${points[3].x}%;
+                        top: ${points[3].y}%;
+                        transform: rotate(${points[3].rotate}deg) scale(${points[3].scale});
+                        opacity: 0.8;
+                        box-shadow: 0 0 60px ${bandColors[0]}, 0 0 120px ${bandColors[bandColors.length-1]};
+                    }
+                `;
+            }
+            
+            // Slut (100%) - försvinner
+            const endX = points.length > 0 ? points[points.length-1].x + (Math.random() - 0.5) * 40 : startX + (Math.random() - 0.5) * 60;
+            const endY = points.length > 0 ? points[points.length-1].y + (Math.random() - 0.5) * 40 : startY + (Math.random() - 0.5) * 60;
+            
+            keyframeText += `
                 100% {
                     left: ${endX}%;
                     top: ${endY}%;
-                    width: 0;
-                    height: 0;
+                    transform: rotate(${rotation + (Math.random() - 0.5) * 360}deg) scale(0.5);
                     opacity: 0;
+                    box-shadow: 0 0 20px ${bandColors[0]};
                 }
             `;
             
             const keyframes = `
-                @keyframes laser-${laserId} {
-                    ${keyframePoints}
-                }
-                @keyframes trail-${trailId} {
-                    ${trailKeyframePoints}
+                @keyframes band-${bandId} {
+                    ${keyframeText}
                 }
             `;
             
+            const style = document.createElement('style');
             style.textContent = keyframes;
             document.head.appendChild(style);
             
-            laser.style.animation = `laser-${laserId} ${duration}s ease-out forwards`;
-            trail.style.animation = `trail-${trailId} ${duration}s ease-out forwards`;
+            band.style.animation = `band-${bandId} ${duration}s ease-in-out forwards`;
             
-            document.body.appendChild(laser);
-            document.body.appendChild(trail);
+            document.body.appendChild(band);
             
             setTimeout(() => {
-                laser.remove();
-                trail.remove();
+                band.remove();
                 style.remove();
             }, duration * 1000 + 200);
             
-        }, i * 80);
+        }, i * 60); // 60ms mellanrum
     }
     
+    // Gör knappen glad
     const btn = document.getElementById('laserRainbowBtn');
     if (btn) {
         btn.style.transform = 'scale(1.1)';
-        btn.style.background = 'linear-gradient(135deg, #FF3366, #FF9933, #FFCC33, #33FF66, #3366FF, #9933FF)';
+        btn.style.background = 'linear-gradient(135deg, #FFB3B3, #FFC9A2, #FFF6B0, #B0E9CA, #B0D4FF, #D9B0FF, #FF3366, #000000)';
         btn.style.color = '#FFFFFF';
-        btn.style.transition = 'all 0.3s ease';
         
         setTimeout(() => {
             btn.style.transform = 'scale(1)';
@@ -341,24 +421,37 @@ window.triggerLaserRainbow = function() {
     }
 };
 
-// ===== F*** ICE FUNKTION MED PINK EFFEKTER, CHOCKVÅGOR OCH BEAT =====
-let discoInterval;
-let isDiscoMode = false;
-let iceClickCount = 0;
-let discoTimeout;
-let beatInterval;
-
-// Bright pink färger
+// ===== PINK CONFETTI FÖR ICE =====
 const PINK_COLORS = [
-    '#FF1493', // Deep Pink
-    '#FF69B4', // Hot Pink
-    '#FF00FF', // Magenta
-    '#DA70D6', // Orchid
-    '#FF007F', // Rose
-    '#FF218C', // Stark pink
-    '#FF33CC', // Neon pink
-    '#FF0099'  // Stark magenta
+    '#FF1493', '#FF69B4', '#FF00FF', 
+    '#DA70D6', '#FF007F', '#FF218C',
+    '#FF33CC', '#FF0099'
 ];
+
+window.triggerPinkConfetti = function(intensity = 'medium') {
+    let count = intensity === 'low' ? 20 : intensity === 'medium' ? 40 : 80;
+    
+    for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.style.position = 'fixed';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = -20 + 'px';
+            confetti.style.width = Math.random() * 10 + 3 + 'px';
+            confetti.style.height = Math.random() * 10 + 3 + 'px';
+            confetti.style.background = PINK_COLORS[Math.floor(Math.random() * PINK_COLORS.length)];
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+            confetti.style.pointerEvents = 'none';
+            confetti.style.zIndex = '9999';
+            confetti.style.boxShadow = '0 0 15px currentColor';
+            confetti.style.animation = `fall ${1 + Math.random() * 1.5}s linear forwards`; // SNABBARE!
+            
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 3000);
+        }, i * 15);
+    }
+};
 
 // ===== CHOCKVÅGOR =====
 function createShockwave() {
@@ -382,7 +475,7 @@ function createShockwave() {
     setTimeout(() => shockwave.remove(), 1000);
 }
 
-// ===== ICE-EFFEKTER - BRIGHT PINK! =====
+// ===== ICE-EFFEKTER =====
 function createIceEffects(count = 15) {
     for (let i = 0; i < count; i++) {
         setTimeout(() => {
@@ -393,7 +486,6 @@ function createIceEffects(count = 15) {
             
             const shape = Math.random();
             if (shape < 0.3) {
-                // Pink kristall
                 ice.style.width = '6px';
                 ice.style.height = '6px';
                 ice.style.background = 'transparent';
@@ -401,7 +493,6 @@ function createIceEffects(count = 15) {
                 ice.style.boxShadow = `0 0 15px ${pinkColor}`;
                 ice.style.transform = `rotate(${Math.random() * 360}deg)`;
             } else if (shape < 0.6) {
-                // Pink flinga
                 ice.style.width = '3px';
                 ice.style.height = '16px';
                 ice.style.background = `linear-gradient(to bottom, ${pinkColor}, #FF69B4, ${pinkColor})`;
@@ -409,7 +500,6 @@ function createIceEffects(count = 15) {
                 ice.style.boxShadow = `0 0 15px ${pinkColor}`;
                 ice.style.transform = `rotate(${Math.random() * 360}deg)`;
             } else {
-                // Pink bit
                 ice.style.width = '10px';
                 ice.style.height = '10px';
                 ice.style.background = pinkColor;
@@ -431,44 +521,16 @@ function createIceEffects(count = 15) {
     }
 }
 
-// ===== PINK CONFETTI =====
-window.triggerPinkConfetti = function(intensity = 'medium') {
-    let count = intensity === 'low' ? 20 : intensity === 'medium' ? 40 : 80;
-    
-    for (let i = 0; i < count; i++) {
-        setTimeout(() => {
-            const confetti = document.createElement('div');
-            confetti.style.position = 'fixed';
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.top = -20 + 'px';
-            confetti.style.width = Math.random() * 10 + 3 + 'px';
-            confetti.style.height = Math.random() * 10 + 3 + 'px';
-            confetti.style.background = PINK_COLORS[Math.floor(Math.random() * PINK_COLORS.length)];
-            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-            confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-            confetti.style.pointerEvents = 'none';
-            confetti.style.zIndex = '9999';
-            confetti.style.boxShadow = '0 0 15px currentColor';
-            confetti.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
-            
-            document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 5000);
-        }, i * 15);
-    }
-};
-
 // ===== BEAT-EFFEKT FÖR DISCO =====
+let beatInterval;
+
 function startBeat() {
     if (beatInterval) clearInterval(beatInterval);
     
     beatInterval = setInterval(() => {
-        // Skapa en puls varje halvsekund
         createShockwave();
-        
-        // Skapa extra pink confetti på varje beat
         window.triggerPinkConfetti('low');
         
-        // Pulsa på knappen
         const iceBtn = document.getElementById('iceButton');
         if (iceBtn) {
             iceBtn.style.transform = 'scale(1.05)';
@@ -478,7 +540,7 @@ function startBeat() {
                 iceBtn.style.boxShadow = '0 0 20px #FF1493';
             }, 200);
         }
-    }, 500); // Beat varje halvsekund
+    }, 500);
 }
 
 function stopBeat() {
@@ -489,34 +551,32 @@ function stopBeat() {
 }
 
 // ===== F*** ICE FUNKTION =====
+let discoInterval;
+let isDiscoMode = false;
+let iceClickCount = 0;
+
 window.triggerIceMode = function() {
     const body = document.body;
     const iceBtn = document.getElementById('iceButton');
     const iceCounter = document.getElementById('iceCounter');
     
-    // ÖKA COUNTER!
     iceClickCount++;
     iceCounter.textContent = iceClickCount;
     localStorage.setItem('iceClickCount', iceClickCount);
     
-    // Skapa PINK ice-effekter och chockvågor
     createIceEffects(15);
     createShockwave();
     
-    // Om vi når 999, starta UNIK DISCO-EFFEKT i 10 sekunder
     if (iceClickCount >= 999) {
         iceClickCount = 0;
         iceCounter.textContent = iceClickCount;
         localStorage.setItem('iceClickCount', iceClickCount);
         
-        // Starta EXTRA DISCO i 10 sekunder
         body.classList.add('disco-mode');
         body.classList.add('ultra-disco');
         
-        // Starta beat!
         startBeat();
         
-        // Skapa massor med pink effekter
         for (let i = 0; i < 20; i++) {
             setTimeout(() => {
                 createIceEffects(20);
@@ -525,7 +585,6 @@ window.triggerIceMode = function() {
             }, i * 200);
         }
         
-        // Stäng av efter 10 sekunder
         setTimeout(() => {
             body.classList.remove('disco-mode');
             body.classList.remove('ultra-disco');
@@ -535,7 +594,6 @@ window.triggerIceMode = function() {
         return;
     }
     
-    // Normal F*** ICE-funktionalitet
     if (!isDiscoMode) {
         isDiscoMode = true;
         body.classList.add('disco-mode');
@@ -544,7 +602,6 @@ window.triggerIceMode = function() {
             iceBtn.innerHTML = 'F-ICE (ON)';
         }
         
-        // Starta beat i disco mode
         startBeat();
         
         discoInterval = setInterval(() => {
@@ -564,10 +621,8 @@ window.triggerIceMode = function() {
             clearInterval(discoInterval);
         }
         
-        // Stoppa beat
         stopBeat();
         
-        // Stor avslutning
         for (let i = 0; i < 5; i++) {
             setTimeout(() => {
                 window.triggerPinkConfetti('high');
@@ -577,6 +632,51 @@ window.triggerIceMode = function() {
         }
     }
 };
+
+// ===== SHOCKWAVE STYLES =====
+const shockwaveStyle = document.createElement('style');
+shockwaveStyle.textContent = `
+    @keyframes shockwave {
+        0% {
+            width: 10px;
+            height: 10px;
+            opacity: 1;
+            border-width: 3px;
+        }
+        100% {
+            width: 500px;
+            height: 500px;
+            opacity: 0;
+            border-width: 1px;
+        }
+    }
+    
+    @keyframes ice-float {
+        0% {
+            transform: translate(0, 0) rotate(0deg) scale(0.3);
+            opacity: 0;
+        }
+        20% {
+            opacity: 1;
+            transform: translate(15px, -20px) rotate(45deg) scale(1);
+        }
+        40% {
+            transform: translate(-20px, -50px) rotate(90deg) scale(0.9);
+        }
+        60% {
+            transform: translate(25px, -80px) rotate(135deg) scale(1.1);
+        }
+        80% {
+            transform: translate(-15px, -110px) rotate(180deg) scale(0.8);
+            opacity: 0.6;
+        }
+        100% {
+            transform: translate(0, -140px) rotate(225deg) scale(0);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(shockwaveStyle);
 
 // ===== FIXA RIBBONS =====
 function fixRibbons() {
@@ -613,77 +713,6 @@ function fixRibbons() {
     document.documentElement.style.setProperty('--color-3', colors[2] || colors[0]);
 }
 
-// ===== ADD STYLES FOR SHOCKWAVE =====
-const shockwaveStyle = document.createElement('style');
-shockwaveStyle.textContent = `
-    @keyframes shockwave {
-        0% {
-            width: 10px;
-            height: 10px;
-            opacity: 1;
-            border-width: 3px;
-        }
-        100% {
-            width: 500px;
-            height: 500px;
-            opacity: 0;
-            border-width: 1px;
-        }
-    }
-`;
-document.head.appendChild(shockwaveStyle);
-
-// ===== CONFETTI TRIGGER (original, behålls för bakåtkompatibilitet) =====
-window.triggerConfetti = function(intensity = 'medium') {
-    const colors = [
-        '#FFB3B3', '#FFC9A2', '#FFF6B0', 
-        '#B0E9CA', '#B0D4FF', '#D9B0FF'
-    ];
-    
-    let count = 50;
-    if (intensity === 'low') count = 25;
-    if (intensity === 'medium') count = 50;
-    if (intensity === 'high') count = 100;
-    if (intensity === 'fabulous') count = 150;
-    
-    for (let i = 0; i < count; i++) {
-        setTimeout(() => {
-            const confetti = document.createElement('div');
-            confetti.style.position = 'fixed';
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.top = -20 + 'px';
-            confetti.style.width = Math.random() * 15 + 5 + 'px';
-            confetti.style.height = Math.random() * 15 + 5 + 'px';
-            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-            confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-            confetti.style.pointerEvents = 'none';
-            confetti.style.zIndex = '9999';
-            confetti.style.boxShadow = '0 0 10px currentColor';
-            confetti.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
-            
-            document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 5000);
-        }, i * 20);
-    }
-};
-
-// Add keyframe animation for confetti
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes fall {
-        0% {
-            transform: translateY(0) rotate(0deg);
-            opacity: 1;
-        }
-        100% {
-            transform: translateY(100vh) rotate(720deg);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
-
 // ===== INITIALIZE =====
 document.addEventListener('DOMContentLoaded', () => {
     new GlitterCursor();
@@ -700,7 +729,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     observer.observe(document.body, { attributes: true });
     
-    // Ladda sparad ice counter
     const savedCount = localStorage.getItem('iceClickCount');
     if (savedCount) {
         iceClickCount = parseInt(savedCount);
