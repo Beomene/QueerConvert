@@ -45,8 +45,8 @@ body {
 
 /* ===== CUSTOM GLITTER CURSOR ===== */
 .glitter-cursor {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     background: transparent;
     position: fixed;
     pointer-events: none;
@@ -61,7 +61,7 @@ body {
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    animation: sparkle 1.5s infinite;
+    animation: sparkle 1.4s infinite;
 }
 
 .glitter-cursor::before {
@@ -195,7 +195,7 @@ body {
 }
 
 .rainbow-bar {
-    height: 4px;
+    height: 44px;
     width: 100%;
     background: linear-gradient(90deg, 
         var(--rainbow-red),
@@ -204,8 +204,8 @@ body {
         var(--rainbow-green),
         var(--rainbow-blue),
         var(--rainbow-purple));
-    border-radius: 2px;
-    animation: shimmer 3s infinite;
+    border-radius: 20px;
+    animation: shimmer 44s infinite;
 }
 
 @keyframes shimmer {
