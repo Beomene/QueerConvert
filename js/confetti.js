@@ -1,7 +1,4 @@
-// confetti.js - Enkel, anropar pink confetti från main.js
-// Denna fil finns mest för bakåtkompatibilitet
-
-// Om main.js redan har triggerPinkConfetti, använd den
+// confetti.js - Anropar pink confetti från main.js
 window.triggerConfetti = window.triggerConfetti || function(intensity) {
     if (window.triggerPinkConfetti) {
         window.triggerPinkConfetti(intensity);
