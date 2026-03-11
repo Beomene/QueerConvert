@@ -212,104 +212,152 @@ document.head.appendChild(style);
 
 // ===== FABULOUS BUTTON FUNCTIONS =====
 
-// EXTRA SPARKLES FUNCTION
-// ===== LASER RAINBOW FUNCTION (ersätter EXTRA SPARKLES) =====
+// ===== LASER RAINBOW FUNCTION - ÄKTA LASERS SOM FAR! =====
 window.triggerLaserRainbow = function() {
-    // Trigger fabulous confetti
+    // Trigger confetti som bakgrund
     if (window.triggerConfetti) {
         window.triggerConfetti('fabulous');
     }
     
     const colors = [
-        '#FFB3B3', '#FFC9A2', '#FFF6B0', 
-        '#B0E9CA', '#B0D4FF', '#D9B0FF'
+        '#FF3131', // Neon Röd
+        '#FF9933', // Neon Orange
+        '#FFEB33', // Neon Gul
+        '#33FF33', // Neon Grön
+        '#33FFF3', // Neon Cyan
+        '#337AFF', // Neon Blå
+        '#8A33FF', // Neon Lila
+        '#FF33F3'  // Neon Rosa
     ];
     
-    // Skapa laserstrålar som skjuter upp från botten
-    for (let i = 0; i < 30; i++) {
+    // Antal laserspår
+    const laserCount = 40;
+    
+    for (let i = 0; i < laserCount; i++) {
         setTimeout(() => {
+            // Välj slumpmässig riktning
+            const direction = Math.floor(Math.random() * 4);
+            let startX, startY, endX, endY;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const thickness = 2 + Math.random() * 4; // 2-6px tjocklek
+            const duration = 0.8 + Math.random() * 1.5; // 0.8-2.3 sekunder
+            
+            // Bestäm start- och slutpunkter baserat på riktning
+            switch(direction) {
+                case 0: // Vänster → Höger
+                    startX = -10;
+                    startY = Math.random() * 120 - 10;
+                    endX = 110;
+                    endY = startY + (Math.random() * 40 - 20);
+                    break;
+                case 1: // Höger → Vänster
+                    startX = 110;
+                    startY = Math.random() * 120 - 10;
+                    endX = -10;
+                    endY = startY + (Math.random() * 40 - 20);
+                    break;
+                case 2: // Topp → Botten
+                    startX = Math.random() * 120 - 10;
+                    startY = -10;
+                    endX = startX + (Math.random() * 40 - 20);
+                    endY = 110;
+                    break;
+                case 3: // Botten → Topp
+                    startX = Math.random() * 120 - 10;
+                    startY = 110;
+                    endX = startX + (Math.random() * 40 - 20);
+                    endY = -10;
+                    break;
+            }
+            
+            // Skapa laser-elementet
             const laser = document.createElement('div');
             laser.style.position = 'fixed';
-            laser.style.bottom = '0';
-            laser.style.left = Math.random() * 100 + '%';
-            laser.style.width = '3px';
+            laser.style.left = startX + '%';
+            laser.style.top = startY + '%';
+            laser.style.width = '0';
             laser.style.height = '0';
-            laser.style.background = `linear-gradient(to top, ${colors[Math.floor(Math.random() * colors.length)]}, transparent)`;
-            laser.style.boxShadow = `0 0 20px ${colors[Math.floor(Math.random() * colors.length)]}`;
+            laser.style.background = 'transparent';
+            laser.style.boxShadow = `0 0 15px ${color}, 0 0 30px ${color}`;
             laser.style.pointerEvents = 'none';
             laser.style.zIndex = '9999';
-            laser.style.animation = `laser-beam ${0.8 + Math.random() * 1}s ease-out forwards`;
+            laser.style.opacity = '0.9';
+            
+            // Skapa en pseudo-effekt med ::after för själva laserstrålen
+            const style = document.createElement('style');
+            const laserId = 'laser-' + Date.now() + '-' + i;
+            laser.setAttribute('data-laser', laserId);
+            
+            const keyframes = `
+                @keyframes laser-${laserId} {
+                    0% {
+                        left: ${startX}%;
+                        top: ${startY}%;
+                        width: 0;
+                        height: 0;
+                        opacity: 0;
+                        box-shadow: 0 0 5px ${color};
+                    }
+                    5% {
+                        opacity: 1;
+                    }
+                    50% {
+                        left: ${(startX + endX) / 2}%;
+                        top: ${(startY + endY) / 2}%;
+                        width: ${thickness * 2}px;
+                        height: ${thickness * 2}px;
+                        box-shadow: 0 0 30px ${color}, 0 0 60px ${color};
+                    }
+                    95% {
+                        opacity: 1;
+                    }
+                    100% {
+                        left: ${endX}%;
+                        top: ${endY}%;
+                        width: 0;
+                        height: 0;
+                        opacity: 0;
+                        box-shadow: 0 0 5px ${color};
+                    }
+                }
+            `;
+            
+            style.textContent = keyframes;
+            document.head.appendChild(style);
+            
+            laser.style.animation = `laser-${laserId} ${duration}s linear forwards`;
             
             document.body.appendChild(laser);
-            setTimeout(() => laser.remove(), 2000);
-        }, i * 30);
-    }
-    
-    // Skapa regnbågsvågor som rör sig horisontellt
-    for (let i = 0; i < 15; i++) {
-        setTimeout(() => {
-            const wave = document.createElement('div');
-            wave.style.position = 'fixed';
-            wave.style.top = Math.random() * 100 + '%';
-            wave.style.left = '-10%';
-            wave.style.width = '20%';
-            wave.style.height = '4px';
-            wave.style.background = `linear-gradient(90deg, 
-                ${colors[Math.floor(Math.random() * colors.length)]}, 
-                ${colors[Math.floor(Math.random() * colors.length)]}, 
-                ${colors[Math.floor(Math.random() * colors.length)]})`;
-            wave.style.boxShadow = `0 0 30px ${colors[Math.floor(Math.random() * colors.length)]}`;
-            wave.style.pointerEvents = 'none';
-            wave.style.zIndex = '9999';
-            wave.style.animation = `laser-wave ${1.5 + Math.random() * 2}s linear forwards`;
-            wave.style.opacity = '0.8';
             
-            document.body.appendChild(wave);
-            setTimeout(() => wave.remove(), 3000);
-        }, i * 50);
-    }
-    
-    // Skapa roterande regnbågs-cirklar
-    for (let i = 0; i < 10; i++) {
-        setTimeout(() => {
-            const ring = document.createElement('div');
-            const size = 50 + Math.random() * 150;
-            ring.style.position = 'fixed';
-            ring.style.top = Math.random() * 100 + '%';
-            ring.style.left = Math.random() * 100 + '%';
-            ring.style.width = size + 'px';
-            ring.style.height = size + 'px';
-            ring.style.borderRadius = '50%';
-            ring.style.border = `3px solid ${colors[Math.floor(Math.random() * colors.length)]}`;
-            ring.style.boxShadow = `0 0 30px ${colors[Math.floor(Math.random() * colors.length)]}`;
-            ring.style.pointerEvents = 'none';
-            ring.style.zIndex = '9999';
-            ring.style.animation = `laser-ring ${1 + Math.random() * 2}s ease-out forwards`;
+            // Städa upp efter animationen
+            setTimeout(() => {
+                laser.remove();
+                style.remove();
+            }, duration * 1000 + 100);
             
-            document.body.appendChild(ring);
-            setTimeout(() => ring.remove(), 2500);
-        }, i * 100);
+        }, i * 30); // 30ms mellanrum mellan lasrarna
     }
     
-    // Animation för knappen
+    // Gör knappen glad
     const btn = document.getElementById('extraSparklesBtn');
     if (btn) {
-        btn.innerHTML = '🌈 LASER RAINBOW 🌈';
-        btn.style.transform = 'scale(1.3)';
-        btn.style.background = 'linear-gradient(135deg, #FFB3B3, #FFC9A2, #FFF6B0, #B0E9CA, #B0D4FF, #D9B0FF)';
-        btn.style.color = '#121212';
+        btn.innerHTML = '🌈 LASER RAINBOW! 🌈';
+        btn.style.transform = 'scale(1.2)';
+        btn.style.background = 'linear-gradient(135deg, #FF3131, #FF9933, #FFEB33, #33FF33, #33FFF3, #337AFF, #8A33FF, #FF33F3)';
+        btn.style.color = '#FFFFFF';
         btn.style.fontWeight = 'bold';
+        btn.style.boxShadow = '0 0 50px rgba(255,255,255,0.8)';
         
         setTimeout(() => {
             btn.innerHTML = '🌈 LASER RAINBOW 🌈';
             btn.style.transform = 'scale(1)';
             btn.style.background = 'linear-gradient(135deg, rgba(255, 243, 176, 0.2), rgba(217, 176, 255, 0.2))';
             btn.style.color = 'var(--text-primary)';
-        }, 500);
+            btn.style.boxShadow = '0 0 20px rgba(255, 243, 176, 0.3)';
+        }, 400);
     }
 };
 
-// Byt namn på knappen i HTML också!
 // F*** ICE FUNCTION (DISCO MODE)
 let discoInterval;
 let isDiscoMode = false;
@@ -323,7 +371,7 @@ window.triggerIceMode = function() {
         body.classList.add('disco-mode');
         
         if (iceBtn) {
-            iceBtn.innerHTML = ' F*** ICE (ON) ';
+            iceBtn.innerHTML = '🧊 F*** ICE (ON) 🧊';
             iceBtn.style.animation = 'pulse-glow-ice 0.2s infinite alternate';
         }
         
@@ -352,7 +400,7 @@ window.triggerIceMode = function() {
         body.classList.remove('disco-mode');
         
         if (iceBtn) {
-            iceBtn.innerHTML = '🧊 F*** ICE 🧊';
+            iceBtn.innerHTML = 'F*** 🧊';
             iceBtn.style.animation = 'pulse-glow-ice 2s infinite alternate';
         }
         
@@ -372,6 +420,6 @@ document.addEventListener('DOMContentLoaded', () => {
     new ParallaxBackground();
     
     window.triggerConfetti = window.triggerConfetti;
-    window.triggerExtraSparkles = window.triggerExtraSparkles;
+    window.triggerLaserRainbow = window.triggerLaserRainbow;
     window.triggerIceMode = window.triggerIceMode;
 });
