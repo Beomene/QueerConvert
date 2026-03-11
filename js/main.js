@@ -384,7 +384,7 @@ window.triggerIceMode = function() {
                 setTimeout(() => {
                     const sparkle = document.createElement('div');
                     sparkle.className = 'extra-sparkle';
-                    sparkle.innerHTML = ['✨', '🌟', '💫', '⭐', '🌈', '🕺', '💃'][Math.floor(Math.random() * 7)];
+                    sparkle.innerHTML = ['✨', '🌟', '💫'][Math.floor(Math.random() * 7)];
                     sparkle.style.left = Math.random() * 100 + 'vw';
                     sparkle.style.top = Math.random() * 100 + 'vh';
                     sparkle.style.fontSize = '2rem';
@@ -412,6 +412,125 @@ window.triggerIceMode = function() {
             window.triggerConfetti('fabulous');
         }
     }
+// ===== F*** ICE FUNCTION (med counter OCH nya effekter) =====
+let discoInterval;
+let isDiscoMode = false;
+let iceClickCount = 0; // Counter för ICE-knappen
+
+window.triggerIceMode = function() {
+    const body = document.body;
+    const iceBtn = document.getElementById('iceButton');
+    const iceCounter = document.getElementById('iceCounter');
+    
+    // ÖKA COUNTER!
+    iceClickCount++;
+    iceCounter.textContent = iceClickCount;
+    
+    // Ändra färg baserat på hur många gånger man tryckt
+    if (iceClickCount >= 20) {
+        iceCounter.setAttribute('data-hot', '20');
+    } else if (iceClickCount >= 10) {
+        iceCounter.setAttribute('data-hot', '10');
+    } else if (iceClickCount >= 5) {
+        iceCounter.setAttribute('data-hot', '5');
+    }
+    
+    // Skapa IS-effekter istället för emojis!
+    createIceEffects();
+    
+    // Fortsätt med disco mode (men utan emojis)
+    if (!isDiscoMode) {
+        isDiscoMode = true;
+        body.classList.add('disco-mode');
+        
+        if (iceBtn) {
+            iceBtn.innerHTML = '🧊 F*** ICE (ON) 🧊';
+            iceBtn.style.animation = 'pulse-glow-ice 0.2s infinite alternate';
+        }
+        
+        discoInterval = setInterval(() => {
+            if (window.triggerConfetti) {
+                window.triggerConfetti('low');
+            }
+            
+            // Skapa is-effekter kontinuerligt i disco mode
+            if (iceClickCount % 5 === 0) { // Var 5:e klick, extra effekter
+                createIceEffects(10);
+            } else {
+                createIceEffects(5);
+            }
+            
+        }, 500);
+        
+    } else {
+        isDiscoMode = false;
+        body.classList.remove('disco-mode');
+        
+        if (iceBtn) {
+            iceBtn.innerHTML = '🧊 F*** ICE 🧊';
+            iceBtn.style.animation = 'pulse-glow-ice 2s infinite alternate';
+        }
+        
+        if (discoInterval) {
+            clearInterval(discoInterval);
+        }
+        
+        if (window.triggerConfetti) {
+            window.triggerConfetti('fabulous');
+        }
+        
+        // Skapa en stor ICE-explosion när man stänger av
+        createIceEffects(30);
+    }
+};
+
+// ===== ICE-EFFEKTER - inga emojis! =====
+function createIceEffects(count = 15) {
+    for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+            const ice = document.createElement('div');
+            ice.className = 'ice-effect';
+            
+            // Slumpmässig form
+            const shape = Math.random();
+            if (shape < 0.3) {
+                // Iskristall
+                ice.style.width = '8px';
+                ice.style.height = '8px';
+                ice.style.background = 'transparent';
+                ice.style.border = '2px solid rgba(200, 230, 255, 0.8)';
+                ice.style.transform = `rotate(${Math.random() * 360}deg)`;
+            } else if (shape < 0.6) {
+                // Isflinga
+                ice.style.width = '4px';
+                ice.style.height = '20px';
+                ice.style.background = 'linear-gradient(to bottom, #aaddff, #88ccff, #aaddff)';
+                ice.style.borderRadius = '2px';
+                ice.style.transform = `rotate(${Math.random() * 360}deg)`;
+            } else {
+                // Isbit
+                ice.style.width = '12px';
+                ice.style.height = '12px';
+                ice.style.background = 'rgba(200, 230, 255, 0.6)';
+                ice.style.borderRadius = '3px';
+                ice.style.boxShadow = 'inset 2px 2px 5px rgba(255,255,255,0.5), inset -2px -2px 5px rgba(0,0,0,0.1)';
+            }
+            
+            ice.style.position = 'fixed';
+            ice.style.left = Math.random() * 100 + '%';
+            ice.style.top = Math.random() * 100 + '%';
+            ice.style.pointerEvents = 'none';
+            ice.style.zIndex = '9998';
+            ice.style.animation = `ice-float ${1 + Math.random() * 2}s ease-out forwards`;
+            ice.style.opacity = 0.7 + Math.random() * 0.3;
+            
+            document.body.appendChild(ice);
+            setTimeout(() => ice.remove(), 2500);
+        }, i * 50);
+    }
+}
+
+// Lägg till animationer i CSS (kommer i nästa steg)
 };
 
 // ===== INITIALIZE =====
