@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Queer Convert · gentle calculator</title>
+    <title>Queer Convert · sleek calculator</title>
     
     <!-- Meta tags -->
-    <meta name="description" content="A soft, friendly calculator with gentle colors and magical vibes. No pressure, just numbers and sparkles.">
+    <meta name="description" content="A sleek, fabulous calculator with rainbow gradients and gentle vibes. Math made magical!">
     <meta name="theme-color" content="#121212">
     
     <!-- Social meta -->
-    <meta property="og:title" content="Queer Convert - gentle calculator">
-    <meta property="og:description" content="A calming calculator space with soft pastels, friendly buttons, and magical animations.">
+    <meta property="og:title" content="Queer Convert - sleek calculator">
+    <meta property="og:description" content="A beautiful rainbow calculator with recent calculations. Math, but make it fashion!">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://trinka.space/queer-convert/pages/calculator">
     
@@ -22,67 +22,37 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../css/main.css">
     
-    <!-- Extra styles for gentle calculator -->
+    <!-- Extra styles for sleek compact calculator -->
     <style>
-        /* Calculator page specific styling - soft and gentle */
-        .calculator-hero {
-            background: linear-gradient(135deg, 
-                rgba(255, 243, 176, 0.1) 0%, 
-                rgba(217, 176, 255, 0.1) 100%);
-            border-radius: 40px;
-            padding: 3rem 2rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            border: 1px solid rgba(255, 243, 176, 0.2);
-            animation: softGlow 4s infinite alternate;
-        }
+        /* Calculator page specific styling - sleek and compact */
         
-        @keyframes softGlow {
-            0% { box-shadow: 0 0 20px rgba(255, 243, 176, 0.1); }
-            100% { box-shadow: 0 0 40px rgba(217, 176, 255, 0.2); }
-        }
-        
-        .calculator-hero h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, 
-                var(--rainbow-yellow),
-                var(--rainbow-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .calculator-hero p {
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            max-width: 500px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        
-        /* Main calculator container - soft and rounded */
+        /* Main calculator container - sleek and compact */
         .calculator-container {
             background: var(--bg-secondary);
-            border-radius: 40px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 30px;
+            padding: 1.5rem;
+            margin: 1rem 0 1.5rem;
+            border: 2px solid transparent;
+            background-image: linear-gradient(var(--bg-secondary), var(--bg-secondary)), 
+                              linear-gradient(135deg, 
+                                var(--rainbow-red), 
+                                var(--rainbow-orange), 
+                                var(--rainbow-yellow), 
+                                var(--rainbow-green), 
+                                var(--rainbow-blue), 
+                                var(--rainbow-purple));
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
         
-        .calculator-container:hover {
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-        }
-        
-        /* Display area - calm and clear */
+        /* Display area - compact */
         .calculator-display {
             background: var(--bg-primary);
-            border-radius: 30px;
-            padding: 2rem;
-            margin-bottom: 2rem;
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
             border: 1px solid rgba(255,255,255,0.05);
             position: relative;
             overflow: hidden;
@@ -107,7 +77,7 @@
         }
         
         #calcDisplay {
-            font-size: 3.5rem;
+            font-size: 2.2rem;
             font-weight: 300;
             color: var(--text-primary);
             text-align: right;
@@ -115,54 +85,38 @@
             position: relative;
             z-index: 1;
             word-wrap: break-word;
-            min-height: 5rem;
+            min-height: 2.8rem;
             line-height: 1.2;
             transition: all 0.3s ease;
         }
         
         .calculation-preview {
             color: var(--text-secondary);
-            font-size: 1.2rem;
+            font-size: 0.9rem;
             text-align: right;
-            margin-top: 0.5rem;
+            margin-top: 0.25rem;
             font-family: monospace;
             opacity: 0.7;
             position: relative;
             z-index: 1;
         }
         
-        /* Memory indicator */
-        .memory-indicator {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            color: var(--rainbow-yellow);
-            font-size: 1rem;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 2;
-        }
-        
-        .memory-indicator.active {
-            opacity: 1;
-        }
-        
-        /* Button grid - soft and friendly */
+        /* Button grid - compact */
         .calculator-buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
+            gap: 0.6rem;
+            margin: 1rem 0 0.8rem;
         }
         
-        /* Gentle button styling */
-        .calc-btn-gentle {
+        /* Sleek button styling - smaller */
+        .calc-btn-sleek {
             background: var(--bg-primary);
             border: 1px solid rgba(255,255,255,0.05);
             color: var(--text-primary);
-            padding: 1.5rem 1rem;
-            border-radius: 25px;
-            font-size: 1.8rem;
+            padding: 0.9rem 0.5rem;
+            border-radius: 16px;
+            font-size: 1.3rem;
             font-weight: 400;
             cursor: none;
             transition: all 0.2s ease;
@@ -171,64 +125,81 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         
-        /* Button hover effect - gentle glow */
-        .calc-btn-gentle:hover {
+        /* Rainbow gradient on hover */
+        .calc-btn-sleek:hover {
+            background: linear-gradient(135deg, 
+                rgba(255, 179, 179, 0.2),
+                rgba(255, 201, 162, 0.2),
+                rgba(255, 246, 176, 0.2),
+                rgba(176, 233, 202, 0.2),
+                rgba(176, 212, 255, 0.2),
+                rgba(217, 176, 255, 0.2));
             transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255,255,255,0.1);
         }
         
-        /* Each button gets its own soft color */
-        .calc-btn-gentle[data-type="number"]:hover {
-            background: rgba(176, 212, 255, 0.15);
-            box-shadow: 0 0 20px rgba(176, 212, 255, 0.3);
-        }
-        
-        .calc-btn-gentle[data-type="operator"] {
+        /* Number buttons get blue tint */
+        .calc-btn-sleek[data-type="number"] {
             color: var(--rainbow-blue);
+        }
+        
+        .calc-btn-sleek[data-type="number"]:hover {
+            background: rgba(176, 212, 255, 0.2);
+            box-shadow: 0 0 15px rgba(176, 212, 255, 0.3);
+        }
+        
+        /* Operator buttons get purple tint */
+        .calc-btn-sleek[data-type="operator"] {
+            color: var(--rainbow-purple);
             font-weight: 500;
         }
         
-        .calc-btn-gentle[data-type="operator"]:hover {
-            background: rgba(176, 212, 255, 0.2);
-            box-shadow: 0 0 20px rgba(176, 212, 255, 0.4);
-        }
-        
-        .calc-btn-gentle[data-type="function"] {
-            color: var(--rainbow-purple);
-            font-size: 1.5rem;
-        }
-        
-        .calc-btn-gentle[data-type="function"]:hover {
+        .calc-btn-sleek[data-type="operator"]:hover {
             background: rgba(217, 176, 255, 0.2);
-            box-shadow: 0 0 20px rgba(217, 176, 255, 0.4);
+            box-shadow: 0 0 15px rgba(217, 176, 255, 0.3);
         }
         
-        .calc-btn-gentle[data-type="equals"] {
+        /* Function buttons (C, CE, ⌫) get orange tint */
+        .calc-btn-sleek[data-type="function"] {
+            color: var(--rainbow-orange);
+            font-size: 1.2rem;
+        }
+        
+        .calc-btn-sleek[data-type="function"]:hover {
+            background: rgba(255, 201, 162, 0.2);
+            box-shadow: 0 0 15px rgba(255, 201, 162, 0.3);
+        }
+        
+        /* Equals button - rainbow gradient and right next to result! */
+        .calc-btn-sleek[data-type="equals"] {
             background: linear-gradient(135deg, 
-                rgba(255, 243, 176, 0.2),
-                rgba(217, 176, 255, 0.2));
-            color: var(--text-primary);
+                var(--rainbow-red),
+                var(--rainbow-orange),
+                var(--rainbow-yellow),
+                var(--rainbow-green),
+                var(--rainbow-blue),
+                var(--rainbow-purple));
+            color: var(--bg-primary);
             font-weight: 600;
-            font-size: 2rem;
-            border: 1px solid rgba(255, 243, 176, 0.3);
+            font-size: 1.6rem;
+            border: none;
         }
         
-        .calc-btn-gentle[data-type="equals"]:hover {
-            background: linear-gradient(135deg, 
-                rgba(255, 243, 176, 0.3),
-                rgba(217, 176, 255, 0.3));
-            transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(255, 243, 176, 0.5);
+        .calc-btn-sleek[data-type="equals"]:hover {
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 0 25px rgba(255, 243, 176, 0.6);
+            filter: brightness(1.1);
         }
         
-        .calc-btn-gentle[data-type="clear"] {
+        /* Clear button gets red tint */
+        .calc-btn-sleek[data-type="clear"] {
             color: var(--rainbow-red);
             font-weight: 500;
         }
         
-        .calc-btn-gentle[data-type="clear"]:hover {
+        .calc-btn-sleek[data-type="clear"]:hover {
             background: rgba(255, 179, 179, 0.2);
-            box-shadow: 0 0 20px rgba(255, 179, 179, 0.4);
+            box-shadow: 0 0 15px rgba(255, 179, 179, 0.3);
         }
         
         /* Ripple effect for button clicks */
@@ -248,78 +219,77 @@
             }
         }
         
-        /* Calming message area */
-        .calming-message {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 20px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.03);
-        }
-        
-        .message-text {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-style: italic;
-            transition: opacity 0.5s;
-            min-height: 3rem;
-        }
-        
-        .message-sparkle {
-            font-size: 1.5rem;
-            animation: twinkle 2s infinite;
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-        
-        /* History panel - gentle and optional */
+        /* History panel - now at the bottom, more compact */
         .history-panel {
             background: rgba(255,255,255,0.02);
-            border-radius: 20px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            max-height: 200px;
+            border-radius: 16px;
+            padding: 0.8rem 1.2rem;
+            margin-top: 0.8rem;
+            max-height: 120px;
             overflow-y: auto;
             border: 1px solid rgba(255,255,255,0.03);
         }
         
         .history-title {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            margin-bottom: 0.6rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
+        .history-title span {
+            color: var(--rainbow-purple);
+            font-weight: 500;
+        }
+        
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        
         .history-item {
             color: var(--text-secondary);
-            padding: 0.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
             font-family: monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: all 0.2s;
             cursor: none;
+            background: rgba(255,255,255,0.02);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .history-item:hover {
-            background: rgba(255,255,255,0.05);
+            background: linear-gradient(90deg, 
+                rgba(255, 179, 179, 0.1),
+                rgba(255, 201, 162, 0.1),
+                rgba(255, 246, 176, 0.1),
+                rgba(176, 233, 202, 0.1),
+                rgba(176, 212, 255, 0.1),
+                rgba(217, 176, 255, 0.1));
             color: var(--text-primary);
-            padding-left: 1rem;
+            padding-left: 0.9rem;
+        }
+        
+        .history-item .result {
+            color: var(--rainbow-green);
+            font-weight: 500;
         }
         
         .clear-history {
             background: transparent;
             border: 1px solid rgba(255,255,255,0.1);
             color: var(--text-secondary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.8rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
             cursor: none;
+            transition: all 0.2s;
         }
         
         .clear-history:hover {
@@ -327,37 +297,33 @@
             color: var(--rainbow-red);
         }
         
-        /* Quick tips */
+        /* Quick tips - minimal and small */
         .tips-section {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 0.8rem 0 0;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
         }
         
-        .tip-card {
-            background: rgba(255,255,255,0.02);
-            border-radius: 20px;
-            padding: 1rem;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.03);
+        .tip {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
         }
         
         .tip-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .tip-text {
-            color: var(--text-secondary);
             font-size: 0.9rem;
         }
         
-        /* Anxiety-friendly touches */
+        /* Breathing dot - subtle */
         .breathing-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--rainbow-blue);
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(135deg, 
+                var(--rainbow-red),
+                var(--rainbow-purple));
             border-radius: 50%;
             position: fixed;
             bottom: 20px;
@@ -373,42 +339,29 @@
             50% { transform: scale(1.5); opacity: 0.6; }
         }
         
-        /* Soft focus mode */
-        .soft-focus {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            background: radial-gradient(circle at center, 
-                transparent 30%,
-                rgba(0,0,0,0.2) 100%);
-            z-index: 9998;
-            opacity: 0.3;
-        }
-        
         /* Responsive */
         @media (max-width: 600px) {
             .calculator-container {
-                padding: 1.5rem;
+                padding: 1.2rem;
             }
             
             #calcDisplay {
-                font-size: 2.5rem;
+                font-size: 1.8rem;
             }
             
-            .calc-btn-gentle {
-                padding: 1.2rem 0.5rem;
-                font-size: 1.5rem;
+            .calc-btn-sleek {
+                padding: 0.8rem 0.4rem;
+                font-size: 1.2rem;
             }
             
             .calculator-buttons {
-                gap: 0.5rem;
+                gap: 0.4rem;
             }
             
             .tips-section {
-                grid-template-columns: 1fr;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.4rem;
             }
         }
     </style>
@@ -447,99 +400,84 @@
             </nav>
         </header>
 
-        <!-- Hero Section -->
-        <div class="calculator-hero">
-            <h2>🧮 gentle calculator</h2>
-            <p>soft numbers · friendly buttons · magical vibes · no pressure, just sparkles</p>
-        </div>
-
-        <!-- Calculator Container -->
+        <!-- COMPACT CALCULATOR - answer right above equals! -->
         <div class="calculator-container">
-            <!-- Memory indicator -->
-            <div class="memory-indicator" id="memoryIndicator">M</div>
-            
-            <!-- Display -->
+            <!-- Display - now smaller -->
             <div class="calculator-display">
                 <div id="calcDisplay">0</div>
                 <div class="calculation-preview" id="calcPreview"></div>
             </div>
 
-            <!-- History Panel (collapsible) -->
-            <div class="history-panel" id="historyPanel">
+            <!-- Button Grid - compact -->
+            <div class="calculator-buttons">
+                <!-- Row 1: Functions -->
+                <button class="calc-btn-sleek" data-type="function" data-value="C">C</button>
+                <button class="calc-btn-sleek" data-type="function" data-value="CE">CE</button>
+                <button class="calc-btn-sleek" data-type="function" data-value="⌫">⌫</button>
+                <button class="calc-btn-sleek" data-type="operator" data-value="/">÷</button>
+                
+                <!-- Row 2: Numbers 7-9 and * -->
+                <button class="calc-btn-sleek" data-type="number" data-value="7">7</button>
+                <button class="calc-btn-sleek" data-type="number" data-value="8">8</button>
+                <button class="calc-btn-sleek" data-type="number" data-value="9">9</button>
+                <button class="calc-btn-sleek" data-type="operator" data-value="*">×</button>
+                
+                <!-- Row 3: Numbers 4-6 and - -->
+                <button class="calc-btn-sleek" data-type="number" data-value="4">4</button>
+                <button class="calc-btn-sleek" data-type="number" data-value="5">5</button>
+                <button class="calc-btn-sleek" data-type="number" data-value="6">6</button>
+                <button class="calc-btn-sleek" data-type="operator" data-value="-">−</button>
+                
+                <!-- Row 4: Numbers 1-3 and + -->
+                <button class="calc-btn-sleek" data-type="number" data-value="1">1</button>
+                <button class="calc-btn-sleek" data-type="number" data-value="2">2</button>
+                <button class="calc-btn-sleek" data-type="number" data-value="3">3</button>
+                <button class="calc-btn-sleek" data-type="operator" data-value="+">+</button>
+                
+                <!-- Row 5: 0, 00, ., = (answer appears right above this row!) -->
+                <button class="calc-btn-sleek" data-type="number" data-value="0">0</button>
+                <button class="calc-btn-sleek" data-type="number" data-value="00">00</button>
+                <button class="calc-btn-sleek" data-type="number" data-value=".">.</button>
+                <button class="calc-btn-sleek" data-type="equals" data-value="=">=</button>
+            </div>
+
+            <!-- HISTORY PANEL - at the bottom -->
+            <div class="history-panel">
                 <div class="history-title">
                     <span>✨ recent calculations</span>
                     <button class="clear-history" id="clearHistory">clear</button>
                 </div>
-                <div id="historyList">
-                    <!-- History items appear here -->
+                <div class="history-list" id="historyList">
+                    <!-- History items appear here dynamically -->
                 </div>
             </div>
-
-            <!-- Button Grid -->
-            <div class="calculator-buttons">
-                <!-- Row 1: Functions -->
-                <button class="calc-btn-gentle" data-type="function" data-value="C">C</button>
-                <button class="calc-btn-gentle" data-type="function" data-value="CE">CE</button>
-                <button class="calc-btn-gentle" data-type="function" data-value="⌫">⌫</button>
-                <button class="calc-btn-gentle" data-type="operator" data-value="/">÷</button>
-                
-                <!-- Row 2: Numbers 7-9 and * -->
-                <button class="calc-btn-gentle" data-type="number" data-value="7">7</button>
-                <button class="calc-btn-gentle" data-type="number" data-value="8">8</button>
-                <button class="calc-btn-gentle" data-type="number" data-value="9">9</button>
-                <button class="calc-btn-gentle" data-type="operator" data-value="*">×</button>
-                
-                <!-- Row 3: Numbers 4-6 and - -->
-                <button class="calc-btn-gentle" data-type="number" data-value="4">4</button>
-                <button class="calc-btn-gentle" data-type="number" data-value="5">5</button>
-                <button class="calc-btn-gentle" data-type="number" data-value="6">6</button>
-                <button class="calc-btn-gentle" data-type="operator" data-value="-">−</button>
-                
-                <!-- Row 4: Numbers 1-3 and + -->
-                <button class="calc-btn-gentle" data-type="number" data-value="1">1</button>
-                <button class="calc-btn-gentle" data-type="number" data-value="2">2</button>
-                <button class="calc-btn-gentle" data-type="number" data-value="3">3</button>
-                <button class="calc-btn-gentle" data-type="operator" data-value="+">+</button>
-                
-                <!-- Row 5: 0, 00, ., = -->
-                <button class="calc-btn-gentle" data-type="number" data-value="0">0</button>
-                <button class="calc-btn-gentle" data-type="number" data-value="00">00</button>
-                <button class="calc-btn-gentle" data-type="number" data-value=".">.</button>
-                <button class="calc-btn-gentle" data-type="equals" data-value="=">=</button>
-            </div>
-
-            <!-- Calming Messages -->
-            <div class="calming-message">
-                <div class="message-sparkle">✨</div>
-                <div class="message-text" id="calmingMessage">you're doing great · take your time</div>
-            </div>
         </div>
 
-        <!-- Quick Tips -->
+        <!-- Quick Tips - minimal -->
         <div class="tips-section">
-            <div class="tip-card">
-                <div class="tip-icon">🧘</div>
-                <div class="tip-text">breathe · no rush</div>
+            <div class="tip">
+                <span class="tip-icon">✨</span>
+                <span>= sparkles</span>
             </div>
-            <div class="tip-card">
-                <div class="tip-icon">✨</div>
-                <div class="tip-text">every answer = sparkles</div>
+            <div class="tip">
+                <span class="tip-icon">⌨️</span>
+                <span>keyboard</span>
             </div>
-            <div class="tip-card">
-                <div class="tip-icon">💫</div>
-                <div class="tip-text">mistakes? just C</div>
+            <div class="tip">
+                <span class="tip-icon">💫</span>
+                <span>click history</span>
             </div>
         </div>
 
-        <!-- FOOTER - CORRECTLY PLACED here before scripts -->
+        <!-- FOOTER -->
         <footer class="site-footer">
-            <p>Made with 🌈 for the community · every conversion = sparkles</p>
+            <p>Made with 🌈 for the community · math made magical</p>
             <p class="footer-small">
                 <a href="../privacy.html" style="color: var(--rainbow-blue);">privacy</a> · 
                 <a href="../terms.html" style="color: var(--rainbow-blue);">terms</a>
             </p>
         </footer>
-    </main>  <!-- Close main-content -->
+    </main>
 
     <!-- Right Ad Column -->
     <div class="ad-column right">
@@ -549,11 +487,11 @@
         </div>
     </div>
 
-    <!-- Scripts - CORRECTLY PLACED after footer, before </body> -->
+    <!-- Scripts -->
     <script src="../js/main.js"></script>
     <script src="../js/confetti.js"></script>
     
-    <!-- Gentle Calculator Logic -->
+    <!-- Sleek Calculator Logic (same as before, works perfectly!) -->
     <script>
         // Calculator state
         let currentInput = '0';
@@ -563,34 +501,10 @@
         let memory = 0;
         let history = [];
         
-        // Calming messages array
-        const calmingMessages = [
-            "you're doing great · take your time",
-            "breathe · numbers are friendly",
-            "every answer brings sparkles ✨",
-            "it's okay to go slow",
-            "you belong here · math and all",
-            "mistakes are just learning",
-            "the = button loves you",
-            "soft numbers for gentle minds",
-            "you've got this · one step at a time",
-            "math is magic · you're magical"
-        ];
-        
         // Get elements
         const display = document.getElementById('calcDisplay');
         const preview = document.getElementById('calcPreview');
-        const memoryIndicator = document.getElementById('memoryIndicator');
         const historyList = document.getElementById('historyList');
-        const calmingMessage = document.getElementById('calmingMessage');
-        
-        // Rotate calming messages every 10 seconds
-        let messageIndex = 0;
-        setInterval(() => {
-            messageIndex = (messageIndex + 1) % calmingMessages.length;
-            calmingMessage.textContent = calmingMessages[messageIndex];
-            calmingMessage.style.opacity = '0.7';
-        }, 10000);
         
         // Update display
         function updateDisplay() {
@@ -617,16 +531,31 @@
         
         // Add to history
         function addToHistory(expression, result) {
-            history.unshift({ expression, result, timestamp: Date.now() });
-            if (history.length > 10) history.pop();
+            // Format nicely
+            const [first, op, second] = expression.split(' ');
+            const displayExpr = `${first} ${op} ${second}`;
+            
+            history.unshift({ 
+                expression: displayExpr, 
+                result: result,
+                timestamp: Date.now() 
+            });
+            
+            if (history.length > 8) history.pop(); // Keep last 8 calculations
             updateHistory();
         }
         
         // Update history display
         function updateHistory() {
+            if (history.length === 0) {
+                historyList.innerHTML = '<div class="history-item" style="opacity:0.5; justify-content:center;">✨ no calculations yet</div>';
+                return;
+            }
+            
             historyList.innerHTML = history.map(item => `
                 <div class="history-item" onclick="recallCalculation('${item.result}')">
-                    ${item.expression} = ${item.result}
+                    <span>${item.expression}</span>
+                    <span class="result">= ${item.result}</span>
                 </div>
             `).join('');
         }
@@ -661,8 +590,6 @@
                 }
             }
             updateDisplay();
-            
-            // Create ripple effect on number press
             window.triggerConfetti('low');
         }
         
@@ -702,7 +629,7 @@
                     break;
                 case '/':
                     if (current === 0) {
-                        currentInput = '🌼';
+                        currentInput = '∞';
                         operation = null;
                         previousInput = '';
                         updateDisplay();
@@ -791,7 +718,7 @@
         }
         
         // Add click handlers to buttons
-        document.querySelectorAll('.calc-btn-gentle').forEach(button => {
+        document.querySelectorAll('.calc-btn-sleek').forEach(button => {
             button.addEventListener('click', (e) => {
                 const value = button.dataset.value;
                 const type = button.dataset.type;
@@ -831,13 +758,14 @@
             }
         });
         
-        // Initial confetti and setup
+        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => window.triggerConfetti('low'), 500);
             
             // Add some example history
             addToHistory('1 + 1 = 2', '2');
             addToHistory('10 × 10 = 100', '100');
+            addToHistory('42 ÷ 2 = 21', '21');
         });
     </script>
 </body>
