@@ -159,58 +159,7 @@ class ParallaxBackground {
     }
 }
 
-// ===== CONFETTI TRIGGER =====
-window.triggerConfetti = function(intensity = 'medium') {
-    const colors = [
-        '#FFB3B3', '#FFC9A2', '#FFF6B0', 
-        '#B0E9CA', '#B0D4FF', '#D9B0FF'
-    ];
-    
-    let count = 50;
-    if (intensity === 'low') count = 25;
-    if (intensity === 'medium') count = 50;
-    if (intensity === 'high') count = 100;
-    if (intensity === 'fabulous') count = 150;
-    
-    for (let i = 0; i < count; i++) {
-        setTimeout(() => {
-            const confetti = document.createElement('div');
-            confetti.style.position = 'fixed';
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.top = -20 + 'px';
-            confetti.style.width = Math.random() * 15 + 5 + 'px';
-            confetti.style.height = Math.random() * 15 + 5 + 'px';
-            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-            confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-            confetti.style.pointerEvents = 'none';
-            confetti.style.zIndex = '9999';
-            confetti.style.boxShadow = '0 0 10px currentColor';
-            confetti.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
-            
-            document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 5000);
-        }, i * 20);
-    }
-};
-
-// Add keyframe animation for confetti
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes fall {
-        0% {
-            transform: translateY(0) rotate(0deg);
-            opacity: 1;
-        }
-        100% {
-            transform: translateY(100vh) rotate(720deg);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
-
-// ===== LASER RAINBOW - LÅNGA KAOTISKA LJUSSTRÅK =====
+// ===== LASER RAINBOW =====
 window.triggerLaserRainbow = function() {
     if (window.triggerConfetti) {
         window.triggerConfetti('fabulous');
@@ -222,15 +171,13 @@ window.triggerLaserRainbow = function() {
         '#9933FF', '#FF33CC', '#FF6633'
     ];
     
-    const laserCount = 25; // Färre men längre laserspår
+    const laserCount = 25;
     
     for (let i = 0; i < laserCount; i++) {
         setTimeout(() => {
-            // Slumpmässig start- och slutpunkt för kaotiska banor
             const startX = Math.random() * 120 - 10;
             const startY = Math.random() * 120 - 10;
             
-            // Skapa 3-5 kontrollpunkter för kaotisk bana
             const controlPoints = [];
             const pointCount = 3 + Math.floor(Math.random() * 3);
             
@@ -246,9 +193,8 @@ window.triggerLaserRainbow = function() {
             
             const color = colors[Math.floor(Math.random() * colors.length)];
             const thickness = 2 + Math.random() * 5;
-            const duration = 4; // 4 sekunder
+            const duration = 4;
             
-            // Skapa laser-elementet
             const laser = document.createElement('div');
             laser.className = 'laser-beam';
             laser.style.position = 'fixed';
@@ -262,7 +208,6 @@ window.triggerLaserRainbow = function() {
             laser.style.zIndex = '9999';
             laser.style.opacity = '0.9';
             
-            // Skapa trail-element (skimmer)
             const trail = document.createElement('div');
             trail.className = 'laser-trail';
             trail.style.position = 'fixed';
@@ -277,7 +222,6 @@ window.triggerLaserRainbow = function() {
             trail.style.opacity = '0.5';
             trail.style.filter = 'blur(4px)';
             
-            // Skapa keyframes för kaotisk bana
             const style = document.createElement('style');
             const laserId = 'laser-' + Date.now() + '-' + i;
             const trailId = 'trail-' + Date.now() + '-' + i;
@@ -285,15 +229,12 @@ window.triggerLaserRainbow = function() {
             laser.setAttribute('data-laser', laserId);
             trail.setAttribute('data-trail', trailId);
             
-            // Bygg keyframes med alla punkter
             let keyframePoints = '';
             let trailKeyframePoints = '';
             
-            // Lägg till startpunkt
             keyframePoints += `0% { left: ${startX}%; top: ${startY}%; width: 0; height: 0; opacity: 0; }`;
             trailKeyframePoints += `0% { left: ${startX}%; top: ${startY}%; width: 0; height: 0; opacity: 0; }`;
             
-            // Lägg till kontrollpunkter
             const totalSteps = pointCount + 2;
             for (let step = 1; step <= pointCount; step++) {
                 const point = controlPoints[step - 1];
@@ -320,7 +261,6 @@ window.triggerLaserRainbow = function() {
                 `;
             }
             
-            // Lägg till slutpunkt
             const finalPercent = 95;
             keyframePoints += `
                 ${finalPercent}% {
@@ -377,7 +317,6 @@ window.triggerLaserRainbow = function() {
             document.body.appendChild(laser);
             document.body.appendChild(trail);
             
-            // Städa upp efter animationen
             setTimeout(() => {
                 laser.remove();
                 trail.remove();
@@ -387,7 +326,6 @@ window.triggerLaserRainbow = function() {
         }, i * 80);
     }
     
-    // Gör knappen glad
     const btn = document.getElementById('laserRainbowBtn');
     if (btn) {
         btn.style.transform = 'scale(1.1)';
@@ -403,12 +341,154 @@ window.triggerLaserRainbow = function() {
     }
 };
 
-// ===== F*** ICE FUNKTION MED COUNTER OCH 10 SEKUNDERS DISCO =====
+// ===== F*** ICE FUNKTION MED PINK EFFEKTER, CHOCKVÅGOR OCH BEAT =====
 let discoInterval;
 let isDiscoMode = false;
 let iceClickCount = 0;
 let discoTimeout;
+let beatInterval;
 
+// Bright pink färger
+const PINK_COLORS = [
+    '#FF1493', // Deep Pink
+    '#FF69B4', // Hot Pink
+    '#FF00FF', // Magenta
+    '#DA70D6', // Orchid
+    '#FF007F', // Rose
+    '#FF218C', // Stark pink
+    '#FF33CC', // Neon pink
+    '#FF0099'  // Stark magenta
+];
+
+// ===== CHOCKVÅGOR =====
+function createShockwave() {
+    const shockwave = document.createElement('div');
+    shockwave.className = 'shockwave';
+    shockwave.style.position = 'fixed';
+    shockwave.style.left = '50%';
+    shockwave.style.top = '50%';
+    shockwave.style.width = '10px';
+    shockwave.style.height = '10px';
+    shockwave.style.borderRadius = '50%';
+    shockwave.style.background = 'transparent';
+    shockwave.style.border = `3px solid ${PINK_COLORS[Math.floor(Math.random() * PINK_COLORS.length)]}`;
+    shockwave.style.transform = 'translate(-50%, -50%)';
+    shockwave.style.pointerEvents = 'none';
+    shockwave.style.zIndex = '9999';
+    shockwave.style.animation = 'shockwave 1s ease-out forwards';
+    shockwave.style.boxShadow = `0 0 50px ${PINK_COLORS[Math.floor(Math.random() * PINK_COLORS.length)]}`;
+    
+    document.body.appendChild(shockwave);
+    setTimeout(() => shockwave.remove(), 1000);
+}
+
+// ===== ICE-EFFEKTER - BRIGHT PINK! =====
+function createIceEffects(count = 15) {
+    for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+            const ice = document.createElement('div');
+            ice.className = 'ice-effect';
+            
+            const pinkColor = PINK_COLORS[Math.floor(Math.random() * PINK_COLORS.length)];
+            
+            const shape = Math.random();
+            if (shape < 0.3) {
+                // Pink kristall
+                ice.style.width = '6px';
+                ice.style.height = '6px';
+                ice.style.background = 'transparent';
+                ice.style.border = `2px solid ${pinkColor}`;
+                ice.style.boxShadow = `0 0 15px ${pinkColor}`;
+                ice.style.transform = `rotate(${Math.random() * 360}deg)`;
+            } else if (shape < 0.6) {
+                // Pink flinga
+                ice.style.width = '3px';
+                ice.style.height = '16px';
+                ice.style.background = `linear-gradient(to bottom, ${pinkColor}, #FF69B4, ${pinkColor})`;
+                ice.style.borderRadius = '2px';
+                ice.style.boxShadow = `0 0 15px ${pinkColor}`;
+                ice.style.transform = `rotate(${Math.random() * 360}deg)`;
+            } else {
+                // Pink bit
+                ice.style.width = '10px';
+                ice.style.height = '10px';
+                ice.style.background = pinkColor;
+                ice.style.borderRadius = '3px';
+                ice.style.boxShadow = `0 0 20px ${pinkColor}, inset 2px 2px 5px rgba(255,255,255,0.5)`;
+            }
+            
+            ice.style.position = 'fixed';
+            ice.style.left = Math.random() * 100 + '%';
+            ice.style.top = Math.random() * 100 + '%';
+            ice.style.pointerEvents = 'none';
+            ice.style.zIndex = '9998';
+            ice.style.animation = `ice-float ${1.5 + Math.random() * 2}s ease-out forwards`;
+            ice.style.opacity = 0.8 + Math.random() * 0.2;
+            
+            document.body.appendChild(ice);
+            setTimeout(() => ice.remove(), 3000);
+        }, i * 40);
+    }
+}
+
+// ===== PINK CONFETTI =====
+window.triggerPinkConfetti = function(intensity = 'medium') {
+    let count = intensity === 'low' ? 20 : intensity === 'medium' ? 40 : 80;
+    
+    for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.style.position = 'fixed';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = -20 + 'px';
+            confetti.style.width = Math.random() * 10 + 3 + 'px';
+            confetti.style.height = Math.random() * 10 + 3 + 'px';
+            confetti.style.background = PINK_COLORS[Math.floor(Math.random() * PINK_COLORS.length)];
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+            confetti.style.pointerEvents = 'none';
+            confetti.style.zIndex = '9999';
+            confetti.style.boxShadow = '0 0 15px currentColor';
+            confetti.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
+            
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 5000);
+        }, i * 15);
+    }
+};
+
+// ===== BEAT-EFFEKT FÖR DISCO =====
+function startBeat() {
+    if (beatInterval) clearInterval(beatInterval);
+    
+    beatInterval = setInterval(() => {
+        // Skapa en puls varje halvsekund
+        createShockwave();
+        
+        // Skapa extra pink confetti på varje beat
+        window.triggerPinkConfetti('low');
+        
+        // Pulsa på knappen
+        const iceBtn = document.getElementById('iceButton');
+        if (iceBtn) {
+            iceBtn.style.transform = 'scale(1.05)';
+            iceBtn.style.boxShadow = '0 0 50px #FF1493';
+            setTimeout(() => {
+                iceBtn.style.transform = 'scale(1)';
+                iceBtn.style.boxShadow = '0 0 20px #FF1493';
+            }, 200);
+        }
+    }, 500); // Beat varje halvsekund
+}
+
+function stopBeat() {
+    if (beatInterval) {
+        clearInterval(beatInterval);
+        beatInterval = null;
+    }
+}
+
+// ===== F*** ICE FUNKTION =====
 window.triggerIceMode = function() {
     const body = document.body;
     const iceBtn = document.getElementById('iceButton');
@@ -417,26 +497,31 @@ window.triggerIceMode = function() {
     // ÖKA COUNTER!
     iceClickCount++;
     iceCounter.textContent = iceClickCount;
+    localStorage.setItem('iceClickCount', iceClickCount);
     
-    // Skapa IS-effekter
+    // Skapa PINK ice-effekter och chockvågor
     createIceEffects(15);
+    createShockwave();
     
     // Om vi når 999, starta UNIK DISCO-EFFEKT i 10 sekunder
     if (iceClickCount >= 999) {
         iceClickCount = 0;
         iceCounter.textContent = iceClickCount;
+        localStorage.setItem('iceClickCount', iceClickCount);
         
         // Starta EXTRA DISCO i 10 sekunder
         body.classList.add('disco-mode');
-        body.classList.add('ultra-disco'); // Extra effekter
+        body.classList.add('ultra-disco');
         
-        // Skapa massor med is-effekter och confetti
-        for (let i = 0; i < 50; i++) {
+        // Starta beat!
+        startBeat();
+        
+        // Skapa massor med pink effekter
+        for (let i = 0; i < 20; i++) {
             setTimeout(() => {
                 createIceEffects(20);
-                if (window.triggerConfetti) {
-                    window.triggerConfetti('fabulous');
-                }
+                window.triggerPinkConfetti('high');
+                createShockwave();
             }, i * 200);
         }
         
@@ -444,6 +529,7 @@ window.triggerIceMode = function() {
         setTimeout(() => {
             body.classList.remove('disco-mode');
             body.classList.remove('ultra-disco');
+            stopBeat();
         }, 10000);
         
         return;
@@ -458,10 +544,11 @@ window.triggerIceMode = function() {
             iceBtn.innerHTML = 'F-ICE (ON)';
         }
         
+        // Starta beat i disco mode
+        startBeat();
+        
         discoInterval = setInterval(() => {
-            if (window.triggerConfetti) {
-                window.triggerConfetti('low');
-            }
+            window.triggerPinkConfetti('low');
             createIceEffects(8);
         }, 400);
         
@@ -477,67 +564,25 @@ window.triggerIceMode = function() {
             clearInterval(discoInterval);
         }
         
-        if (window.triggerConfetti) {
-            window.triggerConfetti('fabulous');
-        }
+        // Stoppa beat
+        stopBeat();
         
-        createIceEffects(30); // Stor avslutning
+        // Stor avslutning
+        for (let i = 0; i < 5; i++) {
+            setTimeout(() => {
+                window.triggerPinkConfetti('high');
+                createIceEffects(30);
+                createShockwave();
+            }, i * 100);
+        }
     }
 };
 
-// ===== ICE-EFFEKTER =====
-function createIceEffects(count = 15) {
-    for (let i = 0; i < count; i++) {
-        setTimeout(() => {
-            const ice = document.createElement('div');
-            ice.className = 'ice-effect';
-            
-            // Slumpmässig form
-            const shape = Math.random();
-            if (shape < 0.3) {
-                // Iskristall
-                ice.style.width = '6px';
-                ice.style.height = '6px';
-                ice.style.background = 'transparent';
-                ice.style.border = '2px solid rgba(200, 230, 255, 0.9)';
-                ice.style.transform = `rotate(${Math.random() * 360}deg)`;
-            } else if (shape < 0.6) {
-                // Isflinga
-                ice.style.width = '3px';
-                ice.style.height = '16px';
-                ice.style.background = 'linear-gradient(to bottom, #ffffff, #aaddff, #ffffff)';
-                ice.style.borderRadius = '2px';
-                ice.style.transform = `rotate(${Math.random() * 360}deg)`;
-            } else {
-                // Isbit
-                ice.style.width = '10px';
-                ice.style.height = '10px';
-                ice.style.background = 'rgba(220, 240, 255, 0.8)';
-                ice.style.borderRadius = '3px';
-                ice.style.boxShadow = 'inset 2px 2px 5px rgba(255,255,255,0.8), inset -2px -2px 5px rgba(0,0,0,0.1)';
-            }
-            
-            ice.style.position = 'fixed';
-            ice.style.left = Math.random() * 100 + '%';
-            ice.style.top = Math.random() * 100 + '%';
-            ice.style.pointerEvents = 'none';
-            ice.style.zIndex = '9998';
-            ice.style.animation = `ice-float ${1.5 + Math.random() * 2}s ease-out forwards`;
-            ice.style.opacity = 0.6 + Math.random() * 0.4;
-            
-            document.body.appendChild(ice);
-            setTimeout(() => ice.remove(), 3000);
-        }, i * 40);
-    }
-}
-
 // ===== FIXA RIBBONS =====
 function fixRibbons() {
-    // Ta bort gamla ribbons om de finns
     const oldRibbons = document.querySelectorAll('.theme-ribbon');
     oldRibbons.forEach(r => r.remove());
     
-    // Skapa nya ribbons
     const topRibbon = document.createElement('div');
     topRibbon.className = 'theme-ribbon ribbon-top';
     document.body.appendChild(topRibbon);
@@ -546,7 +591,6 @@ function fixRibbons() {
     bottomRibbon.className = 'theme-ribbon ribbon-bottom';
     document.body.appendChild(bottomRibbon);
     
-    // Uppdatera färger
     const bodyClass = document.body.className;
     let colors = ['#FFB3B3', '#B0D4FF', '#D9B0FF'];
     
@@ -569,15 +613,84 @@ function fixRibbons() {
     document.documentElement.style.setProperty('--color-3', colors[2] || colors[0]);
 }
 
+// ===== ADD STYLES FOR SHOCKWAVE =====
+const shockwaveStyle = document.createElement('style');
+shockwaveStyle.textContent = `
+    @keyframes shockwave {
+        0% {
+            width: 10px;
+            height: 10px;
+            opacity: 1;
+            border-width: 3px;
+        }
+        100% {
+            width: 500px;
+            height: 500px;
+            opacity: 0;
+            border-width: 1px;
+        }
+    }
+`;
+document.head.appendChild(shockwaveStyle);
+
+// ===== CONFETTI TRIGGER (original, behålls för bakåtkompatibilitet) =====
+window.triggerConfetti = function(intensity = 'medium') {
+    const colors = [
+        '#FFB3B3', '#FFC9A2', '#FFF6B0', 
+        '#B0E9CA', '#B0D4FF', '#D9B0FF'
+    ];
+    
+    let count = 50;
+    if (intensity === 'low') count = 25;
+    if (intensity === 'medium') count = 50;
+    if (intensity === 'high') count = 100;
+    if (intensity === 'fabulous') count = 150;
+    
+    for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.style.position = 'fixed';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = -20 + 'px';
+            confetti.style.width = Math.random() * 15 + 5 + 'px';
+            confetti.style.height = Math.random() * 15 + 5 + 'px';
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+            confetti.style.pointerEvents = 'none';
+            confetti.style.zIndex = '9999';
+            confetti.style.boxShadow = '0 0 10px currentColor';
+            confetti.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
+            
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 5000);
+        }, i * 20);
+    }
+};
+
+// Add keyframe animation for confetti
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fall {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(100vh) rotate(720deg);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
 // ===== INITIALIZE =====
 document.addEventListener('DOMContentLoaded', () => {
     new GlitterCursor();
     new ParallaxBackground();
     
-    // Fixa ribbons
     fixRibbons();
     
-    // Sätt upp observer för temaändringar
     const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             if (mutation.attributeName === 'class') {
@@ -587,7 +700,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     observer.observe(document.body, { attributes: true });
     
+    // Ladda sparad ice counter
+    const savedCount = localStorage.getItem('iceClickCount');
+    if (savedCount) {
+        iceClickCount = parseInt(savedCount);
+        const iceCounter = document.getElementById('iceCounter');
+        if (iceCounter) {
+            iceCounter.textContent = iceClickCount;
+        }
+    }
+    
     window.triggerConfetti = window.triggerConfetti;
+    window.triggerPinkConfetti = window.triggerPinkConfetti;
     window.triggerLaserRainbow = window.triggerLaserRainbow;
     window.triggerIceMode = window.triggerIceMode;
 });
