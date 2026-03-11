@@ -295,7 +295,33 @@ window.triggerIceMode = function() {
         }
     }
 };
-
+/* ===== MOBIL-OPTIMERING ===== */
+@media (max-width: 600px) {
+    /* Göm tomma sektioner på mobil */
+    .ad-placeholder {
+        display: none;  /* Ta bort tomma ad-rutor på mobil */
+    }
+    
+    /* Gör verktygskorten mer kompakta */
+    .tool-card {
+        padding: 1rem;
+    }
+    
+    /* Minska storlek på swap-knappar */
+    .swap-icon {
+        font-size: 1.5rem;  /* Mindre på mobil */
+    }
+    
+    /* Ta bort onödiga mellanrum */
+    .quick-convert {
+        gap: 0.25rem;
+    }
+    
+    .quick-btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+    }
+}
 // ===== INITIALIZE =====
 document.addEventListener('DOMContentLoaded', () => {
     new GlitterCursor();
